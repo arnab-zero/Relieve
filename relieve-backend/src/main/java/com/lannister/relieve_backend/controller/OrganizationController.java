@@ -37,7 +37,8 @@ public class OrganizationController {
         return ResponseEntity.ok(organizations);
     }
 
-    // Update an organization
+
+    // Update an organization api
     @PutMapping("{orgId}")
     public ResponseEntity<OrganizationDto> updateOrganization(@PathVariable("orgId") Long orgId,
                                                               @RequestBody OrganizationDto updatedOrganization) {
