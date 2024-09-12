@@ -19,6 +19,8 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orgId;
 
+    @Column(name = "org-name")
+    private String orgName;
     @Column(name = "description")
     private String description;
     @Column(name = "contact-numbers")

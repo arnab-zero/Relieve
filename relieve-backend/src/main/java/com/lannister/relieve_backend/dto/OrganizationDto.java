@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrganizationDto {
     private Long orgId;
+    private String orgName;
     private String description;
     private Long[] contactNumbers;
     private String location;
