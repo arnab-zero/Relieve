@@ -8,6 +8,7 @@ public class OrganizationMapper {
     public static OrganizationDto mapToOrganizationDto(Organization organization) {
         return new OrganizationDto(
                 organization.getOrgId(),
+                organization.getOrgName(),
                 organization.getDescription(),
                 organization.getContactNumbers(),
                 organization.getLocation(),
@@ -20,6 +21,7 @@ public class OrganizationMapper {
     public static Organization mapToOrganization(OrganizationDto organizationDto) {
         return new Organization(
                 organizationDto.getOrgId(),
+                organizationDto.getOrgName(),
                 organizationDto.getDescription(),
                 organizationDto.getContactNumbers(),
                 organizationDto.getLocation(),

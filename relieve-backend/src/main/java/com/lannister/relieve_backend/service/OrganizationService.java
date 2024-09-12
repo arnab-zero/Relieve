@@ -1,7 +1,6 @@
 package com.lannister.relieve_backend.service;
 
 import com.lannister.relieve_backend.dto.OrganizationDto;
-import com.lannister.relieve_backend.entity.Organization;
 
 import java.util.List;
 
