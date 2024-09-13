@@ -29,5 +29,16 @@ public class IncidentController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("{incidentId}")
+    public ResponseEntity<IncidentDto> updateIncident(@PathVariable("incidentId") Long incidentId, @RequestBody IncidentDto updatedIncident){
+        IncidentDto incidentDto = incidentService.updateIncident(incidentId, updatedIncident);
+        return ResponseEntity.ok(incidentDto);
+    }
+
+    @DeleteMapping("{incidentId}")
+    public ResponseEntity<String> deleteIncident(@PathVariable("incidentId") Long incidentId){
+        incidentService.deleteIncident(incidentId);
+        return ResponseEntity.ok("Incident deleted successfully.");
+    }
 
 }
