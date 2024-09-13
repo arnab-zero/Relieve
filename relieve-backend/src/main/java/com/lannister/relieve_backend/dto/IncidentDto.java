@@ -1,6 +1,6 @@
-package com.lannister.relieve_backend.entity;
+package com.lannister.relieve_backend.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,39 +13,21 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "incident")
-public class Incident {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class IncidentDto {
+
     private Long incidentId;
-    @Column(name = "userId")
     private Long userId;
-    @Column(name = "eventId")
     private Long[] eventId;
-    @Column(name = "update_detail")
     private String updateDetail;
-    @Column(name = "location")
     private String location;
-    @Column(name = "upazilla")
     private String upazilla;
-    @Column(name = "zilla")
     private String zilla;
-    @Column(name = "contact")
     private String contact;
-    @Column(name = "request_type")
     private String requestType;
-    @Column(name = "map_link")
     private String mapLink;
-    @Column(name = "status")
     private String status;
-    @Column(name = "is_verified")
     private boolean isVerified;
-    @Column(name = "description")
-    private boolean description;
-    @CreationTimestamp
     private LocalDateTime postedAt;
-    @CreationTimestamp
     private LocalDateTime lastUpdatedAt;
 
 }
