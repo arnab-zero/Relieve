@@ -29,5 +29,6 @@ public class IncidentDto {
     private boolean isVerified;
     private LocalDateTime postedAt;
     private LocalDateTime lastUpdatedAt;
+    private String description;
 
 }

@@ -20,6 +20,7 @@ public class IncidentMapper {
         incidentDto.setVerified(incident.isVerified());
         incidentDto.setPostedAt(incident.getPostedAt());
         incidentDto.setLastUpdatedAt(incident.getLastUpdatedAt());
+        incidentDto.setDescription(incident.getDescription());
 
         return incidentDto;
     }
@@ -41,6 +42,7 @@ public class IncidentMapper {
         incident.setVerified(incidentDto.isVerified());
         incident.setPostedAt(incidentDto.getPostedAt());
         incident.setLastUpdatedAt(incidentDto.getLastUpdatedAt());
+        incident.setDescription(incidentDto.getDescription());
 
         return incident;
     }

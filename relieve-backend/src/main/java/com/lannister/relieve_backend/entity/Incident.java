@@ -42,7 +42,7 @@ public class Incident {
     @Column(name = "is_verified")
     private boolean isVerified;
     @Column(name = "description")
-    private boolean description;
+    private String description;
     @CreationTimestamp
     private LocalDateTime postedAt;
     @CreationTimestamp
