@@ -49,7 +49,12 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <NavLink to={'/'} className="text-lg text-white md:text-3xl font-black">Relieve</NavLink>
+                <NavLink to={'/'} >
+                    <span className="flex items-center gap-1">
+                     <img src="/logo.svg" alt="" width={'30'} />
+                    <h2 className="text-lg text-white md:text-3xl font-black"> Relieve</h2>
+                    </span>
+                </NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal text-base-200 font-semibold gap-6 items-center text-lg px-1">
