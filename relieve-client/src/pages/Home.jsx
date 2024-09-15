@@ -1,9 +1,12 @@
+import DonationSeekingCard from "../components/DonationSeekingCard";
+import VolunteerSeekingCard from "../components/VolunteerSeekingCard";
+
 const Home = () => {
-    return (
-        <div>
-            <h1 className="text-4xl">Home</h1>
-        </div>
-    );
+  return (
+    <div>
+      <VolunteerSeekingCard />
+    </div>
+  );
 };
 
 export default Home;
