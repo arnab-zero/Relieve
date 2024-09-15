@@ -3,7 +3,6 @@ import Root from "../layouts/Root";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import SignUp from "../pages/SignUp";
-import IncidentReportingForm from "../pages/forms/IncidentReportingForm";
 import SignIn from "../pages/SignIn";
 
 const router = createBrowserRouter([
@@ -23,11 +22,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-      },
-      {
-        path: "/incident-reporting",
-        element: <IncidentReportingForm />,
-      },
+      }
     ],
   },
 ]);
