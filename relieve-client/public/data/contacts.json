@@ -1,0 +1,955 @@
+{
+    "national": {
+      "emergencyNumbers": {
+        "police": "999",
+        "fireService": "999",
+        "ambulance": "999"
+      }
+    },
+    "zilla": [
+      {
+        "name": "Dhaka",
+        "upazilas": [
+          {
+            "name": "Dhamrai",
+            "contact": {
+              "person": "01812345678",
+              "uno": "01823456789",
+              "police": "01834567890",
+              "fireService": "01845678901"
+            }
+          },
+          {
+            "name": "Keraniganj",
+            "contact": {
+              "person": "01723456789",
+              "uno": "01734567890",
+              "police": "01745678901",
+              "fireService": "01756789012"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Chattogram",
+        "upazilas": [
+          {
+            "name": "Banderban",
+            "contact": {
+              "person": "01634567890",
+              "uno": "01645678901",
+              "police": "01656789012",
+              "fireService": "01667890123"
+            }
+          },
+          {
+            "name": "Cox's Bazar",
+            "contact": {
+              "person": "01987654321",
+              "uno": "01998765432",
+              "police": "01909876543",
+              "fireService": "01910987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Khulna",
+        "upazilas": [
+          {
+            "name": "Batiaghata",
+            "contact": {
+              "person": "01512345678",
+              "uno": "01523456789",
+              "police": "01534567890",
+              "fireService": "01545678901"
+            }
+          },
+          {
+            "name": "Dacope",
+            "contact": {
+              "person": "01487654321",
+              "uno": "01498765432",
+              "police": "01409876543",
+              "fireService": "01410987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Rajshahi",
+        "upazilas": [
+          {
+            "name": "Bagmara",
+            "contact": {
+              "person": "01934567890",
+              "uno": "01945678901",
+              "police": "01956789012",
+              "fireService": "01967890123"
+            }
+          },
+          {
+            "name": "Puthia",
+            "contact": {
+              "person": "01312345678",
+              "uno": "01323456789",
+              "police": "01334567890",
+              "fireService": "01345678901"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Barishal",
+        "upazilas": [
+          {
+            "name": "Bakerganj",
+            "contact": {
+              "person": "01778987654",
+              "uno": "01789098765",
+              "police": "01790109876",
+              "fireService": "01791234567"
+            }
+          },
+          {
+            "name": "Wazirpur",
+            "contact": {
+              "person": "01898765432",
+              "uno": "01899876543",
+              "police": "01810987654",
+              "fireService": "01821098765"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sylhet",
+        "upazilas": [
+          {
+            "name": "Jaintiapur",
+            "contact": {
+              "person": "01678901234",
+              "uno": "01689012345",
+              "police": "01690123456",
+              "fireService": "01691234567"
+            }
+          },
+          {
+            "name": "Ruma",
+            "contact": {
+              "person": "01789012345",
+              "uno": "01790123456",
+              "police": "01791234567",
+              "fireService": "01792345678"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Mymensingh",
+        "upazilas": [
+          {
+            "name": "Bhaluka",
+            "contact": {
+              "person": "01901234567",
+              "uno": "01912345678",
+              "police": "01923456789",
+              "fireService": "01934567890"
+            }
+          },
+          {
+            "name": "Haluaghat",
+            "contact": {
+              "person": "01812345678",
+              "uno": "01823456789",
+              "police": "01834567890",
+              "fireService": "01845678901"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Rangpur",
+        "upazilas": [
+          {
+            "name": "Kawnia",
+            "contact": {
+              "person": "01712345678",
+              "uno": "01723456789",
+              "police": "01734567890",
+              "fireService": "01745678901"
+            }
+          },
+          {
+            "name": "Pirganj",
+            "contact": {
+              "person": "01623456789",
+              "uno": "01634567890",
+              "police": "01645678901",
+              "fireService": "01656789012"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Jashore",
+        "upazilas": [
+          {
+            "name": "Abhaynagar",
+            "contact": {
+              "person": "01876543210",
+              "uno": "01887654321",
+              "police": "01898765432",
+              "fireService": "01809876543"
+            }
+          },
+          {
+            "name": "Keshabpur",
+            "contact": {
+              "person": "01987654321",
+              "uno": "01998765432",
+              "police": "01909876543",
+              "fireService": "01910987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Jhalokati",
+        "upazilas": [
+          {
+            "name": "Kachua",
+            "contact": {
+              "person": "01798765432",
+              "uno": "01787654321",
+              "police": "01776543210",
+              "fireService": "01765432109"
+            }
+          },
+          {
+            "name": "Ujirpur",
+            "contact": {
+              "person": "01687654321",
+              "uno": "01676543210",
+              "police": "01665432109",
+              "fireService": "01654321098"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Jamalpur",
+        "upazilas": [
+          {
+            "name": "Baksiganj",
+            "contact": {
+              "person": "01898765432",
+              "uno": "01887654321",
+              "police": "01876543210",
+              "fireService": "01865432109"
+            }
+          },
+          {
+            "name": "Islampur",
+            "contact": {
+              "person": "01787654321",
+              "uno": "01776543210",
+              "police": "01765432109",
+              "fireService": "01754321098"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Naogaon",
+        "upazilas": [
+          {
+            "name": "Manda",
+            "contact": {
+              "person": "01987654321",
+              "uno": "01976543210",
+              "police": "01965432109",
+              "fireService": "01954321098"
+            }
+          },
+          {
+            "name": "Raninagar",
+            "contact": {
+              "person": "01876543210",
+              "uno": "01865432109",
+              "police": "01854321098",
+              "fireService": "01843210987"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Narsingdi",
+        "upazilas": [
+          {
+            "name": "Narsingdi Sadar",
+            "contact": {
+              "person": "01765432109",
+              "uno": "01754321098",
+              "police": "01743210987",
+              "fireService": "01732109876"
+            }
+          },
+          {
+            "name": "Raipura",
+            "contact": {
+              "person": "01654321098",
+              "uno": "01643210987",
+              "police": "01632109876",
+              "fireService": "01621098765"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Moulvibazar",
+        "upazilas": [
+          {
+            "name": "Moulvibazar Sadar",
+            "contact": {
+              "person": "01887654321",
+              "uno": "01876543210",
+              "police": "01865432109",
+              "fireService": "01854321098"
+            }
+          },
+          {
+            "name": "Barlekha",
+            "contact": {
+              "person": "01976543210",
+              "uno": "01965432109",
+              "police": "01954321098",
+              "fireService": "01943210987"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Lalmonirhat",
+        "upazilas": [
+          {
+            "name": "Aditmari",
+            "contact": {
+              "person": "01754321098",
+              "uno": "01743210987",
+              "police": "01732109876",
+              "fireService": "01721098765"
+            }
+          },
+          {
+            "name": "Patgram",
+            "contact": {
+              "person": "01643210987",
+              "uno": "01632109876",
+              "police": "01621098765",
+              "fireService": "01610987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Kurigram",
+        "upazilas": [
+          {
+            "name": "Kurigram Sadar",
+            "contact": {
+              "person": "01854321098",
+              "uno": "01843210987",
+              "police": "01832109876",
+              "fireService": "01821098765"
+            }
+          },
+          {
+            "name": "Bhurgura",
+            "contact": {
+              "person": "01743210987",
+              "uno": "01732109876",
+              "police": "01721098765",
+              "fireService": "01710987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Jhalokati",
+        "upazilas": [
+          {
+            "name": "Jhalokati Sadar",
+            "contact": {
+              "person": "01865432109",
+              "uno": "01854321098",
+              "police": "01843210987",
+              "fireService": "01832109876"
+            }
+          },
+          {
+            "name": "Kachua",
+            "contact": {
+              "person": "01954321098",
+              "uno": "01943210987",
+              "police": "01932109876",
+              "fireService": "01921098765"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Kishoreganj",
+        "upazilas": [
+          {
+            "name": "Kishoreganj Sadar",
+            "contact": {
+              "person": "01732109876",
+              "uno": "01721098765",
+              "police": "01710987654",
+              "fireService": "01709876543"
+            }
+          },
+          {
+            "name": "Bajitpur",
+            "contact": {
+              "person": "01621098765",
+              "uno": "01610987654",
+              "police": "01609876543",
+              "fireService": "01698765432"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Pabna",
+        "upazilas": [
+          {
+            "name": "Pabna Sadar",
+            "contact": {
+              "person": "01710987654",
+              "uno": "01709876543",
+              "police": "01798765432",
+              "fireService": "01787654321"
+            }
+          },
+          {
+            "name": "Chatmohar",
+            "contact": {
+              "person": "01609876543",
+              "uno": "01698765432",
+              "police": "01687654321",
+              "fireService": "01676543210"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Patuakhali",
+        "upazilas": [
+          {
+            "name": "Patuakhali Sadar",
+            "contact": {
+              "person": "01898765432",
+              "uno": "01887654321",
+              "police": "01876543210",
+              "fireService": "01865432109"
+            }
+          },
+          {
+            "name": "Mirzaganj",
+            "contact": {
+              "person": "01787654321",
+              "uno": "01776543210",
+              "police": "01765432109",
+              "fireService": "01754321098"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Bogra",
+        "upazilas": [
+          {
+            "name": "Bogra Sadar",
+            "contact": {
+              "person": "01798765432",
+              "uno": "01787654321",
+              "police": "01776543210",
+              "fireService": "01765432109"
+            }
+          },
+          {
+            "name": "Dhamairhat",
+            "contact": {
+              "person": "01687654321",
+              "uno": "01676543210",
+              "police": "01665432109",
+              "fireService": "01654321098"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gaibandha",
+        "upazilas": [
+          {
+            "name": "Gaibandha Sadar",
+            "contact": {
+              "person": "01809876543",
+              "uno": "01810987654",
+              "police": "01821098765",
+              "fireService": "01832109876"
+            }
+          },
+          {
+            "name": "Sundarganj",
+            "contact": {
+              "person": "01721098765",
+              "uno": "01732109876",
+              "police": "01743210987",
+              "fireService": "01754321098"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sherpur",
+        "upazilas": [
+          {
+            "name": "Sherpur Sadar",
+            "contact": {
+              "person": "01832109876",
+              "uno": "01843210987",
+              "police": "01854321098",
+              "fireService": "01865432109"
+            }
+          },
+          {
+            "name": "Jhenaigati",
+            "contact": {
+              "person": "01743210987",
+              "uno": "01754321098",
+              "police": "01765432109",
+              "fireService": "01776543210"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Netrakona",
+        "upazilas": [
+          {
+            "name": "Netrakona Sadar",
+            "contact": {
+              "person": "01654321098",
+              "uno": "01643210987",
+              "police": "01632109876",
+              "fireService": "01621098765"
+            }
+          },
+          {
+            "name": "Khaliajuri",
+            "contact": {
+              "person": "01543210987",
+              "uno": "01532109876",
+              "police": "01521098765",
+              "fireService": "01510987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sylhet",
+        "upazilas": [
+          {
+            "name": "Sylhet Sadar",
+            "contact": {
+              "person": "01921098765",
+              "uno": "01932109876",
+              "police": "01943210987",
+              "fireService": "01954321098"
+            }
+          },
+          {
+            "name": "Companiganj",
+            "contact": {
+              "person": "01832109876",
+              "uno": "01843210987",
+              "police": "01854321098",
+              "fireService": "01865432109"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Habiganj",
+        "upazilas": [
+          {
+            "name": "Habiganj Sadar",
+            "contact": {
+              "person": "01732109876",
+              "uno": "01721098765",
+              "police": "01710987654",
+              "fireService": "01709876543"
+            }
+          },
+          {
+            "name": "Chunarughat",
+            "contact": {
+              "person": "01621098765",
+              "uno": "01610987654",
+              "police": "01609876543",
+              "fireService": "01698765432"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Brahmanbaria",
+        "upazilas": [
+          {
+            "name": "Brahmanbaria Sadar",
+            "contact": {
+              "person": "01921098765",
+              "uno": "01932109876",
+              "police": "01943210987",
+              "fireService": "01954321098"
+            }
+          },
+          {
+            "name": "Bijoynagar",
+            "contact": {
+              "person": "01832109876",
+              "uno": "01843210987",
+              "police": "01854321098",
+              "fireService": "01865432109"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Jamalpur",
+        "upazilas": [
+          {
+            "name": "Jamalpur Sadar",
+            "contact": {
+              "person": "01754321098",
+              "uno": "01743210987",
+              "police": "01732109876",
+              "fireService": "01721098765"
+            }
+          },
+          {
+            "name": "Bhaluka",
+            "contact": {
+              "person": "01643210987",
+              "uno": "01632109876",
+              "police": "01621098765",
+              "fireService": "01610987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Bogra",
+        "upazilas": [
+          {
+            "name": "Bogra Sadar",
+            "contact": {
+              "person": "01965432109",
+              "uno": "01954321098",
+              "police": "01943210987",
+              "fireService": "01932109876"
+            }
+          },
+          {
+            "name": "Kahaloo",
+            "contact": {
+              "person": "01854321098",
+              "uno": "01843210987",
+              "police": "01832109876",
+              "fireService": "01821098765"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Kushtia",
+        "upazilas": [
+          {
+            "name": "Kushtia Sadar",
+            "contact": {
+              "person": "01765432109",
+              "uno": "01754321098",
+              "police": "01743210987",
+              "fireService": "01732109876"
+            }
+          },
+          {
+            "name": "Mirpur",
+            "contact": {
+              "person": "01654321098",
+              "uno": "01643210987",
+              "police": "01632109876",
+              "fireService": "01621098765"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Magura",
+        "upazilas": [
+          {
+            "name": "Magura Sadar",
+            "contact": {
+              "person": "01943210987",
+              "uno": "01932109876",
+              "police": "01921098765",
+              "fireService": "01910987654"
+            }
+          },
+          {
+            "name": "Sreepur",
+            "contact": {
+              "person": "01832109876",
+              "uno": "01821098765",
+              "police": "01810987654",
+              "fireService": "01809876543"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Meherpur",
+        "upazilas": [
+          {
+            "name": "Meherpur Sadar",
+            "contact": {
+              "person": "01754321098",
+              "uno": "01743210987",
+              "police": "01732109876",
+              "fireService": "01721098765"
+            }
+          },
+          {
+            "name": "Mujibnagar",
+            "contact": {
+              "person": "01643210987",
+              "uno": "01632109876",
+              "police": "01621098765",
+              "fireService": "01610987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Jamalpur",
+        "upazilas": [
+          {
+            "name": "Jamalpur Sadar",
+            "contact": {
+              "person": "01954321098",
+              "uno": "01943210987",
+              "police": "01932109876",
+              "fireService": "01921098765"
+            }
+          },
+          {
+            "name": "Dewanganj",
+            "contact": {
+              "person": "01843210987",
+              "uno": "01832109876",
+              "police": "01821098765",
+              "fireService": "01810987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sunamganj",
+        "upazilas": [
+          {
+            "name": "Sunamganj Sadar",
+            "contact": {
+              "person": "01743210987",
+              "uno": "01732109876",
+              "police": "01721098765",
+              "fireService": "01710987654"
+            }
+          },
+          {
+            "name": "Bishwambharpur",
+            "contact": {
+              "person": "01632109876",
+              "uno": "01621098765",
+              "police": "01610987654",
+              "fireService": "01609876543"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Kurigram",
+        "upazilas": [
+          {
+            "name": "Kurigram Sadar",
+            "contact": {
+              "person": "01932109876",
+              "uno": "01921098765",
+              "police": "01910987654",
+              "fireService": "01909876543"
+            }
+          },
+          {
+            "name": "Bhurgura",
+            "contact": {
+              "person": "01821098765",
+              "uno": "01832109876",
+              "police": "01843210987",
+              "fireService": "01854321098"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Brahmanbaria",
+        "upazilas": [
+          {
+            "name": "Brahmanbaria Sadar",
+            "contact": {
+              "person": "01754321098",
+              "uno": "01743210987",
+              "police": "01732109876",
+              "fireService": "01721098765"
+            }
+          },
+          {
+            "name": "Nabinagar",
+            "contact": {
+              "person": "01643210987",
+              "uno": "01632109876",
+              "police": "01621098765",
+              "fireService": "01610987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Satkhira",
+        "upazilas": [
+          {
+            "name": "Satkhira Sadar",
+            "contact": {
+              "person": "01832109876",
+              "uno": "01821098765",
+              "police": "01810987654",
+              "fireService": "01809876543"
+            }
+          },
+          {
+            "name": "Assasuni",
+            "contact": {
+              "person": "01721098765",
+              "uno": "01732109876",
+              "police": "01743210987",
+              "fireService": "01754321098"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Rajbari",
+        "upazilas": [
+          {
+            "name": "Rajbari Sadar",
+            "contact": {
+              "person": "01654321098",
+              "uno": "01643210987",
+              "police": "01632109876",
+              "fireService": "01621098765"
+            }
+          },
+          {
+            "name": "Bangaon",
+            "contact": {
+              "person": "01543210987",
+              "uno": "01532109876",
+              "police": "01521098765",
+              "fireService": "01510987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Barguna",
+        "upazilas": [
+          {
+            "name": "Barguna Sadar",
+            "contact": {
+              "person": "01732109876",
+              "uno": "01721098765",
+              "police": "01710987654",
+              "fireService": "01709876543"
+            }
+          },
+          {
+            "name": "Amtali",
+            "contact": {
+              "person": "01621098765",
+              "uno": "01610987654",
+              "police": "01609876543",
+              "fireService": "01698765432"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Patuakhali",
+        "upazilas": [
+          {
+            "name": "Patuakhali Sadar",
+            "contact": {
+              "person": "01754321098",
+              "uno": "01743210987",
+              "police": "01732109876",
+              "fireService": "01721098765"
+            }
+          },
+          {
+            "name": "Dumki",
+            "contact": {
+              "person": "01843210987",
+              "uno": "01832109876",
+              "police": "01821098765",
+              "fireService": "01810987654"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tangail",
+        "upazilas": [
+          {
+            "name": "Tangail Sadar",
+            "contact": {
+              "person": "01721098765",
+              "uno": "01732109876",
+              "police": "01743210987",
+              "fireService": "01754321098"
+            }
+          },
+          {
+            "name": "Mirzapur",
+            "contact": {
+              "person": "01832109876",
+              "uno": "01821098765",
+              "police": "01810987654",
+              "fireService": "01809876543"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  
