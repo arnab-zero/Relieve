@@ -1,0 +1,342 @@
+[
+    {
+        "incidentId": 1,
+        "userId": 1,
+        "eventId": [
+            1001
+        ],
+        "updateDetail": "Floodwater entered houses, residents are stranded.",
+        "location": "Companiganj, Noakhali",
+        "upazilla": "Companiganj",
+        "zilla": "Noakhali",
+        "contact": "01812345678",
+        "requestType": "Rescue",
+        "mapLink": "https://goo.gl/maps/j7gkdYazY5t9VNsm8",
+        "status": "Pending",
+        "isVerified": true,
+        "description": "Urgent rescue needed in low-lying areas as water levels rise rapidly."
+    },
+    {
+        "incidentId": 2,
+        "userId": 2,
+        "eventId": [
+            1002
+        ],
+        "updateDetail": "Severe waterlogging, roads blocked.",
+        "location": "Begumganj, Noakhali",
+        "upazilla": "Begumganj",
+        "zilla": "Noakhali",
+        "contact": "01723456789",
+        "requestType": "Relief",
+        "mapLink": "https://goo.gl/maps/Tx79gCPWxpT1PfAC7",
+        "status": "In Progress",
+        "isVerified": true,
+        "description": "Immediate relief items such as food and water are needed."
+    },
+    {
+        "incidentId": 3,
+        "userId": 3,
+        "eventId": [
+            1003
+        ],
+        "updateDetail": "River banks have breached, widespread flooding.",
+        "location": "Fulgazi, Feni",
+        "upazilla": "Fulgazi",
+        "zilla": "Feni",
+        "contact": "01634567890",
+        "requestType": "Medical Help",
+        "mapLink": "https://goo.gl/maps/NuRHmXz4ACqBzVxe8",
+        "status": "Pending",
+        "isVerified": false,
+        "description": "People are falling ill due to contaminated water; medical assistance needed."
+    },
+    {
+        "incidentId": 4,
+        "userId": 4,
+        "eventId": [
+            1004
+        ],
+        "updateDetail": "Main bridge collapsed, cutting off the village.",
+        "location": "Daganbhuiyan, Feni",
+        "upazilla": "Daganbhuiyan",
+        "zilla": "Feni",
+        "contact": "01987654321",
+        "requestType": "Rescue",
+        "mapLink": "https://goo.gl/maps/dfXZrUFSRzht2XRUA",
+        "status": "Pending",
+        "isVerified": false,
+        "description": "People are trapped without access to basic necessities due to the bridge collapse."
+    },
+    {
+        "incidentId": 5,
+        "userId": 5,
+        "eventId": [
+            1005
+        ],
+        "updateDetail": "Heavy flooding near the town center.",
+        "location": "Muradnagar, Cumilla",
+        "upazilla": "Muradnagar",
+        "zilla": "Cumilla",
+        "contact": "01512345678",
+        "requestType": "Relief",
+        "mapLink": "https://goo.gl/maps/BDfwf4XpCy27STHaA",
+        "status": "Pending",
+        "isVerified": true,
+        "description": "Food supplies are urgently required for affected families."
+    },
+    {
+        "incidentId": 6,
+        "userId": 6,
+        "eventId": [
+            1006
+        ],
+        "updateDetail": "Fields and roads are submerged under several feet of water.",
+        "location": "Chandina, Cumilla",
+        "upazilla": "Chandina",
+        "zilla": "Cumilla",
+        "contact": "01487654321",
+        "requestType": "Medical Help",
+        "mapLink": "https://goo.gl/maps/bRAubojmfptvJUm9A",
+        "status": "In Progress",
+        "isVerified": true,
+        "description": "Many people are suffering from waterborne diseases; medical teams are needed."
+    },
+    {
+        "incidentId": 7,
+        "userId": 7,
+        "eventId": [
+            1007
+        ],
+        "updateDetail": "Houses destroyed, families displaced.",
+        "location": "Jagannathpur, Sunamganj",
+        "upazilla": "Jagannathpur",
+        "zilla": "Sunamganj",
+        "contact": "01934567890",
+        "requestType": "Rescue",
+        "mapLink": "https://goo.gl/maps/MEfdrpXt2LZbMNWfA",
+        "status": "Pending",
+        "isVerified": true,
+        "description": "Several homes have been washed away, and families are stranded."
+    },
+    {
+        "incidentId": 8,
+        "userId": 8,
+        "eventId": [
+            1008
+        ],
+        "updateDetail": "Flooding disrupted transportation and communication.",
+        "location": "Tahirpur, Sunamganj",
+        "upazilla": "Tahirpur",
+        "zilla": "Sunamganj",
+        "contact": "01312345678",
+        "requestType": "Relief",
+        "mapLink": "https://goo.gl/maps/Z4GkL6hTxD72SxL69",
+        "status": "In Progress",
+        "isVerified": false,
+        "description": "Access to food and drinking water is cut off due to the flood."
+    },
+    {
+        "incidentId": 9,
+        "userId": 9,
+        "eventId": [
+            1009
+        ],
+        "updateDetail": "Families are stranded on rooftops.",
+        "location": "Senbag, Noakhali",
+        "upazilla": "Senbag",
+        "zilla": "Noakhali",
+        "contact": "01834567890",
+        "requestType": "Rescue",
+        "mapLink": "https://goo.gl/maps/dNzT6rMDe8dXKZdC6",
+        "status": "Pending",
+        "isVerified": false,
+        "description": "Emergency rescue required as water continues to rise, forcing people onto rooftops."
+    },
+    {
+        "incidentId": 10,
+        "userId": 10,
+        "eventId": [
+            1010
+        ],
+        "updateDetail": "Floods have washed away livestock and crops.",
+        "location": "Chatkhil, Noakhali",
+        "upazilla": "Chatkhil",
+        "zilla": "Noakhali",
+        "contact": "01734567890",
+        "requestType": "Relief",
+        "mapLink": "https://goo.gl/maps/K48rkAQeRmffFybd7",
+        "status": "In Progress",
+        "isVerified": true,
+        "description": "Livelihoods are lost due to the flood, and immediate relief is needed."
+    },
+    {
+        "incidentId": 11,
+        "userId": 11,
+        "eventId": [
+            1011
+        ],
+        "updateDetail": "The embankment broke, causing a flash flood.",
+        "location": "Kabirhat, Noakhali",
+        "upazilla": "Kabirhat",
+        "zilla": "Noakhali",
+        "contact": "01876543210",
+        "requestType": "Rescue",
+        "mapLink": "https://goo.gl/maps/H4smShRNdXsxkGns5",
+        "status": "Pending",
+        "isVerified": true,
+        "description": "Immediate evacuation needed as floodwater inundates the area."
+    },
+    {
+        "incidentId": 12,
+        "userId": 12,
+        "eventId": [
+            1012
+        ],
+        "updateDetail": "Critical shortage of drinking water.",
+        "location": "Barura, Cumilla",
+        "upazilla": "Barura",
+        "zilla": "Cumilla",
+        "contact": "01798765432",
+        "requestType": "Relief",
+        "mapLink": "https://goo.gl/maps/2Z1E23A9VkFh9K8B6",
+        "status": "Pending",
+        "isVerified": false,
+        "description": "Residents are requesting water and sanitation supplies due to the flood."
+    },
+    {
+        "incidentId": 13,
+        "userId": 13,
+        "eventId": [
+            1013
+        ],
+        "updateDetail": "The flood has isolated several villages.",
+        "location": "Haimchar, Chandpur",
+        "upazilla": "Haimchar",
+        "zilla": "Chandpur",
+        "contact": "01865432109",
+        "requestType": "Medical Help",
+        "mapLink": "https://goo.gl/maps/5zEfbsHWy8y1tSwH8",
+        "status": "Pending",
+        "isVerified": true,
+        "description": "Many villagers are suffering from dehydration and need medical assistance."
+    },
+    {
+        "incidentId": 14,
+        "userId": 14,
+        "eventId": [
+            1014
+        ],
+        "updateDetail": "Floodwaters destroyed crops and homes.",
+        "location": "Bajra, Noakhali",
+        "upazilla": "Bajra",
+        "zilla": "Noakhali",
+        "contact": "01876543210",
+        "requestType": "Relief",
+        "mapLink": "https://goo.gl/maps/9jEr9fTYnR6y1cq97",
+        "status": "Pending",
+        "isVerified": true,
+        "description": "Residents are in urgent need of food and shelter as the flood devastates their village."
+    },
+    {
+        "incidentId": 15,
+        "userId": 15,
+        "eventId": [
+            1015
+        ],
+        "updateDetail": "Floodwater breached the embankments and swept away roads.",
+        "location": "Sonagazi, Feni",
+        "upazilla": "Sonagazi",
+        "zilla": "Feni",
+        "contact": "01765432109",
+        "requestType": "Rescue",
+        "mapLink": "https://goo.gl/maps/ZH2EyNeVoqQusZQo8",
+        "status": "In Progress",
+        "isVerified": true,
+        "description": "Villagers are stranded with no access to help as roads are destroyed."
+    },
+    {
+        "incidentId": 16,
+        "userId": 16,
+        "eventId": [
+            1016
+        ],
+        "updateDetail": "Rising water levels are threatening nearby villages.",
+        "location": "Parshuram, Feni",
+        "upazilla": "Parshuram",
+        "zilla": "Feni",
+        "contact": "01765432122",
+        "requestType": "Medical Help",
+        "mapLink": "https://goo.gl/maps/S3T25TGyhrxSUHVU6",
+        "status": "In Progress",
+        "isVerified": true,
+        "description": "Medical aid is required as people fall ill due to the unsanitary conditions."
+    },
+    {
+        "incidentId": 17,
+        "userId": 17,
+        "eventId": [
+            1017
+        ],
+        "updateDetail": "Flooding has severely impacted the local community.",
+        "location": "Derai, Sunamganj",
+        "upazilla": "Derai",
+        "zilla": "Sunamganj",
+        "contact": "01865432122",
+        "requestType": "Relief",
+        "mapLink": "https://goo.gl/maps/zTwR1Zhb23GTuYrU9",
+        "status": "In Progress",
+        "isVerified": true,
+        "description": "Relief efforts are urgently needed as families are struggling to survive."
+    },
+    {
+        "incidentId": 18,
+        "userId": 18,
+        "eventId": [
+            1018
+        ],
+        "updateDetail": "Several people are trapped in their homes due to rising floodwaters.",
+        "location": "Doarabazar, Sunamganj",
+        "upazilla": "Doarabazar",
+        "zilla": "Sunamganj",
+        "contact": "01912345612",
+        "requestType": "Rescue",
+        "mapLink": "https://goo.gl/maps/zyN5Y9erUqyb29SL6",
+        "status": "In Progress",
+        "isVerified": false,
+        "description": "Emergency services are required to rescue people trapped in their homes."
+    },
+    {
+        "incidentId": 19,
+        "userId": 19,
+        "eventId": [
+            1019
+        ],
+        "updateDetail": "Floodwaters damaged homes and left people without shelter.",
+        "location": "Sadar, Feni",
+        "upazilla": "Sadar",
+        "zilla": "Feni",
+        "contact": "01665432109",
+        "requestType": "Relief",
+        "mapLink": "https://goo.gl/maps/xV7EQGMJd73uXHrs6",
+        "status": "In Progress",
+        "isVerified": true,
+        "description": "Families are displaced and in need of food, water, and shelter."
+    },
+    {
+        "incidentId": 20,
+        "userId": 20,
+        "eventId": [
+            1020
+        ],
+        "updateDetail": "The flood has blocked all access roads.",
+        "location": "Bishwambharpur, Sunamganj",
+        "upazilla": "Bishwambharpur",
+        "zilla": "Sunamganj",
+        "contact": "01778987654",
+        "requestType": "Rescue",
+        "mapLink": "https://goo.gl/maps/bMHS3APTRvR1dkh97",
+        "status": "In Progress",
+        "isVerified": false,
+        "description": "Villagers are stranded without access to essential services or transportation."
+    }
+]
