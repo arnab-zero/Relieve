@@ -5,28 +5,62 @@ import { GrAnnounce } from "react-icons/gr";
 import IncidentReportingForm from "../pages/forms/IncidentReportingForm"; // Import the form component
 
 const Navbar = () => {
-    const links = <>
-        <li><NavLink to='/network'
-            className={({ isActive, isPending }) =>
-                isActive
-                    ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
-                    : isPending
-                        ? "pending"
-                        : ""
-            }>
-            Network
-        </NavLink></li>
-        <li><NavLink to='/map'
-            className={({ isActive, isPending }) =>
-                isActive
-                    ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
-                    : isPending
-                        ? "pending"
-                        : ""
-            }>
-            Map
-        </NavLink></li>
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const popupRef = useRef(null); // Reference to detect outside clicks
+
+  const handleFormSubmit = () => {
+    setIsPopupVisible(false); // Hide popup after form submission
+  };
+
+  const handleReportClick = () => {
+    setIsPopupVisible(true); // Show popup when "Report Incident" is clicked
+  };
+
+  // Detect clicks outside the popup
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setIsPopupVisible(false); // Close the popup if clicked outside
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [popupRef]);
+
+  const links = (
+    <>
+      <li>
+        <NavLink
+          to="/network"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
+              : isPending
+              ? "pending"
+              : ""
+          }
+        >
+          Network
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/map"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
+              : isPending
+              ? "pending"
+              : ""
+          }
+        >
+          Map
+        </NavLink>
+      </li>
     </>
+  );
 
   return (
     <div className="relative">
