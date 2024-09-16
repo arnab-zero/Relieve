@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import DonationSeekingCard from "../components/DonationSeekingCard";
 import Searchbar from "../components/Home/Searchbar";
 import VolunteerSeekingCard from "../components/VolunteerSeekingCard";
@@ -15,6 +16,7 @@ const Home = () => {
             .then(res => res.json())
             .then(data => setIncidents(data))
     }, [])
+
     return (
         <div>
             {/* <VolunteerSeekingCard />
