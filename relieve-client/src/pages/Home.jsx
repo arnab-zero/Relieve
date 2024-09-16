@@ -6,7 +6,6 @@ import VolunteerSeekingCard from "../components/VolunteerSeekingCard";
 import { Outlet, useLoaderData } from "react-router-dom";
 import AreaUpdate from "../components/Home/AreaUpdate";
 import EmergencyContacts from "../components/Home/EmergencyContacts";
-import { Outdent } from "lucide-react";
 
 const Home = () => {
     const [incidents, setIncidents] = useState([]);
