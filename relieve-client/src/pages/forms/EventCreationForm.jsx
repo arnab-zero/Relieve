@@ -33,8 +33,7 @@ export default function CreateEventForm() {
     if (!formData.eventName) newErrors.eventName = "Event Name is required.";
     if (!formData.coordinators)
       newErrors.coordinators = "Coordinators are required.";
-    if (!formData.contactNo)
-      newErrors.contactNo = "Contact number is required.";
+    if (!formData.contactNo) newErrors.contactNo = "Contact number is required.";
     else if (!/^\d+$/.test(formData.contactNo))
       newErrors.contactNo = "Contact number must contain only digits.";
     if (!formData.startDate) newErrors.startDate = "Start Date is required.";

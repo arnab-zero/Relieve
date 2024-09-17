@@ -1,4 +1,6 @@
-import React from "react";
+import CreateEventForm from "../pages/forms/EventCreationForm"; // Assuming the form component is imported
+import { useEffect, useRef, useState } from "react";
+import { FaCalendarPlus } from "react-icons/fa";
 
 const members = [
   {
@@ -205,131 +207,33 @@ const pastEvents = [
   // Add more past events here
 ];
 
-// function CommunityDashboard() {
-//   return (
-//     <div className="flex w-full h-screen overflow-hidden">
-//       {/* Members List Section */}
-//       <div className="flex-grow-[2] bg-gray-100 p-4 overflow-y-auto">
-//         <h2 className="text-xl font-bold mb-4">Members List</h2>
-//         <div className="space-y-4">
-//           {members.map((member) => (
-//             <div key={member.id} className="flex items-center">
-//               <img
-//                 src={member.profilePic}
-//                 alt={`${member.name} profile`}
-//                 className="w-12 h-12 rounded-full mr-4"
-//               />
-//               <div>
-//                 <p className="font-medium">{member.name}</p>
-//                 {member.isCoordinator && (
-//                   <span className="text-green-500 text-sm">Co-ordinator</span>
-//                 )}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
+const scrollbarHideStyle = {
+  overflow: "auto",
+  scrollbarWidth: "none", // Firefox
+  msOverflowStyle: "none", // Internet Explorer and Edge
+};
 
-//       {/* Community Details Section */}
-//       <div className="flex-grow-[10] p-6 bg-white">
-//         <h2 className="text-2xl font-bold mb-6">Community Name</h2>
-//         <div className="flex space-x-4 mb-6">
-//           <button
-//             className="flex items-center bg-blue-500 text-white py-2 px-4 rounded"
-//             onClick={() => setIsFormOpen(true)}
-//           >
-//             <i className="mr-2">🛠️</i> Create Event
-//           </button>
-//           {/* Popup for CreateEventForm */}
-//           <button className="flex items-center bg-blue-500 text-white py-2 px-4 rounded">
-//             <i className="mr-2">➕</i> Add Member
-//           </button>
-//         </div>
-//         <div className="mt-6">{/* Add any community details here */}</div>
-//       </div>
-
-//       {/* Events Details Section */}
-//       <div className="flex-grow-[1] p-4 bg-gray-100 overflow-y-auto">
-//         <div className="mb-8">
-//           <h3 className="text-lg font-bold mb-4">Ongoing Events</h3>
-//           <div className="space-y-4">
-//             {ongoingEvents.map((event, index) => (
-//               <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-//                 <h4 className="font-bold mb-2">{event.name}</h4>
-//                 <p>
-//                   <strong>Disaster:</strong> {event.disaster}
-//                 </p>
-//                 <p>
-//                   <strong>Time Range:</strong> {event.timeRange}
-//                 </p>
-//                 <p>
-//                   <strong>Area:</strong> {event.area}
-//                 </p>
-//                 <p>
-//                   <strong>Coordinators:</strong> {event.coordinators}
-//                 </p>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         <div className="mb-8">
-//           <h3 className="text-lg font-bold mb-4">Upcoming Events</h3>
-//           <div className="space-y-4">
-//             {upcomingEvents.map((event, index) => (
-//               <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-//                 <h4 className="font-bold mb-2">{event.name}</h4>
-//                 <p>
-//                   <strong>Disaster:</strong> {event.disaster}
-//                 </p>
-//                 <p>
-//                   <strong>Time Range:</strong> {event.timeRange}
-//                 </p>
-//                 <p>
-//                   <strong>Area:</strong> {event.area}
-//                 </p>
-//                 <p>
-//                   <strong>Coordinators:</strong> {event.coordinators}
-//                 </p>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         <div className="mb-8">
-//           <h3 className="text-lg font-bold mb-4">Past Events</h3>
-//           <div className="space-y-4">
-//             {pastEvents.map((event, index) => (
-//               <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-//                 <h4 className="font-bold mb-2">{event.name}</h4>
-//                 <p>
-//                   <strong>Disaster:</strong> {event.disaster}
-//                 </p>
-//                 <p>
-//                   <strong>Time Range:</strong> {event.timeRange}
-//                 </p>
-//                 <p>
-//                   <strong>Area:</strong> {event.area}
-//                 </p>
-//                 <p>
-//                   <strong>Coordinators:</strong> {event.coordinators}
-//                 </p>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default CommunityDashboard;
-
-import CreateEventForm from "../pages/forms/EventCreationForm"; // Assuming the form component is imported
-import { useState } from "react";
+const scrollbarHideWebkit = {
+  overflow: "auto",
+};
 
 function CommunityDashboard() {
+  const [isIncidentPopupVisible, setIsIncidentPopupVisible] = useState(false);
+  const [isEventPopupVisible, setIsEventPopupVisible] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const popupRef = useRef(null);
+
+  const handleIncidentFormSubmit = () => {
+    setIsIncidentPopupVisible(false);
+  };
+
+  const handleEventFormSubmit = () => {
+    setIsEventPopupVisible(false);
+  };
+
+  const handleReportClick = () => {
+    setIsIncidentPopupVisible(true);
+  };
 
   // Function to close the form when clicked outside
   const handleCloseForm = (e) => {
@@ -343,10 +247,27 @@ function CommunityDashboard() {
     setIsFormOpen(false); // Close the form once it's submitted
   };
 
+  const handleCreateEventClick = () => {
+    setIsEventPopupVisible(true);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setIsIncidentPopupVisible(false);
+        setIsEventPopupVisible(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [popupRef]);
+
   return (
     <div className="flex w-full h-screen overflow-hidden">
       {/* Members List Section */}
-      <div className="flex-grow-[2] bg-gray-100 p-4 overflow-y-auto">
+      <div className="flex-grow-[2] bg-gray-100 p-4 overflow-y-auto scrollbar-hide">
         <h2 className="text-xl font-bold mb-4">Members List</h2>
         <div className="space-y-4">
           {members.map((member) => (
@@ -373,10 +294,10 @@ function CommunityDashboard() {
         <div className="flex space-x-4 mb-6">
           {/* Create Event Button */}
           <button
-            className="flex items-center bg-blue-500 text-white py-2 px-4 rounded"
-            onClick={() => setIsFormOpen(true)} // Open the form on click
+            onClick={handleCreateEventClick}
+            className="btn btn-outline text-blue-600 text-lg"
           >
-            <i className="mr-2">🛠️</i> Create Event
+            <FaCalendarPlus /> Create Event
           </button>
 
           {/* Add Member Button */}
@@ -388,7 +309,7 @@ function CommunityDashboard() {
       </div>
 
       {/* Events Details Section */}
-      <div className="flex-grow-[1] p-4 bg-gray-100 overflow-y-auto">
+      <div className="flex-grow-[1] p-4 bg-gray-100 overflow-y-auto scrollbar-hide">
         <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Ongoing Events</h3>
           <div className="space-y-4">
@@ -459,25 +380,14 @@ function CommunityDashboard() {
         </div>
       </div>
 
-      {/* Popup for Create Event Form */}
-      {isFormOpen && (
-        <div
-          id="formModal"
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-          onClick={handleCloseForm} // Close form when clicking outside
-        >
+      {/* Popup Modal for CreateEventForm */}
+      {isEventPopupVisible && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
           <div
-            className="bg-white p-6 rounded-lg shadow-lg relative w-96"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+            ref={popupRef}
+            className="bg-white rounded-lg shadow-lg p-6 relative w-[27%] max-h-[80vh] overflow-y-auto scrollbar-hide"
           >
-            <button
-              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
-              onClick={() => setIsFormOpen(false)} // Close on clicking 'X'
-            >
-              &times;
-            </button>
-            {/* Create Event Form */}
-            <CreateEventForm onSubmit={handleFormSubmit} />
+            <CreateEventForm onSubmit={handleEventFormSubmit} />
           </div>
         </div>
       )}
