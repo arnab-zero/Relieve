@@ -5,16 +5,15 @@ const AreaItem = ({ upazilla, count }) => {
     <div className="py-2 font-manrope">
       <div className="flex justify-between p-2 hover:bg-base-200">
         <span className="text-lg font-semibold text-gray-600">{upazilla}</span>
-        <span className={`text-lg p-1 `}>{count}</span>
+        <span className={`text-lg p-1`}>{count}</span>
       </div>
       <hr className="border-gray-300" />
     </div>
   );
 };
 
-const AreaUpdate = ({ incidents }) => {
-
-  const [areaCounts, setAreaCounts] = useState([]);
+const AreaUpdate = ({ incidents, setSortedUpazillaCounts }) => {
+  const [upazillaCounts, setUpazillaCounts] = useState([]);
 
   useEffect(() => {
     const upazillaCounts = incidents.reduce((acc, incident) => {
@@ -22,13 +21,21 @@ const AreaUpdate = ({ incidents }) => {
       return acc;
     }, {});
 
+
     const countsArray = Object.keys(upazillaCounts).map(upazilla => ({
       upazilla,
       count: upazillaCounts[upazilla]
     }));
+
+    // Sort by count (most incidents first)
     countsArray.sort((a, b) => b.count - a.count);
-    setAreaCounts(countsArray);
-  }, [incidents]);
+    setUpazillaCounts(countsArray);
+
+    // Pass sorted upazilla counts to Home.jsx
+    if (setSortedUpazillaCounts) {
+      setSortedUpazillaCounts(countsArray);
+    }
+  }, [incidents, setSortedUpazillaCounts]);
 
   return (
     <div className="font-manrope h-screen bg-base-100 border rounded-t-lg p-4 mb-4">
@@ -39,7 +46,7 @@ const AreaUpdate = ({ incidents }) => {
       </div>
       <hr className="border-gray-300" />
       <div className="flex-grow bg-base-100 rounded-t-lg overflow-y-visible">
-        {areaCounts.map(({ upazilla, count }) => (
+        {upazillaCounts.map(({ upazilla, count }) => (
           <AreaItem key={upazilla} upazilla={upazilla} count={count} />
         ))}
       </div>
