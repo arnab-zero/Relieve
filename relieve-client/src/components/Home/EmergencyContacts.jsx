@@ -21,7 +21,6 @@ const EmergencyContacts = ({ sortedUpazillaCounts }) => {
 
                 setAllContacts(contacts);
 
-                // Generate top 10 upazilas based on sortedUpazillaCounts
                 const contactMap = new Map(contacts.map(contact => [contact.name, contact]));
                 const top10 = sortedUpazillaCounts
                     .slice(0, 10)
@@ -34,21 +33,17 @@ const EmergencyContacts = ({ sortedUpazillaCounts }) => {
             });
     }, [sortedUpazillaCounts]);
 
-    // console.log(allContacts);
-
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
 
         if (query) {
-            // Search all contacts
             const filtered = allContacts.filter(contact =>
                 contact.name.toLowerCase().includes(query) ||
                 contact.zilla.toLowerCase().includes(query)
             );
             setDisplayContacts(filtered);
         } else {
-            // Reset to top 10 upazilas when query is cleared
             setDisplayContacts(top10Upazilas);
         }
     };

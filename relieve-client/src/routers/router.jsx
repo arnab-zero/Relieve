@@ -31,20 +31,19 @@ const router = createBrowserRouter([
         element: <Home />,
         children: [
           {
-            path: "/",
             element: <HomePageContainer />,
             children: [
               {
-                path: '/',
-                element: <IncidentReports></IncidentReports>,
+                index: true, // This will render IncidentReports at the root of HomePageContainer
+                element: <IncidentReports />,
               },
               {
                 path: "/volunteer-calls",
-                element: <VolunteerCalls></VolunteerCalls>,
+                element: <VolunteerCalls />,
               },
               {
                 path: "/donation-calls",
-                element: <DonationCalls></DonationCalls>,
+                element: <DonationCalls />,
               },
               {
                 path: "/alerts",

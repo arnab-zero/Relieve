@@ -1,12 +1,13 @@
-import { Outlet } from "react-router-dom";
 import HomePageNav from "../components/Home/HomePageNav";
-
-
+import { Outlet } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 const HomePageContainer = () => {
+    const { incidents } = useOutletContext() || { incidents: [] };
+    console.log(incidents);
     return (
         <div>
-            <HomePageNav></HomePageNav>
-            <Outlet></Outlet>
+            <HomePageNav />
+            <Outlet context={{incidents}} />
         </div>
     );
 };

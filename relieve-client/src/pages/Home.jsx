@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Searchbar from "../components/Home/Searchbar";
 import AreaUpdate from "../components/Home/AreaUpdate";
@@ -24,7 +24,7 @@ const Home = () => {
                     setSortedUpazillaCounts={setSortedUpazillaCounts} 
                 />
                 <div className="col-span-3">
-                    <Outlet />
+                    <Outlet context={{ incidents }} />
                 </div>
                 <EmergencyContacts 
                     sortedUpazillaCounts={sortedUpazillaCounts} 
