@@ -8,29 +8,28 @@ import AreaUpdate from "../components/Home/AreaUpdate";
 import EmergencyContacts from "../components/Home/EmergencyContacts";
 
 const Home = () => {
-    const [incidents, setIncidents] = useState([]);
+  const [incidents, setIncidents] = useState([]);
 
-    useEffect(() => {
-        fetch('/data/incidents.json')
-            .then(res => res.json())
-            .then(data => setIncidents(data))
-    }, [])
+  useEffect(() => {
+    fetch("/data/incidents.json")
+      .then((res) => res.json())
+      .then((data) => setIncidents(data));
+  }, []);
 
-    return (
-        <div>
-            {/* <VolunteerSeekingCard />
+  return (
+    <div>
+      {/* <VolunteerSeekingCard />
       <DonationSeekingCard></DonationSeekingCard> */}
-            <Searchbar />
-            <div className="grid grid-cols-5 gap-4">
-                <AreaUpdate incidents={incidents} />
-                <div className="col-span-3">
-                   <Outlet></Outlet>
-                </div>
-                <EmergencyContacts />
-            </div>
-
+      <Searchbar />
+      <div className="grid grid-cols-5 gap-4">
+        <AreaUpdate incidents={incidents} />
+        <div className="col-span-3">
+          <Outlet></Outlet>
         </div>
-    );
+        <EmergencyContacts />
+      </div>
+    </div>
+  );
 };
 
 export default Home;

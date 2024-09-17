@@ -9,6 +9,8 @@ import HomePageContainer from "../layouts/HomePageContainer";
 import IncidentReports from "../components/Home/IncidentReports";
 import VolunteerCalls from "../components/Home/VolunteerCalls";
 import DonationCalls from "../components/Home/DonationCalls";
+import Alerts from "../components/Home/Alerts";
+import CommunityDashboard from "../pages/CommunityDashboard";
 
 const router = createBrowserRouter([
   {
@@ -29,28 +31,36 @@ const router = createBrowserRouter([
         element: <Home />,
         children: [
           {
-            path: '/',
+            path: "/",
             element: <HomePageContainer />,
             children: [
               {
-                path: '/',
-                element: <IncidentReports></IncidentReports>
+                path: "/",
+                element: <IncidentReports></IncidentReports>,
               },
               {
-                path: '/volunteer-calls',
-                element: <VolunteerCalls></VolunteerCalls>
+                path: "/volunteer-calls",
+                element: <VolunteerCalls></VolunteerCalls>,
               },
               {
-                path: '/donation-calls',
-                element: <DonationCalls></DonationCalls>
-              }
-            ]
-          }
-        ]
+                path: "/donation-calls",
+                element: <DonationCalls></DonationCalls>,
+              },
+              {
+                path: "/alerts",
+                element: <Alerts />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: "/event-dashboard",
         element: <EventDashboard />,
+      },
+      {
+        path: "/community",
+        element: <CommunityDashboard />,
       },
     ],
   },
