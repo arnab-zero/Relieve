@@ -5,7 +5,7 @@ const HomePageContainer = () => {
     const { incidents } = useOutletContext() || { incidents: [] };
     console.log(incidents);
     return (
-        <div>
+        <div className="h-screen overflow-scroll scrollbar-hide">
             <HomePageNav />
             <Outlet context={{incidents}} />
         </div>

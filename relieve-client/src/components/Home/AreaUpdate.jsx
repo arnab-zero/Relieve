@@ -21,10 +21,9 @@ const AreaUpdate = ({ incidents, setSortedUpazillaCounts }) => {
       return acc;
     }, {});
 
-
-    const countsArray = Object.keys(upazillaCounts).map(upazilla => ({
+    const countsArray = Object.keys(upazillaCounts).map((upazilla) => ({
       upazilla,
-      count: upazillaCounts[upazilla]
+      count: upazillaCounts[upazilla],
     }));
 
     // Sort by count (most incidents first)
@@ -39,13 +38,15 @@ const AreaUpdate = ({ incidents, setSortedUpazillaCounts }) => {
 
   return (
     <div className="font-manrope h-screen bg-base-100 border rounded-t-lg p-4 mb-4">
-      <h2 className="text-3xl text-center font-extrabold text-blue-primary mb-2">Area Update</h2>
+      <h2 className="text-3xl text-center font-extrabold text-blue-primary mb-2">
+        Area Update
+      </h2>
       <div className="flex justify-between p-2 text-amber-700 font-bold">
         <h4 className="text-xl">Upazilla</h4>
         <h4 className="text-xl">Count</h4>
       </div>
       <hr className="border-gray-300" />
-      <div className="flex-grow bg-base-100 rounded-t-lg overflow-y-visible">
+      <div className="flex-grow bg-base-100 rounded-t-lg overflow-y-scroll h-screen scrollbar-hide">
         {upazillaCounts.map(({ upazilla, count }) => (
           <AreaItem key={upazilla} upazilla={upazilla} count={count} />
         ))}
