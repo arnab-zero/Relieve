@@ -15,7 +15,11 @@ const Home = () => {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+<<<<<<< HEAD
     // console.log('sortedUp',sortedUpazillaCounts);
+=======
+    // console.log('sortedUpazillaCounts',sortedUpazillaCounts);
+>>>>>>> 46178eb (contact operation updated)
     return (
         <div>
             <Searchbar />
