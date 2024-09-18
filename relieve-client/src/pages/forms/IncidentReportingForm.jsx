@@ -49,15 +49,17 @@ export default function IncidentReportingForm() {
     return isValid ? "" : "Contact number must contain only digits.";
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       const currentTime = new Date().toISOString(); // Get the current time in ISO format
 
       const requestObject = {
+        incidentId: 1, 
         userId: 1, // Default userId
-        updateDetail: [], // Default empty array
+        eventId: [],
+        updateDetail: "", // ???
         location: formData.location,
         upazilla: formData.upazilla,
         zilla: formData.zilla,
@@ -68,12 +70,30 @@ export default function IncidentReportingForm() {
         isVerified: false, // Default isVerified
         postedAt: currentTime,
         lastUpdatedAt: currentTime, // Initially same as postedAt
-        description: formData.detail, // Use detail as the description
+        // description: formData.detail, // Use detail as the description
       };
 
-      console.log(requestObject);
+      try {
+        // Send the requestObject to your backend API using POST method
+        const response = await fetch("http://localhost:8080/incident", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestObject),
+        });
 
-      // Send the requestObject to your backend
+        if (response.ok) {
+          console.log("Incident Created Successfully");
+          // Handle success: maybe show a success message or redirect
+        } else {
+          console.log("Error in creating incident", response.statusText);
+          // Handle error: show error message
+        }
+      } catch (error) {
+        console.error("Network error while creating incident:", error);
+        // Handle network errors
+      }
     }
   };
 
