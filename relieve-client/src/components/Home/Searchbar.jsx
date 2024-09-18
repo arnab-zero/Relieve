@@ -3,105 +3,7 @@ const Searchbar = ({ setQuery }) => {
         setQuery(e.target.value);
     };
 
-    return (
-<<<<<<< HEAD
-        import { useState } from "react";
-import { zillaUpazillaData } from "./ZillaUpazillaData.js";
-
-export default function IncidentReportingForm() {
-  const [formData, setFormData] = useState({
-    typeOfNeed: "",
-    detail: "",
-    zilla: "",
-    upazilla: "",
-    location: "",
-    contactNo: "",
-    mapLink: "",
-  });
-
-  const [errors, setErrors] = useState({
-    typeOfNeed: "",
-    detail: "",
-    zilla: "",
-    location: "",
-    contactNo: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-      ...(name === "zilla" && { upazilla: "" }), // Reset upazilla if zilla changes
-    }));
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.typeOfNeed)
-      newErrors.typeOfNeed = "Type of need is required.";
-    if (!formData.zilla) newErrors.zilla = "Zilla is required.";
-    if (!formData.location) newErrors.location = "Location is required.";
-    if (!formData.detail) newErrors.detail = "Detail is required.";
-    const contactNoError = validateContactNo(formData.contactNo);
-    if (contactNoError) newErrors.contactNo = contactNoError;
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const validateContactNo = (contactNo) => {
-    // Validate that contactNo contains only digits
-    const isValid = /^\d+$/.test(contactNo);
-    return isValid ? "" : "Contact number must contain only digits.";
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      console.log(formData);
-      // Send the data to your backend
-    }
-  };
-
-  const upazillas = formData.zilla
-    ? zillaUpazillaData[formData.zilla] || []
-    : [];
-
-  return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">
-        Incident Reporting Form
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Type of Need */}
-        <div className="space-y-2">
-          <label
-            htmlFor="typeOfNeed"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Type of Need
-          </label>
-          <select
-            id="typeOfNeed"
-            name="typeOfNeed"
-            value={formData.typeOfNeed}
-            onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.typeOfNeed ? "border-red-500" : "border-gray-300"
-            } bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-          >
-            <option value="">Select type of need</option>
-            <option value="relief">Relief</option>
-            <option value="rescue">Rescue</option>
-            <option value="medical">Medical Facilities</option>
-          </select>
-          {errors.typeOfNeed && (
-            <p className="text-sm text-red-600 mt-1">{errors.typeOfNeed}</p>
-          )}
-=======
-        
+    return ( 
         <div className="font-manrope">
             <span className="flex justify-center my-10">
                 <input
@@ -110,7 +12,6 @@ export default function IncidentReportingForm() {
                     onChange={handleChange}
                     className="input input-bordered input-info border-blue-secondary focus:border-blue-secondary focus:outline-blue-secondary w-full max-w-md" />
             </span>
->>>>>>> 9441ca560fae03dfa7de6fd46f2030474d460698
         </div>
 
         {/* Detail */}
