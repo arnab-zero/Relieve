@@ -51,12 +51,32 @@ export default function IncidentReportingForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     if (validateForm()) {
-      console.log(formData);
-      // Send the data to your backend
+      const currentTime = new Date().toISOString(); // Get the current time in ISO format
+  
+      const requestObject = {
+        userId: 1, // Default userId
+        updateDetail: [], // Default empty array
+        location: formData.location,
+        upazilla: formData.upazilla,
+        zilla: formData.zilla,
+        contact: formData.contactNo,
+        requestType: formData.typeOfNeed,
+        mapLink: formData.mapLink,
+        status: 'pending', // Default status
+        isVerified: false, // Default isVerified
+        postedAt: currentTime,
+        lastUpdatedAt: currentTime, // Initially same as postedAt
+        description: formData.detail, // Use detail as the description
+      };
+  
+      console.log(requestObject);
+  
+      // Send the requestObject to your backend
     }
   };
+  
 
   const upazillas = formData.zilla
     ? zillaUpazillaData[formData.zilla] || []
@@ -243,6 +263,7 @@ export default function IncidentReportingForm() {
         <button
           type="submit"
           className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={handleSubmit}
         >
           Submit Request
         </button>
