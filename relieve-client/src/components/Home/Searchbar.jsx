@@ -1,6 +1,10 @@
+const Searchbar = ({ setQuery }) => {
+    const handleChange = (e) => {
+        setQuery(e.target.value);
+    };
 
-const Searchbar = () => {
     return (
+<<<<<<< HEAD
         import { useState } from "react";
 import { zillaUpazillaData } from "./ZillaUpazillaData.js";
 
@@ -96,6 +100,17 @@ export default function IncidentReportingForm() {
           {errors.typeOfNeed && (
             <p className="text-sm text-red-600 mt-1">{errors.typeOfNeed}</p>
           )}
+=======
+        
+        <div className="font-manrope">
+            <span className="flex justify-center my-10">
+                <input
+                    type="text"
+                    placeholder="Type any location, contact or any info"
+                    onChange={handleChange}
+                    className="input input-bordered input-info border-blue-secondary focus:border-blue-secondary focus:outline-blue-secondary w-full max-w-md" />
+            </span>
+>>>>>>> 9441ca560fae03dfa7de6fd46f2030474d460698
         </div>
 
         {/* Detail */}

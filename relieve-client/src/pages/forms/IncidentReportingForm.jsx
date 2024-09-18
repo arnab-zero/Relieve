@@ -51,10 +51,10 @@ export default function IncidentReportingForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     if (validateForm()) {
       const currentTime = new Date().toISOString(); // Get the current time in ISO format
-  
+
       const requestObject = {
         userId: 1, // Default userId
         updateDetail: [], // Default empty array
@@ -64,19 +64,18 @@ export default function IncidentReportingForm() {
         contact: formData.contactNo,
         requestType: formData.typeOfNeed,
         mapLink: formData.mapLink,
-        status: 'pending', // Default status
+        status: "pending", // Default status
         isVerified: false, // Default isVerified
         postedAt: currentTime,
         lastUpdatedAt: currentTime, // Initially same as postedAt
         description: formData.detail, // Use detail as the description
       };
-  
+
       console.log(requestObject);
-  
+
       // Send the requestObject to your backend
     }
   };
-  
 
   const upazillas = formData.zilla
     ? zillaUpazillaData[formData.zilla] || []
