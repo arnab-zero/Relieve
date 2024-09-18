@@ -7,6 +7,7 @@ import EmergencyContacts from "../components/Home/EmergencyContacts";
 const Home = () => {
     const [incidents, setIncidents] = useState([]);
     const [sortedUpazillaCounts, setSortedUpazillaCounts] = useState([]);
+    const [query, setQuery] = useState("");
 
     useEffect(() => {
         fetch('/data/incidents.json')
@@ -17,14 +18,14 @@ const Home = () => {
 
     return (
         <div>
-            <Searchbar />
+            <Searchbar setQuery={setQuery} />
             <div className="grid grid-cols-5 gap-4">
                 <AreaUpdate 
                     incidents={incidents}
                     setSortedUpazillaCounts={setSortedUpazillaCounts} 
                 />
                 <div className="col-span-3">
-                    <Outlet context={{ incidents }} />
+                    <Outlet context={{ incidents, query }} />
                 </div>
                 <EmergencyContacts 
                     sortedUpazillaCounts={sortedUpazillaCounts} 
