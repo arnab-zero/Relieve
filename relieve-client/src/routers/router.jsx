@@ -11,6 +11,7 @@ import VolunteerCalls from "../components/Home/VolunteerCalls";
 import DonationCalls from "../components/Home/DonationCalls";
 import Alerts from "../components/Home/Alerts";
 import CommunityDashboard from "../pages/CommunityDashboard";
+import Network from "../pages/Network";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/community",
         element: <CommunityDashboard />,
+      },
+      {
+        path: "/network",
+        element: <Network />,
       },
     ],
   },

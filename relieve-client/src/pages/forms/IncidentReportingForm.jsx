@@ -56,7 +56,7 @@ export default function IncidentReportingForm() {
       const currentTime = new Date().toISOString(); // Get the current time in ISO format
 
       const requestObject = {
-        incidentId: 1, 
+        incidentId: 1,
         userId: 1, // Default userId
         eventId: [],
         updateDetail: "", // ???
@@ -117,7 +117,7 @@ export default function IncidentReportingForm() {
           </label>
           <select
             id="typeOfNeed"
-            name="typeOfNeed"
+            name="typeOfNeed"     
             value={formData.typeOfNeed}
             onChange={handleChange}
             className={`mt-1 block w-full py-2 px-3 border ${
