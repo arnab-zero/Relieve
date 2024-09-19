@@ -56,8 +56,6 @@ export default function IncidentReportingForm() {
       const currentTime = new Date().toISOString(); // Get the current time in ISO format
 
       const requestObject = {
-        incidentId: 1,
-        userId: 1, // Default userId
         eventId: [],
         updateDetail: "", // ???
         location: formData.location,
