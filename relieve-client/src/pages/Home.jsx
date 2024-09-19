@@ -10,7 +10,7 @@ const Home = () => {
     const [query, setQuery] = useState("");
 
     useEffect(() => {
-        fetch('/data/incidents.json')
+        fetch('')
             .then(res => res.json())
             .then(data => setIncidents(data))
             .catch(error => console.error('Error fetching data:', error));
