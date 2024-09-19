@@ -33,7 +33,8 @@ export default function CreateEventForm() {
     if (!formData.eventName) newErrors.eventName = "Event Name is required.";
     if (!formData.coordinators)
       newErrors.coordinators = "Coordinators are required.";
-    if (!formData.contactNo) newErrors.contactNo = "Contact number is required.";
+    if (!formData.contactNo)
+      newErrors.contactNo = "Contact number is required.";
     else if (!/^\d+$/.test(formData.contactNo))
       newErrors.contactNo = "Contact number must contain only digits.";
     if (!formData.startDate) newErrors.startDate = "Start Date is required.";
@@ -49,11 +50,41 @@ export default function CreateEventForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log(formData);
-      // Send the data to the backend or handle it as needed
+      const eventDto = {
+        eventName: formData.eventName,
+        description: formData.details,
+        contacts: [parseInt(formData.contactNo)], // Assuming it's one contact, adjust if there are more
+        dateFrom: new Date(`${formData.startDate}T${formData.startTime}`),
+        dateTo: new Date(`${formData.endDate}T${formData.endTime}`),
+        location: `${formData.location}, ${formData.upazilla}, ${formData.zilla}`,
+        volunteers: [], // Add volunteer ids if applicable
+        eventAdmins: [], // Add event admin ids if applicable
+        volunteerCalls: [],
+        donationCalls: [],
+        reports: [],
+      };
+
+      try {
+        const response = await fetch("http://localhost:8080/api/events", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(eventDto),
+        });
+
+        if (response.ok) {
+          const savedEvent = await response.json();
+          console.log("Event created:", savedEvent);
+        } else {
+          console.error("Failed to create event", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error creating event:", error);
+      }
     }
   };
 
