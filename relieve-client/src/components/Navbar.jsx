@@ -31,6 +31,20 @@ const Navbar = () => {
 
   const links = (
     <>
+    <li>
+        <NavLink
+          to="/"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
+              : isPending
+              ? "pending"
+              : ""
+          }
+        >
+          Home
+        </NavLink>
+      </li>
       <li>
         <NavLink
           to="/network"
@@ -59,13 +73,27 @@ const Navbar = () => {
           Map
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/shelter"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
+              : isPending
+              ? "pending"
+              : ""
+          }
+        >
+          Shelter
+        </NavLink>
+      </li>
     </>
   );
 
   return (
     <div className="relative">
       {/* Navbar content */}
-      <div className="navbar bg-blue-primary font-manrope md:px-6 rounded-t-lg">
+      <div className="navbar bg-blue-primary font-manrope md:px-6">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

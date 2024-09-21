@@ -12,6 +12,7 @@ import DonationCalls from "../components/Home/DonationCalls";
 import Alerts from "../components/Home/Alerts";
 import CommunityDashboard from "../pages/CommunityDashboard";
 import Network from "../pages/Network";
+import Shelter from "../pages/Shelter";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
         path: "/network",
         element: <Network />,
       },
+      {
+        path: "/shelter",
+        element: <Shelter></Shelter>
+      }
     ],
   },
 ]);

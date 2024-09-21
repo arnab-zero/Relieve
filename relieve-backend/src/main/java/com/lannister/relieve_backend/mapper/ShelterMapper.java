@@ -9,6 +9,8 @@ public class ShelterMapper {
         return new ShelterDto(
                 shelter.getShelterId(),
                 shelter.getName(),
+                shelter.getZilla(),
+                shelter.getUpazilla(),
                 shelter.getLocation(),
                 shelter.getContactNumbers(),
                 shelter.getCapacity(),
@@ -21,6 +23,8 @@ public class ShelterMapper {
         return new Shelter(
                 shelterDto.getShelterId(),
                 shelterDto.getName(),
+                shelterDto.getZilla(),
+                shelterDto.getUpazilla(),
                 shelterDto.getLocation(),
                 shelterDto.getContactNumbers(),
                 shelterDto.getCapacity(),
