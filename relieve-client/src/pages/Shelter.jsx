@@ -2,7 +2,6 @@ import { FaPeopleLine, FaMapLocation } from "react-icons/fa6";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import ShelterFinder from "../components/Shelter/ShelterFinder";
 import { useEffect, useState } from "react";
-import { json } from "react-router-dom";
 import ShelterCard from "../components/Shelter/ShelterCard";
 
 const Shelter = () => {
