@@ -1,0 +1,123 @@
+[
+    {
+      "shelterId": 1,
+      "imageUrl": "https://www.bssnews.net/assets/news_photos/2021/09/09/image-16435-1631198480.jpg",
+      "name": "Noakhali Govt. College Shelter",
+      "zilla": "Noakhali",
+      "upazilla": "Subarnachar",
+      "location": "Subarnachar Upazila, Noakhali",
+      "contactNumbers": [8801712345678, 8801912345678],
+      "capacity": 500,
+      "currentPeople": 320,
+      "eventId": 1001
+    },
+    {
+      "shelterId": 2,
+      "name": "Feni High School Shelter",
+      "imageUrl": "https://lh3.googleusercontent.com/proxy/XY5sX-TL7fZesc04_0buDjSdj3lx2nt5-ALjtS7t_CgwAOK84KPQqYzhZ8W2kS1ADR7FJKiOUho2fxMbhGDTd3v1NFABsKx0iIv17Q",
+      "zilla": "Feni",
+      "upazilla": "Feni Sadar",
+      "location": "Feni Sadar, Feni",
+      "contactNumbers": [8801712345699, 8801912345699],
+      "capacity": 300,
+      "currentPeople": 180,
+      "eventId": 1002
+    },
+    {
+      "shelterId": 3,
+      "name": "Sunamganj Govt. High School Shelter",
+      "imageUrl": "https://bangladeshpost.net/webroot/uploads/featureimage/2021-10/6162fecec1402.jpg",
+      "zilla": "Sunamganj",
+      "upazilla": "Sunamganj Sadar",
+      "location": "Sunamganj Sadar, Sunamganj",
+      "contactNumbers": [8801712345789, 8801912345789],
+      "capacity": 400,
+      "currentPeople": 250,
+      "eventId": 1003
+    },
+    {
+      "shelterId": 4,
+      "name": "Barisal Cyclone Shelter",
+      "imageUrl": "https://file-chittagong.portal.gov.bd/uploads/0f0b670b-dc9a-4b81-b366-148b2e157442//635/3cd/f55/6353cdf551690378394988.jpg",
+      "zilla": "Barisal",
+      "upazilla": "Muladi",
+      "location": "Muladi Upazila, Barisal",
+      "contactNumbers": [8801712345123, 8801912345123],
+      "capacity": 600,
+      "currentPeople": 400,
+      "eventId": 1004
+    },
+    {
+      "shelterId": 5,
+      "name": "Cox's Bazar Cyclone Shelter",
+      "imageUrl": "https://www.bssnews.net/assets/news_photos/2021/09/09/image-16435-1631198480.jpg",
+      "zilla": "Cox's Bazar",
+      "upazilla": "Kutubdia",
+      "location": "Kutubdia Upazila, Cox's Bazar",
+      "contactNumbers": [8801712345456, 8801912345456],
+      "capacity": 700,
+      "currentPeople": 500,
+      "eventId": 1005
+    },
+    {
+      "shelterId": 6,
+      "name": "Khulna Govt. School Shelter",
+      "imageUrl": "https://lh3.googleusercontent.com/proxy/XY5sX-TL7fZesc04_0buDjSdj3lx2nt5-ALjtS7t_CgwAOK84KPQqYzhZ8W2kS1ADR7FJKiOUho2fxMbhGDTd3v1NFABsKx0iIv17Q",
+      "zilla": "Khulna",
+      "upazilla": "Dacope",
+      "location": "Dacope Upazila, Khulna",
+      "contactNumbers": [8801712345567, 8801912345567],
+      "capacity": 350,
+      "currentPeople": 210,
+      "eventId": 1006
+    },
+    {
+      "shelterId": 7,
+      "name": "Chittagong University Shelter",
+      "imageUrl": "https://file-chittagong.portal.gov.bd/uploads/0f0b670b-dc9a-4b81-b366-148b2e157442//635/3cd/f55/6353cdf551690378394988.jpg",
+      "zilla": "Chittagong",
+      "upazilla": "Hathazari",
+      "location": "Hathazari Upazila, Chittagong",
+      "contactNumbers": [8801712345234, 8801912345234],
+      "capacity": 450,
+      "currentPeople": 300,
+      "eventId": 1007
+    },
+    {
+      "shelterId": 8,
+      "name": "Bhola District Shelter",
+      "imageUrl": "https://bangladeshpost.net/webroot/uploads/featureimage/2021-10/6162fecec1402.jpg",
+      "zilla": "Bhola",
+      "upazilla": "Bhola Sadar",
+      "location": "Bhola Sadar, Bhola",
+      "contactNumbers": [8801712345670, 8801912345670],
+      "capacity": 500,
+      "currentPeople": 380,
+      "eventId": 1008
+    },
+    {
+      "shelterId": 9,
+      "name": "Satkhira Cyclone Shelter",
+      "imageUrl": "https://file-chittagong.portal.gov.bd/uploads/0f0b670b-dc9a-4b81-b366-148b2e157442//635/3cd/f55/6353cdf551690378394988.jpg",
+      "zilla": "Satkhira",
+      "upazilla": "Shyamnagar",
+      "location": "Shyamnagar Upazila, Satkhira",
+      "contactNumbers": [8801712345900, 8801912345900],
+      "capacity": 600,
+      "currentPeople": 420,
+      "eventId": 1009
+    },
+    {
+      "shelterId": 10,
+      "name": "Patuakhali Central School Shelter",
+      "imageUrl": "https://www.bssnews.net/assets/news_photos/2021/09/09/image-16435-1631198480.jpg",
+      "zilla": "Patuakhali",
+      "upazilla": "Galachipa",
+      "location": "Galachipa Upazila, Patuakhali",
+      "contactNumbers": [8801712345345, 8801912345345],
+      "capacity": 550,
+      "currentPeople": 320,
+      "eventId": 1010
+    }
+  ]
+  
