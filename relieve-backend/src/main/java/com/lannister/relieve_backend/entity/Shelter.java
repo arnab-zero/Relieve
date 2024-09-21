@@ -21,6 +21,12 @@ public class Shelter {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "zilla")
+    private String zilla;
+
+    @Column(name = "upazilla")
+    private String upazilla;
+
     @Column(name = "location", nullable = false)
     private String location;
 

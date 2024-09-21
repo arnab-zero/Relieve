@@ -12,6 +12,8 @@ import lombok.Setter;
 public class ShelterDto {
     private Long shelterId;
     private String name;
+    private String zilla;
+    private String upazilla;
     private String location;
     private Long[] contactNumbers;
     private Integer capacity;

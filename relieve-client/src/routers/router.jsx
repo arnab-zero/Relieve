@@ -14,6 +14,7 @@ import CommunityDashboard from "../pages/CommunityDashboard";
 import Network from "../pages/Network";
 import Communities from "../components/Network/Communities";
 import Events from "../components/Network/Events";
+import Shelter from "../pages/Shelter";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/shelter",
+        element: <Shelter></Shelter>
+      }
     ],
   },
 ]);
