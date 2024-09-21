@@ -12,6 +12,7 @@ import lombok.Setter;
 public class ShelterDto {
     private Long shelterId;
     private String name;
+    private String imageUrl;
     private String zilla;
     private String upazilla;
     private String location;

@@ -51,6 +51,7 @@ public class FoodServiceImpl implements FoodService {
         food.setDonorContact(foodDto.getDonorContact());
         food.setType(foodDto.getType());
         food.setDate(foodDto.getDate());
+        food.setShelterId(foodDto.getShelterId());
 
         Food updatedFood = foodRepository.save(food);
         return FoodMapper.mapToFoodDto(updatedFood);
