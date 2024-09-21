@@ -17,4 +17,8 @@ public class OrganizationDto {
     private String location;
     private String orgImage;
     private String[] nid;
+    private Long[] ongoingEvents;
+    private Long[] pastEvents;
+    private Long[] upcomingEvents;
+    private Long[] volunteers;
 }

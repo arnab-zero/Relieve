@@ -1,6 +1,7 @@
 import CreateEventForm from "../pages/forms/EventCreationForm"; // Assuming the form component is imported
 import { useEffect, useRef, useState } from "react";
 import { FaCalendarPlus } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const members = [
   {
@@ -222,6 +223,9 @@ function CommunityDashboard() {
   const [isEventPopupVisible, setIsEventPopupVisible] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const popupRef = useRef(null);
+  const location = useLocation();
+  const community = location.state;
+  console.log(community);
 
   const handleIncidentFormSubmit = () => {
     setIsIncidentPopupVisible(false);
@@ -290,7 +294,7 @@ function CommunityDashboard() {
 
       {/* Community Details Section */}
       <div className="flex-grow-[10] p-6 bg-white">
-        <h2 className="text-2xl font-bold mb-6">Community Name</h2>
+        <h2 className="text-2xl font-bold mb-6">{community.orgName}</h2>
         <div className="flex space-x-4 mb-6">
           {/* Create Event Button */}
           <button

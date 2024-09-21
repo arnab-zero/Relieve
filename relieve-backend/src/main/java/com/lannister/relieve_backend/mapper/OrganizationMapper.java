@@ -13,8 +13,11 @@ public class OrganizationMapper {
                 organization.getContactNumbers(),
                 organization.getLocation(),
                 organization.getOrgImage(),
-                organization.getNid()
-
+                organization.getNid(),
+                organization.getOngoingEvents(),
+                organization.getPastEvents(),
+                organization.getUpcomingEvents(),
+                organization.getVolunteers()
         );
     }
 
@@ -26,7 +29,11 @@ public class OrganizationMapper {
                 organizationDto.getContactNumbers(),
                 organizationDto.getLocation(),
                 organizationDto.getOrgImage(),
-                organizationDto.getNid()
+                organizationDto.getNid(),
+                organizationDto.getOngoingEvents(),
+                organizationDto.getPastEvents(),
+                organizationDto.getUpcomingEvents(),
+                organizationDto.getVolunteers()
         );
     }
 }

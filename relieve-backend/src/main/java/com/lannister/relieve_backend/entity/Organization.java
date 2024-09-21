@@ -19,16 +19,24 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orgId;
 
-    @Column(name = "org-name")
+    @Column(name = "org_name")
     private String orgName;
     @Column(name = "description")
     private String description;
-    @Column(name = "contact-numbers")
+    @Column(name = "contact_numbers")
     private Long[] contactNumbers;
     @Column(name = "location")
     private String location;
-    @Column(name = "org-image")
+    @Column(name = "org_image")
     private String orgImage;
     @Column(name = "nid", nullable = false)
     private String[] nid;
+    @Column(name="ongoing_events")
+    private Long[] ongoingEvents;
+    @Column(name="past_events")
+    private Long[] pastEvents;
+    @Column(name="upcoming_events")
+    private Long[] upcomingEvents;
+    @Column(name="volunteers")
+    private Long[] volunteers;
 }

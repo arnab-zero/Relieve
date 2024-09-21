@@ -12,6 +12,8 @@ import DonationCalls from "../components/Home/DonationCalls";
 import Alerts from "../components/Home/Alerts";
 import CommunityDashboard from "../pages/CommunityDashboard";
 import Network from "../pages/Network";
+import Communities from "../components/Network/Communities";
+import Events from "../components/Network/Events";
 
 const router = createBrowserRouter([
   {
@@ -59,12 +61,23 @@ const router = createBrowserRouter([
         element: <EventDashboard />,
       },
       {
-        path: "/community",
+        path: "/community/:orgId",
         element: <CommunityDashboard />,
       },
       {
         path: "/network",
         element: <Network />,
+        children: [
+          {
+            index: true,
+            path: "/network/communities",
+            element: <Communities />,
+          },
+          {
+            path: "/network/events",
+            element: <Events />,
+          },
+        ],
       },
     ],
   },

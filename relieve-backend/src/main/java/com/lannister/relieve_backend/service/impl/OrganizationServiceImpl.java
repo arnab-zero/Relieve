@@ -28,7 +28,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public OrganizationDto getOrganizationById(Long orgId) {
         Organization organization = organizationRepository.findById(orgId).orElseThrow(
-                ()-> new ResourceNotFoundException("Organization does not exist with the given id: " + orgId));
+                () -> new ResourceNotFoundException("Organization does not exist with the given id: " + orgId));
         return OrganizationMapper.mapToOrganizationDto(organization);
     }
 
@@ -48,6 +48,10 @@ public class OrganizationServiceImpl implements OrganizationService {
         organization.setDescription(updatedOrganization.getDescription());
         organization.setLocation(updatedOrganization.getLocation());
         organization.setOrgImage(updatedOrganization.getOrgImage());
+        organization.setOngoingEvents(updatedOrganization.getOngoingEvents());
+        organization.setPastEvents(updatedOrganization.getPastEvents());
+        organization.setUpcomingEvents(updatedOrganization.getUpcomingEvents());
+        organization.setVolunteers(updatedOrganization.getVolunteers());
 
         Organization updatedOrganizationObj = organizationRepository.save(organization);
 
@@ -62,3 +66,4 @@ public class OrganizationServiceImpl implements OrganizationService {
         organizationRepository.deleteById(orgId);
     }
 }
+

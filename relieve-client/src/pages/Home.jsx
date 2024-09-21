@@ -25,7 +25,7 @@ const Home = () => {
                     setSortedUpazillaCounts={setSortedUpazillaCounts} 
                 />
                 <div className="col-span-3">
-                    <Outlet context={{ incidents, query }} />
+                    <Outlet context={{ incidents, setIncidents, query }} />
                 </div>
                 <EmergencyContacts 
                     sortedUpazillaCounts={sortedUpazillaCounts} 
