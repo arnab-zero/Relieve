@@ -70,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/shelter",
         element: <Shelter></Shelter>
+      },
+      {
+        path: "shelter/:shelterId",
+        element: <h2>Hello</h2>
       }
     ],
   },
