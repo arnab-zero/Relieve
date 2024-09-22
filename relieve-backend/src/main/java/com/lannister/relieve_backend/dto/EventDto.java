@@ -13,9 +13,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class EventDto {
     private Long eventId;
+    private Long communityId;
     private String eventName;
     private String description;
-    private Long[] contacts;
+    private String[] contacts;
     private Date dateFrom;
     private Date dateTo;
     private String location;

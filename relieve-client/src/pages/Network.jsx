@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
-import EventCreationForm from "../pages/forms/EventCreationForm"; // Adjust the import if the path is different
 import { NavLink, Outlet } from "react-router-dom";
 import CommunityCreationForm from "./forms/CommunityCreationForm";
 
 const Network = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [communities, setCommunities] = useState([]); // State to store community data
+  const [communities, setCommunities] = useState([]); // State to store communities
+  const [events, setEvents] = useState([]); // State to store events
 
-  // Function to toggle the popup visibility
+  // Toggle popup visibility
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
   };
 
-  // Function to handle form submission
-  const handleFormSubmit = () => {
+  // Handle form submission
+  const handleFormSubmit = (newCommunity) => {
     setIsPopupVisible(false); // Hide the popup after form submission
-    fetchCommunities(); // Fetch updated communities after form submission
+
+    // Add the new community to the existing list
+    setCommunities((prevCommunities) => [...prevCommunities, newCommunity]);
   };
 
-  // Close the popup when clicking outside the form
+  // Handle backdrop click to close popup
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       setIsPopupVisible(false);
@@ -29,14 +31,14 @@ const Network = () => {
     setQuery(e.target.value); // Handle search input changes
   };
 
-  // Function to fetch communities from the API
+  // Fetch communities from API
   const fetchCommunities = async () => {
     try {
       const response = await fetch("http://localhost:8080/organizations");
       if (response.ok) {
-        const data = await response.json();
-        setCommunities(data); // Update communities state with fetched data
-        console.log(data);
+        const communityData = await response.json();
+        setCommunities(communityData); // Set communities state
+        console.log(communityData);
       } else {
         console.error("Failed to fetch communities:", response.statusText);
       }
@@ -45,10 +47,27 @@ const Network = () => {
     }
   };
 
-  // Fetch communities when the component mounts
+  // Fetch events from API
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/events");
+      if (response.ok) {
+        const eventsData = await response.json();
+        setEvents(eventsData); // Set event state
+        console.log(eventsData);
+      } else {
+        console.error("Failed to fetch events:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
+
+  // Fetch communities when component mounts
   useEffect(() => {
     fetchCommunities();
-  }, []); // Empty dependency array ensures this runs once on component mount
+    fetchEvents();
+  }, []); // Run on component mount
 
   return (
     <div className="mx-10">
@@ -73,13 +92,14 @@ const Network = () => {
             <ul className="flex text-2xl gap-[100px] mb-8">
               <li>
                 <NavLink
-                  to="/network/communities"
+                  to="/network"
                   className={
                     ({ isActive }) =>
                       isActive
-                        ? "text-blue-500 underline font-semibold" // active link styles
-                        : "text-gray-500" // default link styles
+                        ? "text-blue-500 underline font-semibold" // Active link styles
+                        : "text-gray-500" // Default link styles
                   }
+                  end
                 >
                   Communities
                 </NavLink>
@@ -90,8 +110,8 @@ const Network = () => {
                   className={
                     ({ isActive }) =>
                       isActive
-                        ? "text-blue-500 underline font-semibold" // active link styles
-                        : "text-gray-500" // default link styles
+                        ? "text-blue-500 underline font-semibold" // Active link styles
+                        : "text-gray-500" // Default link styles
                   }
                 >
                   Events
@@ -100,10 +120,12 @@ const Network = () => {
             </ul>
           </div>
 
-          <div>
-            <Outlet />
-          </div>
+          {/* outlet */}
+          <Outlet
+            context={{ communities, setCommunities, events, setEvents }}
+          />
         </div>
+
         {/* Communities Section */}
         <div>
           <div className="flex justify-center mb-8">
@@ -118,11 +140,14 @@ const Network = () => {
             <h1 className="text-2xl font-semibold underline">
               Your Communities
             </h1>
-            {/* Display the fetched communities */}
+            {/* Display fetched communities */}
             <ul className="mt-4">
               {communities.length > 0 ? (
                 communities.map((community) => (
-                  <li key={community.id} className="mb-4 p-2 border rounded-md">
+                  <li
+                    key={community.orgId}
+                    className="mb-4 p-2 border rounded-md"
+                  >
                     <h2 className="text-lg font-semibold">
                       {community.orgName}
                     </h2>
@@ -145,6 +170,7 @@ const Network = () => {
         </div>
       </div>
 
+      {/* Popup for community creation */}
       {isPopupVisible && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"

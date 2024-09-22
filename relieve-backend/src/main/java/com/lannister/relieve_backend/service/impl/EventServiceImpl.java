@@ -44,6 +44,7 @@ public class EventServiceImpl implements EventService {
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + eventId));
 
         event.setEventName(updatedEvent.getEventName());
+        event.setCommunityId(updatedEvent.getCommunityId());
         event.setDescription(updatedEvent.getDescription());
         event.setContacts(updatedEvent.getContacts());
         event.setDateFrom(updatedEvent.getDateFrom());

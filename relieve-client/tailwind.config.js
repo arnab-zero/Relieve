@@ -1,17 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@shadcn/ui/dist/**/*.{js,jsx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
-        manrope: ['Manrope', 'sans-serif'],
+        manrope: ["Manrope", "sans-serif"],
       },
       colors: {
-        'green-primary': '#23BE0A',
-        'blue-primary': '#005288', //'#336699',
-        'blue-secondary': '#86BBD8'
-      }
+        "green-primary": "#23BE0A",
+        "blue-primary": "#005288", //'#336699',
+        "blue-secondary": "#86BBD8",
+      },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require("daisyui")],
 };

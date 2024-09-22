@@ -2,6 +2,7 @@ import CreateEventForm from "../pages/forms/EventCreationForm"; // Assuming the 
 import { useEffect, useRef, useState } from "react";
 import { FaCalendarPlus } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
+import EventDetailCard from "../components/EventDetailCard";
 
 const members = [
   {
@@ -274,7 +275,7 @@ function CommunityDashboard() {
       <div className="flex-grow-[2] bg-gray-100 p-4 overflow-y-auto scrollbar-hide">
         <h2 className="text-xl font-bold mb-4">Members List</h2>
         <div className="space-y-4">
-          {members.map((member) => (
+          {community?.volunteers.map((member) => (
             <div key={member.id} className="flex items-center">
               <img
                 src={member.profilePic}
@@ -318,21 +319,7 @@ function CommunityDashboard() {
           <h3 className="text-lg font-bold mb-4">Ongoing Events</h3>
           <div className="space-y-4">
             {ongoingEvents.map((event, index) => (
-              <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-                <h4 className="font-bold mb-2">{event.name}</h4>
-                <p>
-                  <strong>Disaster:</strong> {event.disaster}
-                </p>
-                <p>
-                  <strong>Time Range:</strong> {event.timeRange}
-                </p>
-                <p>
-                  <strong>Area:</strong> {event.area}
-                </p>
-                <p>
-                  <strong>Coordinators:</strong> {event.coordinators}
-                </p>
-              </div>
+              <EventDetailCard key={index} event={event} />
             ))}
           </div>
         </div>
@@ -341,21 +328,7 @@ function CommunityDashboard() {
           <h3 className="text-lg font-bold mb-4">Upcoming Events</h3>
           <div className="space-y-4">
             {upcomingEvents.map((event, index) => (
-              <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-                <h4 className="font-bold mb-2">{event.name}</h4>
-                <p>
-                  <strong>Disaster:</strong> {event.disaster}
-                </p>
-                <p>
-                  <strong>Time Range:</strong> {event.timeRange}
-                </p>
-                <p>
-                  <strong>Area:</strong> {event.area}
-                </p>
-                <p>
-                  <strong>Coordinators:</strong> {event.coordinators}
-                </p>
-              </div>
+              <EventDetailCard key={index} event={event} />
             ))}
           </div>
         </div>
@@ -364,21 +337,7 @@ function CommunityDashboard() {
           <h3 className="text-lg font-bold mb-4">Past Events</h3>
           <div className="space-y-4">
             {pastEvents.map((event, index) => (
-              <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-                <h4 className="font-bold mb-2">{event.name}</h4>
-                <p>
-                  <strong>Disaster:</strong> {event.disaster}
-                </p>
-                <p>
-                  <strong>Time Range:</strong> {event.timeRange}
-                </p>
-                <p>
-                  <strong>Area:</strong> {event.area}
-                </p>
-                <p>
-                  <strong>Coordinators:</strong> {event.coordinators}
-                </p>
-              </div>
+              <EventDetailCard key={index} event={event} />
             ))}
           </div>
         </div>
@@ -391,7 +350,10 @@ function CommunityDashboard() {
             ref={popupRef}
             className="bg-white rounded-lg shadow-lg p-6 relative w-[27%] max-h-[80vh] overflow-y-auto scrollbar-hide"
           >
-            <CreateEventForm onSubmit={handleEventFormSubmit} />
+            <CreateEventForm
+              communityId={community.orgId}
+              onSubmit={handleEventFormSubmit}
+            />
           </div>
         </div>
       )}

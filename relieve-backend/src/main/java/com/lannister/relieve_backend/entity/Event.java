@@ -34,12 +34,14 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eventId;
 
+    @Column(name= "org_id")
+    private Long communityId;
     @Column(name = "event_name")
     private String eventName;
     @Column(name = "description")
     private String description;
     @Column(name = "contacts")
-    private Long[] contacts;
+    private String[] contacts;
     @Column(name = "date_from")
     private Date dateFrom;
     @Column(name = "date_to")

@@ -6,36 +6,42 @@ import com.lannister.relieve_backend.entity.Event;
 public class EventMapper {
 
     public static EventDto mapToEventDto(Event event) {
-        return new EventDto(
-                event.getEventId(),
-                event.getEventName(),
-                event.getDescription(),
-                event.getContacts(),
-                event.getDateFrom(),
-                event.getDateTo(),
-                event.getLocation(),
-                event.getVolunteers(),
-                event.getEventAdmins(),
-                event.getVolunteerCalls(),
-                event.getDonationCalls(),
-                event.getReports()
-        );
+        EventDto eventDto = new EventDto();
+
+        eventDto.setEventId(event.getEventId());
+        eventDto.setCommunityId(event.getCommunityId());
+        eventDto.setEventName(event.getEventName());
+        eventDto.setDescription(event.getDescription());
+        eventDto.setContacts(event.getContacts());
+        eventDto.setDateFrom(event.getDateFrom());
+        eventDto.setDateTo(event.getDateTo());
+        eventDto.setLocation(event.getLocation());
+        eventDto.setVolunteers(event.getVolunteers());
+        eventDto.setEventAdmins(event.getEventAdmins());
+        eventDto.setVolunteerCalls(event.getVolunteerCalls());
+        eventDto.setDonationCalls(event.getDonationCalls());
+        eventDto.setReports(event.getReports());
+
+        return eventDto;
     }
 
     public static Event mapToEvent(EventDto eventDto) {
-        return new Event(
-                eventDto.getEventId(),
-                eventDto.getEventName(),
-                eventDto.getDescription(),
-                eventDto.getContacts(),
-                eventDto.getDateFrom(),
-                eventDto.getDateTo(),
-                eventDto.getLocation(),
-                eventDto.getVolunteers(),
-                eventDto.getEventAdmins(),
-                eventDto.getVolunteerCalls(),
-                eventDto.getDonationCalls(),
-                eventDto.getReports()
-        );
+        Event event = new Event();
+
+        event.setEventId(eventDto.getEventId());
+        event.setCommunityId(eventDto.getCommunityId());
+        event.setEventName(eventDto.getEventName());
+        event.setDescription(eventDto.getDescription());
+        event.setContacts(eventDto.getContacts());
+        event.setDateFrom(eventDto.getDateFrom());
+        event.setDateTo(eventDto.getDateTo());
+        event.setLocation(eventDto.getLocation());
+        event.setVolunteers(eventDto.getVolunteers());
+        event.setEventAdmins(eventDto.getEventAdmins());
+        event.setVolunteerCalls(eventDto.getVolunteerCalls());
+        event.setDonationCalls(eventDto.getDonationCalls());
+        event.setReports(eventDto.getReports());
+
+        return event;
     }
 }

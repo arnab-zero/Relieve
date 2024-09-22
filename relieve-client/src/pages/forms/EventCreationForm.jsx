@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { zillaUpazillaData } from "./ZillaUpazillaData.js";
 
-export default function CreateEventForm() {
+export default function CreateEventForm({communityId}) {
   const [formData, setFormData] = useState({
     eventName: "",
+    communityId: null,
     coordinators: "",
     contactNo: "",
     startDate: "",
@@ -55,6 +56,7 @@ export default function CreateEventForm() {
     if (validateForm()) {
       const eventDto = {
         eventName: formData.eventName,
+        communityId: communityId,
         description: formData.details,
         contacts: [parseInt(formData.contactNo)], // Assuming it's one contact, adjust if there are more
         dateFrom: new Date(`${formData.startDate}T${formData.startTime}`),
@@ -68,7 +70,7 @@ export default function CreateEventForm() {
       };
 
       try {
-        const response = await fetch("http://localhost:8080/api/events", {
+        const response = await fetch("http://localhost:8080/events", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
