@@ -154,12 +154,14 @@ const Network = () => {
                     <p>{community.description}</p>
                     <p>Location: {community.location}</p>
                     <p>Contact: {community.contactNumbers.join(", ")}</p>
-                    <NavLink
-                      to={`/community/${community.orgId}`}
-                      state={community}
-                    >
-                      View this community
-                    </NavLink>
+                    <div className="hover:text-blue-500 hover:underline hover:font-medium">
+                      <NavLink
+                        to={`/community/${community.orgId}`}
+                        state={community}
+                      >
+                        View this community
+                      </NavLink>
+                    </div>
                   </li>
                 ))
               ) : (

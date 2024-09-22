@@ -16,6 +16,7 @@ import Communities from "../components/Network/Communities";
 import Events from "../components/Network/Events";
 import Shelter from "../pages/Shelter";
 import ShelterDashboard from "../pages/ShelterDashboard";
+import MapPage from "../components/Map/MapPage";
 
 // Define the routes
 const router = createBrowserRouter([
@@ -82,13 +83,17 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: "/map",
+        element: <MapPage />,
+      },
+      {
         path: "/shelter",
         element: <Shelter />,
       },
       {
         path: "shelter/:shelterId",
         element: <ShelterDashboard />,
-      }
+      },
     ],
   },
 ]);

@@ -1,5 +1,6 @@
 import React from "react";
 import { MapPin, Phone, Users, Calendar } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 // Card Components
 const Card = ({ className, children }) => (
@@ -47,27 +48,32 @@ const Badge = ({ variant, className, children }) => (
 );
 
 export default function Component({ community }) {
-  const {
-    orgName,
-    orgImage,
-    location,
-    contactNumbers,
-    volunteers,
-    description,
-    ongoingEvents,
-    pastEvents,
-    upcomingEvents,
-  } = community;
+  // const {
+  //   orgId,
+  //   orgName,
+  //   orgImage,
+  //   location,
+  //   contactNumbers,
+  //   volunteers,
+  //   description,
+  //   ongoingEvents,
+  //   pastEvents,
+  //   upcomingEvents,
+  // } = community;
 
   return (
     <Card className="w-full max-w-3xl mx-auto">
-      <CardHeader className="flex flex-row items-center gap-4">
+      {/* <CardHeader className="flex flex-row items-center gap-4">
         <Avatar className="w-16 h-16">
           <AvatarImage src={orgImage} alt={orgName} />
           <AvatarFallback>{orgName.charAt(0)}</AvatarFallback>
         </Avatar>
         <div>
-          <h2 className="text-2xl font-bold">{orgName}</h2>
+          <h2 className="text-2xl font-bold hover:underline hover:cursor-pointer">
+            <NavLink to={`/community/${orgId}`} state={community}>
+              {orgName}
+            </NavLink>
+          </h2>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
             <MapPin className="w-4 h-4" />
             {location}
@@ -114,9 +120,11 @@ export default function Component({ community }) {
         </div>
         <div className="flex items-center gap-1 text-sm text-muted-foreground">
           <Calendar className="w-4 h-4" />
-          <span>{ongoingEvents.length + upcomingEvents.length} active events</span>
+          <span>
+            {ongoingEvents.length + upcomingEvents.length} active events
+          </span>
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }

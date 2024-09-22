@@ -1,4 +1,5 @@
 import { useOutletContext } from "react-router-dom";
+import EventDetailCard from "../EventDetailCard";
 
 const Events = () => {
   const { events } = useOutletContext();
@@ -7,9 +8,7 @@ const Events = () => {
   return (
     <div>
       {events?.map((event) => (
-        <div key={event.eventId}>
-          <h1>{event.eventName}</h1>
-        </div>
+        <EventDetailCard key={event.eventId} event={event} />
       ))}
     </div>
   );

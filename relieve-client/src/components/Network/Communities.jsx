@@ -3,19 +3,22 @@ import { useEffect } from "react";
 import CommunityDetailCard from "../CommunityDetailCard";
 
 const Communities = () => {
-  const { communities, setCommunities } = useOutletContext(); // Access passed state
+  const { communities } = useOutletContext(); // Access passed state
 
   useEffect(() => {
     console.log("Communities: ", communities);
   }, [communities]);
 
   return (
-    <div>
+    <div className="h-screen overflow-scroll scrollbar-hide">
       {/* Render the communities */}
       <ul>
         {communities.length > 0 ? (
           communities.map((community) => (
-            <CommunityDetailCard key={community.orgId} community={community} />
+            <CommunityDetailCard
+              key={community.orgId}
+              props={{ community, events }}
+            />
           ))
         ) : (
           <p>No communities found.</p>

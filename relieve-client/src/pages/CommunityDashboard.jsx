@@ -295,7 +295,7 @@ function CommunityDashboard() {
 
       {/* Community Details Section */}
       <div className="flex-grow-[10] p-6 bg-white">
-        <h2 className="text-2xl font-bold mb-6">{community.orgName}</h2>
+        <h2 className="text-2xl font-bold mb-6">{community?.orgName}</h2>
         <div className="flex space-x-4 mb-6">
           {/* Create Event Button */}
           <button
@@ -318,29 +318,32 @@ function CommunityDashboard() {
         <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Ongoing Events</h3>
           <div className="space-y-4">
-            {ongoingEvents.map((event, index) => (
-              <EventDetailCard key={index} event={event} />
-            ))}
+            {ongoingEvents.length !== 0 &&
+              ongoingEvents.map((event, index) => (
+                <EventDetailCard key={index} event={event} />
+              ))}
           </div>
         </div>
 
-        <div className="mb-8">
+        {/* <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Upcoming Events</h3>
           <div className="space-y-4">
-            {upcomingEvents.map((event, index) => (
-              <EventDetailCard key={index} event={event} />
-            ))}
+            {upcomingEvents.length !== 0 &&
+              upcomingEvents.map((event, index) => (
+                <EventDetailCard key={index} event={event} />
+              ))}
           </div>
-        </div>
+        </div> */}
 
-        <div className="mb-8">
+        {/* <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Past Events</h3>
           <div className="space-y-4">
-            {pastEvents.map((event, index) => (
-              <EventDetailCard key={index} event={event} />
-            ))}
+            {pastEvents.length !== 0 &&
+              pastEvents.map((event, index) => (
+                <EventDetailCard key={index} event={event} />
+              ))}
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Popup Modal for CreateEventForm */}
