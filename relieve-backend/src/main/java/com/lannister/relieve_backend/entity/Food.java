@@ -38,4 +38,7 @@ public class Food {
     @Column(name = "date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date date;
+
+    @Column(name = "shelter_id")
+    private Long shelterId;
 }

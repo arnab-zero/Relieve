@@ -13,7 +13,8 @@ public class FoodMapper {
                 food.getDonorName(),
                 food.getDonorContact(),
                 food.getType(),
-                food.getDate()
+                food.getDate(),
+                food.getShelterId()
         );
     }
 
@@ -25,7 +26,8 @@ public class FoodMapper {
                 foodDto.getDonorName(),
                 foodDto.getDonorContact(),
                 foodDto.getType(),
-                foodDto.getDate()
+                foodDto.getDate(),
+                foodDto.getShelterId()
         );
     }
 }

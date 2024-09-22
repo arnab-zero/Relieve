@@ -19,4 +19,18 @@ public class FoodDto {
     private String donorContact;
     private String type;
     private Date date;
+    private Long shelterId;
 }
+
+/*
+{
+    "foodId" : 1,
+    "item" : "dim khichuri",
+    "quantity" : 100,
+    "donorName" : "Md. Sabbir Hosen",
+    "donorContact" : "0123839473",
+    "type" : "Lunch",
+    "date" : "09-09-2024",
+    "shelterId" : 1
+}
+ */

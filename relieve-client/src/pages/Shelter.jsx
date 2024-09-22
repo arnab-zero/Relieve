@@ -7,7 +7,7 @@ import ShelterCard from "../components/Shelter/ShelterCard";
 const Shelter = () => {
     const [shelters, setShelters] = useState([]);
     useEffect(()=> {
-        fetch('/data/shelters.json')
+        fetch('http://localhost:8080/api/shelters')
         .then(res => res.json())
         .then(data => setShelters(data))
     },[])

@@ -46,6 +46,7 @@ public class ShelterServiceImpl implements ShelterService {
                 .orElseThrow(() -> new ResourceNotFoundException("Shelter not found with id: " + shelterId));
 
         shelter.setName(updatedShelter.getName());
+        shelter.setImageUrl(updatedShelter.getImageUrl());
         shelter.setZilla(updatedShelter.getZilla());
         shelter.setUpazilla(updatedShelter.getUpazilla());
         shelter.setLocation(updatedShelter.getLocation());
