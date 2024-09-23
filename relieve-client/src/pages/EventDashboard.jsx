@@ -5,8 +5,43 @@ import {
   FileText,
   Users2,
 } from "lucide-react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function EventDashboard() {
+  const { eventId } = useParams();
+  const [event, setEvent] = useState(null); // State to store event data
+  const [loading, setLoading] = useState(true); // State to manage loading
+
+  useEffect(() => {
+    // Fetch the event data using the eventId
+    const fetchEventData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/events/${eventId}`);
+        const data = await response.json();
+        setEvent(data); // Store event data in state
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching event data:", error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    fetchEventData();
+  }, [eventId]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!event) {
+    return <div>No event found.</div>;
+  }
+
+  // Destructure the event object
+  const { eventName, description, communityId, dateFrom } = event;
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto p-4">
@@ -23,25 +58,21 @@ export default function EventDashboard() {
           {/* Main Content */}
           <main className="col-span-6 bg-white rounded-lg shadow-lg p-6">
             <h1 className="text-4xl font-bold text-indigo-600 mb-2">
-              Community Cleanup Drive
+              {eventName}{" "}
+              {/* Render communityId eventName dateFrom
+            <>communityId className=dateFromtex text-gray-600 mb-4">
+              {description} {/* Render event description */}
             </h1>
-            <p className="text-xl text-gray-600 mb-4">
-              Join us in making our neighborhood cleaner and greener!
-            </p>
             <div className="text-sm text-gray-500 mb-2">
-              Organized by: Green Earth Community
+              Organized by: {communityId} {/* Render event organizer */}
             </div>
             <div className="text-sm text-gray-500 mb-6">
-              Created on: July 15, 2023 at 10:00 AM
+              Created on: {new Date(dateFrom).toLocaleString()}{" "}
+              {/* Render created date */}
             </div>
             <hr className="my-6" />
             <p className="text-gray-700 leading-relaxed">
-              Our annual Community Cleanup Drive is back! This year, we're
-              focusing on the riverside area. We'll be picking up litter,
-              planting trees, and setting up recycling stations. This event is a
-              great opportunity to meet your neighbors, get some exercise, and
-              make a positive impact on our environment. Don't forget to bring
-              your gloves and water bottle!
+              {description} {/* Render additional event details */}
             </p>
           </main>
 
