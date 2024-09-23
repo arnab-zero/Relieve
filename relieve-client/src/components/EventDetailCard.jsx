@@ -1,5 +1,6 @@
 import React from "react";
 import { MapPin, Phone, Users, Calendar } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 // Card Components
 const Card = ({ className, children }) => (
@@ -52,7 +53,11 @@ export default function EventDetailCard({ event }) {
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <CardHeader>
-        <h2 className="text-2xl font-bold">{eventName}</h2>
+        <h2 className="text-2xl font-bold">
+          <NavLink to={`/event-dashboard/${event.eventId}`}>
+            {eventName}
+          </NavLink>
+        </h2>
         <p className="text-sm text-muted-foreground">
           Organized by {communityId}
         </p>
