@@ -1,72 +1,70 @@
 import React from "react";
-import { MapPin, Phone, Users, Calendar } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
-// Card Components
-const Card = ({ className, children }) => (
-  <div className={`border rounded-lg shadow-lg ${className}`}>{children}</div>
-);
+const Card = ({ children, className }) => {
+  return (
+    <div className={`bg-white shadow-md rounded-lg p-4 ${className} mb-5`}>
+      {children}
+    </div>
+  );
+};
 
-const CardHeader = ({ className, children }) => (
-  <div className={`border-b p-4 ${className}`}>{children}</div>
-);
+const CardHeader = ({ children, className }) => {
+  return <div className={`border-b pb-4 mb-4 ${className}`}>{children}</div>;
+};
 
-const CardContent = ({ className, children }) => (
-  <div className={`p-4 ${className}`}>{children}</div>
-);
+const Avatar = ({ children, className }) => {
+  return (
+    <div className={`rounded-full overflow-hidden ${className}`}>
+      {children}
+    </div>
+  );
+};
 
-const CardFooter = ({ className, children }) => (
-  <div className={`border-t p-4 flex ${className}`}>{children}</div>
-);
+const AvatarImage = ({ src, alt }) => {
+  return <img src={src} alt={alt} className="w-full h-full object-cover" />;
+};
 
-// Avatar Components
-const Avatar = ({ className, children }) => (
-  <div className={`rounded-full overflow-hidden ${className}`}>{children}</div>
-);
+const AvatarFallback = ({ children }) => {
+  return (
+    <div className="flex items-center justify-center bg-gray-300 text-white text-xl">
+      {children}
+    </div>
+  );
+};
 
-const AvatarImage = ({ src, alt }) => (
-  <img src={src} alt={alt} className="object-cover w-full h-full" />
-);
+export default function CommunityDetailCard({ community }) {
+  // Removed events as it's not passed to this component
+  console.log("Props from card: ", community);
 
-const AvatarFallback = ({ children }) => (
-  <div className="flex items-center justify-center w-full h-full bg-gray-300 text-gray-600">
-    {children}
-  </div>
-);
+  // Check if community is undefined or null
+  if (!community) {
+    return <div>Loading community data...</div>;
+  }
 
-// Badge Component
-const Badge = ({ variant, className, children }) => (
-  <span
-    className={`inline-flex items-center px-2 py-1 text-xs font-medium rounded-full ${
-      variant === "secondary"
-        ? "bg-gray-200 text-gray-800"
-        : "bg-blue-200 text-blue-800"
-    } ${className}`}
-  >
-    {children}
-  </span>
-);
-
-export default function Component({ community }) {
-  // const {
-  //   orgId,
-  //   orgName,
-  //   orgImage,
-  //   location,
-  //   contactNumbers,
-  //   volunteers,
-  //   description,
-  //   ongoingEvents,
-  //   pastEvents,
-  //   upcomingEvents,
-  // } = community;
+  const {
+    orgId = "",
+    orgName = "Unknown Organization",
+    orgImage = "",
+    location = "Unknown Location",
+    contactNumbers = [],
+    volunteers = [],
+    description = "No description available",
+    ongoingEvents = [],
+    pastEvents = [],
+    upcomingEvents = [],
+  } = community;
 
   return (
     <Card className="w-full max-w-3xl mx-auto">
-      {/* <CardHeader className="flex flex-row items-center gap-4">
+      <CardHeader className="flex flex-row items-center gap-4">
         <Avatar className="w-16 h-16">
-          <AvatarImage src={orgImage} alt={orgName} />
-          <AvatarFallback>{orgName.charAt(0)}</AvatarFallback>
+          {orgImage ? (
+            <AvatarImage src={orgImage} alt={orgName} />
+          ) : (
+            <AvatarFallback>{orgName.charAt(0)}</AvatarFallback>
+          )}
         </Avatar>
         <div>
           <h2 className="text-2xl font-bold hover:underline hover:cursor-pointer">
@@ -80,51 +78,27 @@ export default function Component({ community }) {
           </p>
         </div>
       </CardHeader>
-      <CardContent className="grid gap-4">
-        <p className="text-sm text-muted-foreground">{description}</p>
-        <div className="flex flex-wrap gap-2">
-          {contactNumbers.map((number, index) => (
-            <Badge
-              key={index}
-              variant="secondary"
-              className="flex items-center gap-1"
-            >
-              <Phone className="w-3 h-3" />
-              {number}
-            </Badge>
-          ))}
+
+      {/* Description */}
+      <p className="text-gray-700">{description}</p>
+
+      {/* Contact information */}
+      {contactNumbers.length > 0 && (
+        <div className="mt-4">
+          <h4 className="text-lg font-bold">Contact:</h4>
+          <p>{contactNumbers.join(", ")}</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-          <div>
-            <p className="text-2xl font-bold">{volunteers.length}</p>
-            <p className="text-xs text-muted-foreground">Volunteers</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold">{ongoingEvents.length}</p>
-            <p className="text-xs text-muted-foreground">Ongoing Events</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold">{pastEvents.length}</p>
-            <p className="text-xs text-muted-foreground">Past Events</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold">{upcomingEvents.length}</p>
-            <p className="text-xs text-muted-foreground">Upcoming Events</p>
-          </div>
+      )}
+
+      {/* Volunteers (if any) */}
+      {volunteers.length > 0 && (
+        <div className="mt-4">
+          <h4 className="text-lg font-bold">Volunteers:</h4>
+          <p>{volunteers.join(", ")}</p>
         </div>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-          <Users className="w-4 h-4" />
-          <span>{volunteers.length} volunteers</span>
-        </div>
-        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-          <Calendar className="w-4 h-4" />
-          <span>
-            {ongoingEvents.length + upcomingEvents.length} active events
-          </span>
-        </div>
-      </CardFooter> */}
+      )}
+
+      {/* Ongoing/Upcoming events can be displayed here */}
     </Card>
   );
 }

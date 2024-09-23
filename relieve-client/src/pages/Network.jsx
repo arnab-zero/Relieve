@@ -6,6 +6,7 @@ const Network = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [communities, setCommunities] = useState([]); // State to store communities
   const [events, setEvents] = useState([]); // State to store events
+  const [query, setQuery] = useState("");
 
   // Toggle popup visibility
   const togglePopup = () => {
@@ -38,7 +39,6 @@ const Network = () => {
       if (response.ok) {
         const communityData = await response.json();
         setCommunities(communityData); // Set communities state
-        console.log(communityData);
       } else {
         console.error("Failed to fetch communities:", response.statusText);
       }
@@ -54,7 +54,6 @@ const Network = () => {
       if (response.ok) {
         const eventsData = await response.json();
         setEvents(eventsData); // Set event state
-        console.log(eventsData);
       } else {
         console.error("Failed to fetch events:", response.statusText);
       }
@@ -121,9 +120,7 @@ const Network = () => {
           </div>
 
           {/* outlet */}
-          <Outlet
-            context={{ communities, setCommunities, events, setEvents }}
-          />
+          <Outlet context={{ communities, events }} />
         </div>
 
         {/* Communities Section */}

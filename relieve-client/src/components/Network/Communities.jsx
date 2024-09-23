@@ -13,11 +13,11 @@ const Communities = () => {
     <div className="h-screen overflow-scroll scrollbar-hide">
       {/* Render the communities */}
       <ul>
-        {communities.length > 0 ? (
+        {communities && communities.length > 0 ? (
           communities.map((community) => (
             <CommunityDetailCard
-              key={community.orgId}
-              props={{ community, events }}
+              key={community.orgId || community.tempId}
+              community={community} // Pass `community` as prop
             />
           ))
         ) : (
