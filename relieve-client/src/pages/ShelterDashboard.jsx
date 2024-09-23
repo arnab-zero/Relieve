@@ -97,7 +97,7 @@ const ShelterDashboard = () => {
       </div>
       <div className="">
         {
-          active === 'inhabitant' ? <ShelterInhabitant></ShelterInhabitant> : <ShelterFood></ShelterFood>
+          active === 'inhabitant' ? <ShelterInhabitant shelterId={shelterId}></ShelterInhabitant> : <ShelterFood shelterId={shelterId}></ShelterFood>
         }
       </div>
       <ToastContainer />

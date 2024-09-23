@@ -14,6 +14,7 @@ export default {
         "green-primary": "#23BE0A",
         "blue-primary": "#005288", //'#336699',
         "blue-secondary": "#86BBD8",
+        "blue-dark" : "#002b47"
       },
     },
   },

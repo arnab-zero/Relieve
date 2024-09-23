@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Modal } from "daisyui"; // DaisyUI modal import
+import { Modal } from "daisyui";
 
 const PendingInhabitants = ({ shelterId }) => {
   const [pendingInhabitants, setPendingInhabitants] = useState([]);
-  const [selectedInhabitant, setSelectedInhabitant] = useState(null); // State to track selected inhabitant for details modal
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [selectedInhabitant, setSelectedInhabitant] = useState(null); 
+  const [isModalOpen, setIsModalOpen] = useState(false); 
 
   useEffect(() => {
     fetch('/data/shelterInhabitant.json')
@@ -13,18 +13,18 @@ const PendingInhabitants = ({ shelterId }) => {
   }, []);
 
   const handleViewDetails = (inhabitant) => {
-    setSelectedInhabitant(inhabitant); // Set the selected inhabitant data
-    setIsModalOpen(true); // Open the modal
+    setSelectedInhabitant(inhabitant);
+    setIsModalOpen(true);
   };
 
   const handleApprove = () => {
     console.log("User approved");
-    setIsModalOpen(false); // Close the modal after action
+    setIsModalOpen(false);
   };
 
   const handleDecline = () => {
     console.log("User declined");
-    setIsModalOpen(false); // Close the modal after action
+    setIsModalOpen(false);
   };
 
   return (

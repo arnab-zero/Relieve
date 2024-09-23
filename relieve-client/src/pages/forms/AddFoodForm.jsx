@@ -1,138 +1,124 @@
-// components/AddFoodForm.jsx
 import { useState } from "react";
-import { toast } from "react-toastify";
 
-const AddFoodForm = ({ shelterId }) => {
-  const [formData, setFormData] = useState({
-    item: "",
-    quantity: "",
-    donorName: "",
-    donorContact: "",
-    type: "Breakfast", // default type
-    date: "",
-  });
+const AddFoodForm = ({ shelterId, onAddFood, onClose }) => {
+    const [item, setItem] = useState("");
+    const [quantity, setQuantity] = useState(1);
+    const [donorName, setDonorName] = useState("");
+    const [donorContact, setDonorContact] = useState("");
+    const [type, setType] = useState("breakfast");
+    const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const newFood = { item, quantity, donorName, donorContact, type, date, shelterId };
 
-    // Validate form input before sending
-    if (!formData.item || !formData.quantity || !formData.donorName || !formData.donorContact || !formData.date) {
-      toast.error("Please fill all the fields");
-      return;
-    }
+        try {
+            const response = await fetch("http://localhost:8080/api/food", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newFood),
+            });
 
-    const foodData = { ...formData, shelterId: shelterId };
+            if (response.ok) {
+                const addedFood = await response.json();
+                onAddFood(addedFood); // Notify parent to update list
+                onClose(); // Close the modal
+            } else {
+                console.error("Failed to add food item");
+            }
+        } catch (error) {
+            console.error("Error adding food item:", error);
+        }
+    };
 
-    // Send a POST request to the server to add food
-    fetch("http://localhost:8080/api/food", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(foodData),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        toast.success("Food item added successfully!");
-        setFormData({
-          item: "",
-          quantity: "",
-          donorName: "",
-          donorContact: "",
-          type: "Breakfast",
-          date: "",
-        });
-      })
-      .catch(() => toast.error("Failed to add food item"));
-  };
-
-  return (
-    <div>
-      <button className="btn btn-primary my-4" onClick={() => window.food_modal.showModal()}>
-        Add Food
-      </button>
-      <dialog id="food_modal" className="modal">
-        <form method="dialog" className="modal-box w-full max-w-md" onSubmit={handleSubmit}>
-          <h3 className="font-bold text-lg">Add Food</h3>
-          <div className="form-control">
-            <label className="label">Food Item</label>
-            <input
-              type="text"
-              placeholder="Item Name"
-              value={formData.item}
-              onChange={(e) => setFormData({ ...formData, item: e.target.value })}
-              className="input input-bordered"
-            />
-          </div>
-
-          <div className="form-control">
-            <label className="label">Quantity</label>
-            <input
-              type="number"
-              placeholder="Quantity"
-              value={formData.quantity}
-              onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-              className="input input-bordered"
-            />
-          </div>
-
-          <div className="form-control">
-            <label className="label">Donor Name</label>
-            <input
-              type="text"
-              placeholder="Donor Name"
-              value={formData.donorName}
-              onChange={(e) => setFormData({ ...formData, donorName: e.target.value })}
-              className="input input-bordered"
-            />
-          </div>
-
-          <div className="form-control">
-            <label className="label">Donor Contact</label>
-            <input
-              type="text"
-              placeholder="Donor Contact"
-              value={formData.donorContact}
-              onChange={(e) => setFormData({ ...formData, donorContact: e.target.value })}
-              className="input input-bordered"
-            />
-          </div>
-
-          <div className="form-control">
-            <label className="label">Type</label>
-            <select
-              className="select select-bordered"
-              value={formData.type}
-              onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-            >
-              <option value="Breakfast">Breakfast</option>
-              <option value="Lunch">Lunch</option>
-              <option value="Dinner">Dinner</option>
-            </select>
-          </div>
-
-          <div className="form-control">
-            <label className="label">Date</label>
-            <input
-              type="date"
-              value={formData.date}
-              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-              className="input input-bordered"
-            />
-          </div>
-
-          <div className="modal-action">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-            <button className="btn" onClick={() => window.food_modal.close()}>
-              Close
-            </button>
-          </div>
-        </form>
-      </dialog>
-    </div>
-  );
+    return (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-10 space-y-4 rounded-lg shadow-lg w-2/5">
+                <h3 className="text-2xl font-semibold">Add New Food</h3>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Item"
+                            value={item}
+                            onChange={(e) => setItem(e.target.value)}
+                            required
+                            className="input input-bordered border-2 text-lg font-semibold border-blue-primary w-full"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="number"
+                            placeholder="Quantity"
+                            value={quantity}
+                            onChange={(e) => setQuantity(e.target.value)}
+                            // min="1"
+                            required
+                            className="input input-bordered border-2 text-lg font-semibold border-blue-primary w-full"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Donor Name"
+                            value={donorName}
+                            onChange={(e) => setDonorName(e.target.value)}
+                            required
+                            className="input input-bordered border-2 text-lg font-semibold border-blue-primary w-full"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Donor Contact"
+                            value={donorContact}
+                            onChange={(e) => setDonorContact(e.target.value)}
+                            required
+                            className="input input-bordered border-2 text-lg font-semibold border-blue-primary w-full"
+                        />
+                    </div>
+                    <div>
+                        <select
+                            value={type}
+                            placeholder="Type"
+                            onChange={(e) => setType(e.target.value)}
+                            required
+                            className="select select-bordered border-2 text-lg font-semibold border-blue-primary w-full"
+                        >
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="dinner">Dinner</option>
+                            <option value="snacks">Snacks</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input
+                            type="date"
+                            placeholder="Date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                            required
+                            className="input input-bordered border-2 text-lg font-semibold border-blue-primary w-full"
+                        />
+                    </div>
+                    <div className="flex justify-end space-x-4">
+                        <button
+                            type="button"
+                            className="btn"
+                            onClick={onClose}
+                        >
+                            Cancel
+                        </button>
+                        <button type="submit" className="btn btn-primary bg-blue-primary text-base-100">
+                            Add Food
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 };
 
 export default AddFoodForm;
