@@ -13,7 +13,7 @@ public class OrganizationDto {
     private Long orgId;
     private String orgName;
     private String description;
-    private Long[] contactNumbers;
+    private String[] contactNumbers;
     private String location;
     private String orgImage;
     private String[] nid;

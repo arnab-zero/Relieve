@@ -145,20 +145,17 @@ const Network = () => {
                     key={community.orgId}
                     className="mb-4 p-2 border rounded-md"
                   >
-                    <h2 className="text-lg font-semibold">
-                      {community.orgName}
-                    </h2>
-                    <p>{community.description}</p>
-                    <p>Location: {community.location}</p>
-                    <p>Contact: {community.contactNumbers.join(", ")}</p>
-                    <div className="hover:text-blue-500 hover:underline hover:font-medium">
+                    <h2 className="text-lg font-semibold hover:underline">
                       <NavLink
                         to={`/community/${community.orgId}`}
                         state={{ community, events }}
                       >
-                        View this community
+                        {community.orgName}
                       </NavLink>
-                    </div>
+                    </h2>
+                    <p>{community.description}</p>
+                    <p>Location: {community.location}</p>
+                    <p>Contact: {community.contactNumbers.join(", ")}</p>
                   </li>
                 ))
               ) : (

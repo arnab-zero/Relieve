@@ -105,7 +105,7 @@ function CommunityDashboard() {
           <div className="space-y-4">
             {events.length !== 0 &&
               events
-                .filter((event) => event.orgId === community.orgId) // Filter by orgId
+                .filter((event) => event.communityId === community.orgId) // Filter by orgId
                 .map((event, index) => (
                   <EventDetailCard key={index} event={event} />
                 ))}
@@ -139,7 +139,7 @@ function CommunityDashboard() {
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
           <div
             ref={popupRef}
-            className="bg-white rounded-lg shadow-lg p-6 relative w-[27%] max-h-[80vh] overflow-y-auto scrollbar-hide"
+            className="bg-white rounded-lg shadow-lg p-6 relative min-w-[30%] max-h-[80vh] overflow-y-auto scrollbar-hide"
           >
             <CreateEventForm
               communityId={community.orgId}

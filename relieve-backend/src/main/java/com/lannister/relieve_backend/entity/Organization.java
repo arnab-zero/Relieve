@@ -24,7 +24,7 @@ public class Organization {
     @Column(name = "description")
     private String description;
     @Column(name = "contact_numbers")
-    private Long[] contactNumbers;
+    private String[] contactNumbers;
     @Column(name = "location")
     private String location;
     @Column(name = "org_image")
