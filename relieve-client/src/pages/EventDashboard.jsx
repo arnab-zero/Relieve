@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   Users,
   DollarSign,
@@ -5,26 +7,25 @@ import {
   FileText,
   Users2,
 } from "lucide-react";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import FundCallForm from "../pages/forms/FundCallForm";
 
 export default function EventDashboard() {
   const { eventId } = useParams();
-  const [event, setEvent] = useState(null); // State to store event data
-  const [loading, setLoading] = useState(true); // State to manage loading
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [showFundCallForm, setShowFundCallForm] = useState(false);
 
   useEffect(() => {
-    // Fetch the event data using the eventId
     const fetchEventData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/events/${eventId}`);
         const data = await response.json();
-        setEvent(data); // Store event data in state
+        setEvent(data);
         console.log(data);
       } catch (error) {
         console.error("Error fetching event data:", error);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
@@ -39,8 +40,12 @@ export default function EventDashboard() {
     return <div>No event found.</div>;
   }
 
-  // Destructure the event object
   const { eventName, description, communityId, dateFrom } = event;
+
+  const handleFundCallSubmit = () => {
+    // Handle successful submission (e.g., show a success message, refresh data)
+    console.log("Fund call submitted successfully");
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -49,7 +54,11 @@ export default function EventDashboard() {
           {/* Left Aside */}
           <aside className="col-span-2 space-y-4">
             <OptionBox icon={<Users />} text="Call for Volunteers" />
-            <OptionBox icon={<DollarSign />} text="Call for Donation" />
+            <OptionBox
+              icon={<DollarSign />}
+              text="Call for Donation"
+              onClick={() => setShowFundCallForm(true)}
+            />
             <OptionBox icon={<MessageSquare />} text="Slack Chatroom" />
             <OptionBox icon={<FileText />} text="View Expense Report" />
             <OptionBox icon={<Users2 />} text="Reach Our Ground Team" />
@@ -58,22 +67,16 @@ export default function EventDashboard() {
           {/* Main Content */}
           <main className="col-span-6 bg-white rounded-lg shadow-lg p-6">
             <h1 className="text-4xl font-bold text-indigo-600 mb-2">
-              {eventName}{" "}
-              {/* Render communityId eventName dateFrom
-            <>communityId className=dateFromtex text-gray-600 mb-4">
-              {description} {/* Render event description */}
+              {eventName}
             </h1>
             <div className="text-sm text-gray-500 mb-2">
-              Organized by: {communityId} {/* Render event organizer */}
+              Organized by: {communityId}
             </div>
             <div className="text-sm text-gray-500 mb-6">
-              Created on: {new Date(dateFrom).toLocaleString()}{" "}
-              {/* Render created date */}
+              Created on: {new Date(dateFrom).toLocaleString()}
             </div>
             <hr className="my-6" />
-            <p className="text-gray-700 leading-relaxed">
-              {description} {/* Render additional event details */}
-            </p>
+            <p className="text-gray-700 leading-relaxed">{description}</p>
           </main>
 
           {/* Right Aside */}
@@ -94,13 +97,24 @@ export default function EventDashboard() {
           </aside>
         </div>
       </div>
+
+      {showFundCallForm && (
+        <FundCallForm
+          eventId={eventId}
+          onClose={() => setShowFundCallForm(false)}
+          onSubmit={handleFundCallSubmit}
+        />
+      )}
     </div>
   );
 }
 
-function OptionBox({ icon, text }) {
+function OptionBox({ icon, text, onClick }) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 flex items-center space-x-3 hover:bg-indigo-50 transition-colors cursor-pointer">
+    <div
+      className="bg-white rounded-lg shadow-md p-4 flex items-center space-x-3 hover:bg-indigo-50 transition-colors cursor-pointer"
+      onClick={onClick}
+    >
       {icon}
       <span className="text-sm font-medium text-gray-700">{text}</span>
     </div>

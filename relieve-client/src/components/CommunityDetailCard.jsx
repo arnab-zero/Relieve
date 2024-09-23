@@ -38,7 +38,7 @@ export default function CommunityDetailCard({ props }) {
   const community = props.community;
   const events = props.events;
   // Removed events as it's not passed to this component
-  console.log("Props from card: ", community, events);
+  // console.log("Props from card: ", community, events);
 
   // Check if community is undefined or null
   if (!community) {

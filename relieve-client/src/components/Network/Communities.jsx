@@ -6,10 +6,10 @@ const Communities = () => {
   const { communities, events } = useOutletContext(); // Access passed state
 
   useEffect(() => {
-    console.log("Communities: ", communities);
+    // console.log("Communities: ", communities);
   }, [communities]);
 
-  console.log("Events from communities: ", events);
+  // console.log("Events from communities: ", events);
 
   return (
     <div className="h-screen overflow-scroll scrollbar-hide">
