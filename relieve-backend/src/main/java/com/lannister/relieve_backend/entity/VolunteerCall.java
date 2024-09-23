@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -35,13 +36,8 @@ public class VolunteerCall {
     private String location;
 
     @Column(name = "deadline")
-    private Date deadline;
+    private Time deadline;
 
     @Column(name = "creation_time", nullable = false, updatable = false)
     private Time creationTime;
-
-    @PrePersist
-    protected void onCreate() {
-        this.creationTime = Time.valueOf(LocalTime.now());
-    }
 }

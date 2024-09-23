@@ -11,10 +11,10 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/volunteer-calls")
+@RequestMapping("/volunteer-calls")
 public class VolunteerCallController {
 
-    private final VolunteerCallService volunteerCallService;
+    private VolunteerCallService volunteerCallService;
 
     @PostMapping
     public ResponseEntity<VolunteerCallDto> createVolunteerCall(@RequestBody VolunteerCallDto volunteerCallDto) {

@@ -8,12 +8,14 @@ import {
   Users2,
 } from "lucide-react";
 import FundCallForm from "../pages/forms/FundCallForm";
+import VolunteerCallForm from "../pages/forms/VolunteerCallForm";
 
 export default function EventDashboard() {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showFundCallForm, setShowFundCallForm] = useState(false);
+  const [showVolunteerCallForm, setShowVolunteerCallForm] = useState(false);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -43,8 +45,11 @@ export default function EventDashboard() {
   const { eventName, description, communityId, dateFrom } = event;
 
   const handleFundCallSubmit = () => {
-    // Handle successful submission (e.g., show a success message, refresh data)
     console.log("Fund call submitted successfully");
+  };
+
+  const handleVolunteerCallSubmit = () => {
+    console.log("Volunteer call submitted successfully");
   };
 
   return (
@@ -53,7 +58,11 @@ export default function EventDashboard() {
         <div className="grid grid-cols-11 gap-4">
           {/* Left Aside */}
           <aside className="col-span-2 space-y-4">
-            <OptionBox icon={<Users />} text="Call for Volunteers" />
+            <OptionBox
+              icon={<Users />}
+              text="Call for Volunteers"
+              onClick={() => setShowVolunteerCallForm(true)}
+            />
             <OptionBox
               icon={<DollarSign />}
               text="Call for Donation"
@@ -103,6 +112,14 @@ export default function EventDashboard() {
           eventId={eventId}
           onClose={() => setShowFundCallForm(false)}
           onSubmit={handleFundCallSubmit}
+        />
+      )}
+
+      {showVolunteerCallForm && (
+        <VolunteerCallForm
+          eventId={eventId}
+          onClose={() => setShowVolunteerCallForm(false)}
+          onSubmit={handleVolunteerCallSubmit}
         />
       )}
     </div>

@@ -8,16 +8,39 @@ export default function FundCallForm({ eventId, onClose, onSubmit }) {
     deadline: "",
   });
 
+  const [errors, setErrors] = useState({}); // State for error messages
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" })); // Clear error on change
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.title) newErrors.title = "Title is required.";
+    if (!formData.description)
+      newErrors.description = "Description is required.";
+    if (!formData.targetAmount || formData.targetAmount <= 0) {
+      newErrors.targetAmount = "Target Amount must be a positive number.";
+    }
+    if (!formData.deadline) newErrors.deadline = "Deadline is required.";
+    else if (new Date(formData.deadline) <= new Date()) {
+      newErrors.deadline = "Deadline must be a future date.";
+    }
+
+    setErrors(newErrors); // Set the errors to state
+    return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) return; // Validate before submitting
+
     const fundCallData = {
       ...formData,
       eventId,
@@ -66,6 +89,10 @@ export default function FundCallForm({ eventId, onClose, onSubmit }) {
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             />
+            {errors.title && (
+              <p className="text-red-600 text-sm">{errors.title}</p>
+            )}{" "}
+            {/* Error message */}
           </div>
           <div>
             <label
@@ -83,6 +110,10 @@ export default function FundCallForm({ eventId, onClose, onSubmit }) {
               rows="3"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             ></textarea>
+            {errors.description && (
+              <p className="text-red-600 text-sm">{errors.description}</p>
+            )}{" "}
+            {/* Error message */}
           </div>
           <div>
             <label
@@ -100,6 +131,10 @@ export default function FundCallForm({ eventId, onClose, onSubmit }) {
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             />
+            {errors.targetAmount && (
+              <p className="text-red-600 text-sm">{errors.targetAmount}</p>
+            )}{" "}
+            {/* Error message */}
           </div>
           <div>
             <label
@@ -117,6 +152,10 @@ export default function FundCallForm({ eventId, onClose, onSubmit }) {
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             />
+            {errors.deadline && (
+              <p className="text-red-600 text-sm">{errors.deadline}</p>
+            )}{" "}
+            {/* Error message */}
           </div>
           <div className="flex justify-end space-x-2">
             <button

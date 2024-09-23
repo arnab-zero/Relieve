@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -18,6 +19,6 @@ public class VolunteerCallDto {
     private String title;
     private String description;
     private String location;
-    private Date deadline;
+    private Time deadline;
     private Time creationTime;
 }
