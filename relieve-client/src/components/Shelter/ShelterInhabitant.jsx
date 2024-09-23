@@ -1,47 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PendingInhabitants from "./PendingInhabitants";
 import CurrentInhabitants from "./CurrentInhabitants";
 
 const ShelterInhabitant = ({ shelterId }) => {
-  const [activeTab, setActiveTab] = useState("inhabitant-requests");
-  console.log("Here")
-  console.log(activeTab)
+  const [activeInhabitantTab, setActiveInhabitantTab] = useState("inhabitant-requests");
+  
+  const handleInhabitantRequests = () => {
+    setActiveInhabitantTab('inhabitant-requests');
+  }
 
+  const handleCurrentInhabitant = () => {
+    setActiveInhabitantTab('current-inhabitants')
+  }
   return (
-    <div>
-      {/* Tab Navigation */}
-      <div className="flex justify-center space-x-4 mb-8">
-        <button
-          className={`px-4 py-2 ${
-            activeTab === "inhabitant-requests"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-black"
-          } rounded-md`}
-          onClick={() => setActiveTab("inhabitant-requests")}
-        >
-          Inhabitant Requests
-        </button>
-        <button
-          className={`px-4 py-2 ${
-            activeTab === "current-inhabitants"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-black"
-          } rounded-md`}
-          onClick={() => setActiveTab("current-inhabitants")}
-        >
-          Current Inhabitants
-        </button>
+    <div className="my-10 container mx-auto font-manrope min-h-screen">
+      <h2 className="text-4xl font-bold text-blue-primary text-center my-10">Shleter Inhabitants</h2>
+      <div className="flex justify-center gap-10">
+        <button className={`text-xl font-semibold text-gray-500 ${activeInhabitantTab === 'inhabitant-requests' ? "border-2 border-b-gray-500 border-t-0 border-l-0 border-r-0" : ""}`} onClick={handleInhabitantRequests}>Inhabitant Requests</button>
+        <button className={`text-xl font-semibold text-gray-500 ${activeInhabitantTab === 'current-inhabitants' ? "border-2 border-b-gray-500 border-t-0 border-l-0 border-r-0" : ""}`} onClick={handleCurrentInhabitant}>Current Inhabitants</button>
       </div>
-
-      {/* Tab Content */}
-      <div className="tab-content">
-        {activeTab === "inhabitant-requests" && (
-        //   <PendingInhabitants key={shelterId} shelterId={shelterId} />
-        <div>Hello</div>
-        )}
-        {activeTab === "current-inhabitants" && 
-        // <CurrentInhabitants key={shelterId} shelterId={shelterId} />
-        <div>Second</div>
+      <div className="">
+        {
+          activeInhabitantTab === 'inhabitant-requests' ? <PendingInhabitants></PendingInhabitants> : <CurrentInhabitants></CurrentInhabitants>
         }
       </div>
     </div>

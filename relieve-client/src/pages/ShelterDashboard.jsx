@@ -7,7 +7,7 @@ import ShelterFood from "../components/Shelter/ShelterFood";
 const ShelterDashboard = () => {
   const { shelterId } = useParams();
   const [shelter, setShelter] = useState({});
-  const [activeTab, setActiveTab] = useState("inhabitant");
+  const [active, setActive] = useState("inhabitant");
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/shelters/${shelterId}`)
@@ -26,6 +26,14 @@ const ShelterDashboard = () => {
     contactNumbers,
     eventId,
   } = shelter;
+
+  const handleInhabitantButton = () => {
+    setActive('inhabitant');
+  }
+
+  const handleFoodButton = () => {
+    setActive('food');
+  }
 
   return (
     <div className="font-manrope">
@@ -83,39 +91,15 @@ const ShelterDashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* Tab navigation */}
-      <div className="flex justify-center space-x-4 mb-8">
-        <button
-          className={`px-4 py-2 ${
-            activeTab === "inhabitant"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-black"
-          } rounded-md`}
-          onClick={() => setActiveTab("inhabitant")}
-        >
-          Inhabitant
-        </button>
-        <button
-          className={`px-4 py-2 ${
-            activeTab === "food"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-black"
-          } rounded-md`}
-          onClick={() => setActiveTab("food")}
-        >
-          Food
-        </button>
+      <div className="flex justify-center gap-20">
+      <button className={`text-2xl font-semibold text-gray-500 ${active === 'inhabitant' ? "border-2 border-b-gray-500 border-t-0 border-l-0 border-r-0" : ""}`} onClick={handleInhabitantButton}>Inhabitants</button>
+        <button className={`text-2xl font-semibold text-gray-500 ${active === 'food' ? "border-2 border-b-gray-500 border-t-0 border-l-0 border-r-0" : ""}`} onClick={handleFoodButton}>Food</button>
       </div>
-
-      {/* Tab content */}
-      <div className="tab-content">
-        {activeTab === "inhabitant" && 
-        <ShelterInhabitant key={shelterId} shelterId={shelterId} />
+      <div className="">
+        {
+          active === 'inhabitant' ? <ShelterInhabitant></ShelterInhabitant> : <ShelterFood></ShelterFood>
         }
-        {activeTab === "food" && <ShelterFood key={shelterId} shelterId={shelterId} />}
       </div>
-
       <ToastContainer />
     </div>
   );
