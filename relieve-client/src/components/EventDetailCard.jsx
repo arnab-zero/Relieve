@@ -43,6 +43,8 @@ export default function EventDetailCard({ event }) {
     dateTo,
   } = event;
 
+  console.log("Event: ", event);
+
   const eventDuration = Math.ceil(
     (new Date(dateTo) - new Date(dateFrom)) / (1000 * 60 * 60 * 24)
   );

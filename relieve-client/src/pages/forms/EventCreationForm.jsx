@@ -95,7 +95,7 @@ export default function CreateEventForm({communityId}) {
     : [];
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
+    <div className="min-w-md mx-auto bg-white shadow-md rounded-lg p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Create Event</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Event Name */}

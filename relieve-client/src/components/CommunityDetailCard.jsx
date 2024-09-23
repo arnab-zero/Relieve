@@ -34,9 +34,11 @@ const AvatarFallback = ({ children }) => {
   );
 };
 
-export default function CommunityDetailCard({ community }) {
+export default function CommunityDetailCard({ props }) {
+  const community = props.community;
+  const events = props.events;
   // Removed events as it's not passed to this component
-  console.log("Props from card: ", community);
+  console.log("Props from card: ", community, events);
 
   // Check if community is undefined or null
   if (!community) {
@@ -68,7 +70,7 @@ export default function CommunityDetailCard({ community }) {
         </Avatar>
         <div>
           <h2 className="text-2xl font-bold hover:underline hover:cursor-pointer">
-            <NavLink to={`/community/${orgId}`} state={community}>
+            <NavLink to={`/community/${orgId}`} state={{ community, events }}>
               {orgName}
             </NavLink>
           </h2>

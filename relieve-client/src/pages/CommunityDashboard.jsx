@@ -10,8 +10,8 @@ function CommunityDashboard() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const popupRef = useRef(null);
   const location = useLocation();
-  const community = location.state;
-  console.log(community);
+  const { community, events } = location.state;
+  console.log("Community from dashboard: ", community, events);
 
   const handleIncidentFormSubmit = () => {
     setIsIncidentPopupVisible(false);
@@ -104,13 +104,16 @@ function CommunityDashboard() {
           <h3 className="text-lg font-bold mb-4">Ongoing Events</h3>
           <div className="space-y-4">
             {events.length !== 0 &&
-              events.map((event, index) => (
-                <EventDetailCard key={index} event={event} />
-              ))}
+              events
+                .filter((event) => event.orgId === community.orgId) // Filter by orgId
+                .map((event, index) => (
+                  <EventDetailCard key={index} event={event} />
+                ))}
           </div>
         </div>
+      </div>
 
-        {/* <div className="mb-8">
+      {/* <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Upcoming Events</h3>
           <div className="space-y-4">
             {upcomingEvents.length !== 0 &&
@@ -120,7 +123,7 @@ function CommunityDashboard() {
           </div>
         </div> */}
 
-        {/* <div className="mb-8">
+      {/* <div className="mb-8">
           <h3 className="text-lg font-bold mb-4">Past Events</h3>
           <div className="space-y-4">
             {pastEvents.length !== 0 &&
@@ -129,7 +132,7 @@ function CommunityDashboard() {
               ))}
           </div>
         </div> */}
-      </div>
+      {/* </div> */}
 
       {/* Popup Modal for CreateEventForm */}
       {isEventPopupVisible && (

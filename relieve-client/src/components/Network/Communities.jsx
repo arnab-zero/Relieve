@@ -3,11 +3,13 @@ import { useEffect } from "react";
 import CommunityDetailCard from "../CommunityDetailCard";
 
 const Communities = () => {
-  const { communities } = useOutletContext(); // Access passed state
+  const { communities, events } = useOutletContext(); // Access passed state
 
   useEffect(() => {
     console.log("Communities: ", communities);
   }, [communities]);
+
+  console.log("Events from communities: ", events);
 
   return (
     <div className="h-screen overflow-scroll scrollbar-hide">
@@ -17,7 +19,7 @@ const Communities = () => {
           communities.map((community) => (
             <CommunityDetailCard
               key={community.orgId || community.tempId}
-              community={community} // Pass `community` as prop
+              props={{ community, events }} // Pass `community` as prop
             />
           ))
         ) : (

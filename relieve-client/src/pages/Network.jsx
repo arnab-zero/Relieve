@@ -69,7 +69,7 @@ const Network = () => {
   }, []); // Run on component mount
 
   return (
-    <div className="mx-10">
+    <div className="mx-10 mb-8">
       {/* Search bar */}
       <div className="flex justify-center mt-10 mb-8">
         <div className="w-[25%]">
@@ -138,7 +138,7 @@ const Network = () => {
               Your Communities
             </h1>
             {/* Display fetched communities */}
-            <ul className="mt-4">
+            <ul className="mt-4 max-h-screen overflow-scroll scrollbar-hide">
               {communities.length > 0 ? (
                 communities.map((community) => (
                   <li
@@ -154,7 +154,7 @@ const Network = () => {
                     <div className="hover:text-blue-500 hover:underline hover:font-medium">
                       <NavLink
                         to={`/community/${community.orgId}`}
-                        state={community}
+                        state={{ community, events }}
                       >
                         View this community
                       </NavLink>
