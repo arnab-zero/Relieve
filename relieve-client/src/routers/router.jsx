@@ -17,6 +17,8 @@ import Events from "../components/Network/Events";
 import Shelter from "../pages/Shelter";
 import ShelterDashboard from "../pages/ShelterDashboard";
 import MapPage from "../components/Map/MapPage";
+import ShelterInhabitant from "../components/Shelter/ShelterInhabitant";
+
 
 // Define the routes
 const router = createBrowserRouter([
@@ -70,14 +72,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/network",
-        element: <Network />, // Network Component with nested routes
+        element: <Network />,
         children: [
           {
             index: true,
-            element: <Communities />, // Default component when at /network
+            element: <Communities />,
           },
           {
-            path: "events", // No need for '/network/events' since it's relative to /network
+            path: "events",
             element: <Events />,
           },
         ],
@@ -93,7 +95,7 @@ const router = createBrowserRouter([
       {
         path: "shelter/:shelterId",
         element: <ShelterDashboard />,
-      },
+      }
     ],
   },
 ]);
