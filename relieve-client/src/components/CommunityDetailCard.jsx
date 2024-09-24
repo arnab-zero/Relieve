@@ -65,7 +65,7 @@ export default function CommunityDetailCard({ props }) {
           {orgImage ? (
             <AvatarImage src={orgImage} alt={orgName} />
           ) : (
-            <AvatarFallback>{orgName.charAt(0)}</AvatarFallback>
+            <AvatarFallback>{orgName?.charAt(0)}</AvatarFallback>
           )}
         </Avatar>
         <div>
@@ -85,7 +85,7 @@ export default function CommunityDetailCard({ props }) {
       <p className="text-gray-700">{description}</p>
 
       {/* Contact information */}
-      {contactNumbers.length > 0 && (
+      {contactNumbers?.length > 0 && (
         <div className="mt-4">
           <h4 className="text-lg font-bold">Contact:</h4>
           <p>{contactNumbers.join(", ")}</p>
@@ -93,7 +93,7 @@ export default function CommunityDetailCard({ props }) {
       )}
 
       {/* Volunteers (if any) */}
-      {volunteers.length > 0 && (
+      {volunteers?.length > 0 && (
         <div className="mt-4">
           <h4 className="text-lg font-bold">Volunteers:</h4>
           <p>{volunteers.join(", ")}</p>
