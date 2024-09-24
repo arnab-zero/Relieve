@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { zillaUpazillaData } from "../forms/ZillaUpazillaData";
+import { AuthContext } from "../Authentication/AuthProvider";
 
 export default function CommunityCreationForm() {
   const [formData, setFormData] = useState({
     organizationName: "",
+    organizationImage: "",
     coordinatorsName: "",
     coordinatorsNid: "",
     zilla: "",
@@ -13,6 +15,10 @@ export default function CommunityCreationForm() {
     description: "",
   });
 
+  const { user, logOut } = useContext(AuthContext);
+  const userId = user.userId;
+
+  // console.log(userId);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -20,7 +26,7 @@ export default function CommunityCreationForm() {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-      ...(name === "zilla" && { upazilla: "" }), // Reset upazilla if zilla changes
+      ...(name === "zilla" && { upazilla: "" }),
     }));
   };
 
@@ -31,6 +37,8 @@ export default function CommunityCreationForm() {
       newErrors.organizationName = "Organization Name is required.";
     if (!formData.coordinatorsName)
       newErrors.coordinatorsName = "Coordinators Name is required.";
+    if (!formData.organizationImage)
+      newErrors.coordinatorsNid = "Organization name is required.";
     if (!formData.coordinatorsNid)
       newErrors.coordinatorsNid = "Coordinators NID is required.";
     if (!formData.contactNumbers)
@@ -55,9 +63,9 @@ export default function CommunityCreationForm() {
         description: formData.description,
         contactNumbers: [parseInt(formData.contactNumbers)], // Assuming a single contact number
         location: formData.location,
-        orgImage: "Image 1", // If you have an orgImage, handle it separately
-        nid: [formData.coordinatorsNid], // Sending NID as an array
-        ongoingEvents: [], // Adjust as necessary, for now setting empty arrays
+        orgImage: formData.organizationImage,
+        nid: [formData.coordinatorsNid],
+        ongoingEvents: [],
         pastEvents: [],
         upcomingEvents: [],
         volunteers: [],
@@ -74,13 +82,45 @@ export default function CommunityCreationForm() {
 
         if (response.ok) {
           const savedOrganization = await response.json();
-          console.log("Organization created:", savedOrganization);
+          // console.log(savedOrganization);
+          const communityId = savedOrganization.orgId; // Assuming organization ID is returned as `id`
+          // console.log(communityId);
+          await updateUserWithCommunity(userId, communityId); // Update user with the new community ID
         } else {
           console.error("Failed to create organization", response.statusText);
         }
       } catch (error) {
         console.error("Error creating organization:", error);
       }
+    }
+  };
+
+  const updateUserWithCommunity = async (userId, communityId) => {
+    try {
+      // Fetch the user data
+      const userResponse = await fetch(`http://localhost:8080/api/users/${userId}`);
+      if (!userResponse.ok) throw new Error("User not found");
+
+      const userData = await userResponse.json();
+      // console.log(userData);
+
+      const updatedCommunityIds = [...userData.communityIds, communityId];
+
+      const updateResponse = await fetch(`http://localhost:8080/api/users/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...userData, communityIds: updatedCommunityIds }),
+      });
+
+      if (updateResponse.ok) {
+        console.log("User updated with new community ID");
+      } else {
+        console.error("Failed to update user", updateResponse.statusText);
+      }
+    } catch (error) {
+      console.error("Error updating user with community:", error);
     }
   };
 
@@ -108,9 +148,8 @@ export default function CommunityCreationForm() {
             name="organizationName"
             value={formData.organizationName}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.organizationName ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
+            className={`mt-1 block w-full py-2 px-3 border ${errors.organizationName ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
           />
           {errors.organizationName && (
             <p className="text-red-600 text-sm">{errors.organizationName}</p>
@@ -131,9 +170,8 @@ export default function CommunityCreationForm() {
             name="coordinatorsName"
             value={formData.coordinatorsName}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.coordinatorsName ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
+            className={`mt-1 block w-full py-2 px-3 border ${errors.coordinatorsName ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
           />
           {errors.coordinatorsName && (
             <p className="text-red-600 text-sm">{errors.coordinatorsName}</p>
@@ -154,12 +192,32 @@ export default function CommunityCreationForm() {
             name="coordinatorsNid"
             value={formData.coordinatorsNid}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.coordinatorsNid ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
+            className={`mt-1 block w-full py-2 px-3 border ${errors.coordinatorsNid ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
           />
           {errors.coordinatorsNid && (
             <p className="text-red-600 text-sm">{errors.coordinatorsNid}</p>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="organizationImage"
+            className="block text-sm font-medium"
+          >
+            Organization Image
+          </label>
+          <input
+            type="text"
+            id="organizationImage"
+            name="organizationImage"
+            value={formData.organizationImage}
+            onChange={handleChange}
+            className={`mt-1 block w-full py-2 px-3 border ${errors.organizationImage ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
+          />
+          {errors.organizationImage && (
+            <p className="text-red-600 text-sm">{errors.organizationImage}</p>
           )}
         </div>
 
@@ -173,9 +231,8 @@ export default function CommunityCreationForm() {
             name="zilla"
             value={formData.zilla}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.zilla ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
+            className={`mt-1 block w-full py-2 px-3 border ${errors.zilla ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
           >
             <option value="">Select Zilla</option>
             {Object.keys(zillaUpazillaData).map((zilla) => (
@@ -225,9 +282,8 @@ export default function CommunityCreationForm() {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.location ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
+            className={`mt-1 block w-full py-2 px-3 border ${errors.location ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
           />
           {errors.location && (
             <p className="text-red-600 text-sm">{errors.location}</p>
@@ -245,9 +301,8 @@ export default function CommunityCreationForm() {
             name="contactNumbers"
             value={formData.contactNumbers}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.contactNumbers ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
+            className={`mt-1 block w-full py-2 px-3 border ${errors.contactNumbers ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
           />
           {errors.contactNumbers && (
             <p className="text-red-600 text-sm">{errors.contactNumbers}</p>
@@ -264,9 +319,8 @@ export default function CommunityCreationForm() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.description ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
+            className={`mt-1 block w-full py-2 px-3 border ${errors.description ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
           />
           {errors.description && (
             <p className="text-red-600 text-sm">{errors.description}</p>

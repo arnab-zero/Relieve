@@ -51,7 +51,8 @@ const AuthProvider = ({ children }) => {
                             userImage: dbUser.userImage,
                             communityIds: dbUser.communityIds,
                             eventIds: dbUser.eventIds,
-                            incidentIds: dbUser.incidentIds
+                            incidentIds: dbUser.incidentIds,
+                            userId: dbUser.userId
                         };
                         setUser(mergedUser);
                     } else {
