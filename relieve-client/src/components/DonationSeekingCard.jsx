@@ -93,7 +93,7 @@ const DonationSeekingCard = ({ fundCall }) => {
   };
 
   return (
-    <div className="border-2 border-[#86bbd8] w-full mb-4 rounded overflow-hidden shadow-lg p-8 border">
+    <div className="border-2 border-[#86bbd8] w-full mb-4 rounded overflow-hidden shadow-lg p-8">
       <div className="text-sm mb-4 font-normal">Posted at {createdAt}</div>
       <div className="mb-4">
         <div className="text-3xl font-semibold mb-2 items-center">
@@ -183,7 +183,7 @@ const DonationSeekingCard = ({ fundCall }) => {
               id="paymentAmount"
               value={paymentAmount}
               onChange={(e) => setPaymentAmount(e.target.value)}
-              className={`mt-1 block w-full rounded-md border-black border-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring focus:ring-indigo-200 focus:ring-opacity-5 ${
+              className={`mt-1 block w-full rounded-md border-black border-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-5 ${
                 errors.paymentAmount ? "border-red-500" : ""
               }`}
             />
