@@ -78,7 +78,7 @@ const Network = () => {
               type="text"
               placeholder="Type any community or event name"
               onChange={handleChange}
-              className="input input-bordered input-info border-blue-secondary focus:border-blue-secondary focus:outline-blue-secondary w-full max-w-md"
+              className="input input-bordered input-info text-black border-2 border-[#60a3d7] focus:border-[#005288] focus:outline-[#60a3d7] w-full max-w-md"
             />
           </span>
         </div>
@@ -95,7 +95,7 @@ const Network = () => {
                   className={
                     ({ isActive }) =>
                       isActive
-                        ? "text-blue-500 underline font-semibold" // Active link styles
+                        ? "text-[#005288] underline font-semibold" // Active link styles
                         : "text-gray-500" // Default link styles
                   }
                   end
@@ -109,7 +109,7 @@ const Network = () => {
                   className={
                     ({ isActive }) =>
                       isActive
-                        ? "text-blue-500 underline font-semibold" // Active link styles
+                        ? "text-[#005288] underline font-semibold" // Active link styles
                         : "text-gray-500" // Default link styles
                   }
                 >
@@ -127,7 +127,7 @@ const Network = () => {
         <div>
           <div className="flex justify-center mb-8">
             <div
-              className="btn btn-info text-white text-lg"
+              className="btn bg-[#60a3d7] hover:bg-[#005288] text-white text-lg"
               onClick={togglePopup}
             >
               Create New Community
@@ -155,7 +155,12 @@ const Network = () => {
                     </h2>
                     <p>{community.description}</p>
                     <p>Location: {community.location}</p>
-                    <p>Contact: {Array.isArray(community.contactNumbers) ? community.contactNumbers.join(", ") : "N/A"}</p>
+                    <p>
+                      Contact:{" "}
+                      {Array.isArray(community.contactNumbers)
+                        ? community.contactNumbers.join(", ")
+                        : "N/A"}
+                    </p>
                   </li>
                 ))
               ) : (

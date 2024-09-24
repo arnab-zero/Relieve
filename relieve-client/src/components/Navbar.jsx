@@ -23,11 +23,11 @@ const Navbar = () => {
     if (user) {
       logOut()
         .then(() => {
-          navigate('/');
+          navigate("/");
         })
-        .catch(error => console.error(error));
+        .catch((error) => console.error(error));
     } else {
-      navigate('/sign-in');
+      navigate("/sign-in");
     }
   };
 
@@ -50,7 +50,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
+              ? "text-white btn bg-inherit border-white shadow-none hover:bg-[#002b47] hover:text-white font-semibold text-lg"
               : ""
           }
         >
@@ -62,7 +62,7 @@ const Navbar = () => {
           to="/network"
           className={({ isActive }) =>
             isActive
-              ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
+              ? "text-white btn bg-inherit border-white shadow-none hover:bg-[#002b47] hover:text-white font-semibold text-lg"
               : ""
           }
         >
@@ -74,7 +74,7 @@ const Navbar = () => {
           to="/map"
           className={({ isActive }) =>
             isActive
-              ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
+              ? "text-white btn bg-inherit  border-white shadow-none hover:bg-[#002b47] hover:text-white font-semibold text-lg"
               : ""
           }
         >
@@ -86,7 +86,7 @@ const Navbar = () => {
           to="/shelter"
           className={({ isActive }) =>
             isActive
-              ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
+              ? "text-white btn bg-inherit  border-white shadow-none hover:bg-[#002b47] hover:text-white font-semibold text-lg"
               : ""
           }
         >
@@ -149,7 +149,7 @@ const Navbar = () => {
             onClick={handleAuthClick}
             className="btn btn-outline text-base-200 text-lg"
           >
-            {user ? 'Log Out' : 'Sign In'}
+            {user ? "Log Out" : "Sign In"}
           </button>
           {user && (
             <NavLink

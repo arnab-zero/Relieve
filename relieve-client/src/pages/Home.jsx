@@ -15,7 +15,10 @@ const Home = () => {
   useEffect(() => {
     fetch("http://localhost:8080/incident")
       .then((res) => res.json())
-      .then((data) => setIncidents(data))
+      .then((data) => {
+        setIncidents(data);
+        console.log("Incidents: ", data);
+      })
       .catch((error) => console.error("Error fetching data:", error));
 
     fetch("http://localhost:8080/volunteer-calls")
