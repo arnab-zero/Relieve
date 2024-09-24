@@ -1,27 +1,39 @@
+import { nav } from "framer-motion/client";
+import { useState } from "react";
 import { BiCurrentLocation, BiSearch } from "react-icons/bi"
 
-const Inputs = () => {
+const Inputs = ({setQuery, setUnits}) => {
+    const [city, setCity] = useState('');
+
+    const handleSearchClick = () => {
+        if(city !== "") setQuery({q: city})
+    }
+
+    const handleLocationClick = () => {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const {latitude, longitude} = position.coords;
+                setQuery({lat: latitude, lon: longitude})
+            })
+        }
+    }
   return (
     <div className=" font-manrope flex flex-row justify-center my-6">
         <div className="flex flex-row w-3/4 items-center justify-center space-x-4">
             <input 
             type="text"
+            value={city}
+            onChange={e => setCity(e.currentTarget.value)}
             placeholder="search by city"
-            className="text-gray-500 border-blue-primary text-xl font-light p-2 w-full shadow-sm capitalize focus:outline-none placeholder:lowercase" />
-            <BiSearch size={30}
-            className="cursor-pointer transition ease-out hover:scale-125" />
-            <BiCurrentLocation size={30}
-            className="cursor-pointer transition ease-out hover:scale-125" />
+            className="input input-info text-gray-500 border-blue-secondary focus:border-blue-secondary focus:outline-blue-secondary text-xl font-light p-2 w-full capitalize focus:outline placeholder:lowercase max-w-md" />
+            <BiSearch size={25}
+            className="cursor-pointer text-blue-primary transition ease-out hover:scale-125"
+            onClick={handleSearchClick} />
+            <BiCurrentLocation size={25}
+            className="cursor-pointer transition ease-out hover:scale-125 text-blue-primary"
+            onClick={handleLocationClick} />
         </div>
-        <div className="flex flex-row w-1/4 items-center justify-center">
-            <button className="text-2xl font-medium transition ease-out hover:scale-125">
-                °C
-            </button>
-            <p className="text-2xl font-medium mx-1">|</p>
-            <button className="text-2xl font-medium transition ease-out hover:scale-125">
-                °F
-            </button>
-        </div>
+        
     </div>
   )
 }
