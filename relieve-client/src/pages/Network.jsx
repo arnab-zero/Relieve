@@ -155,7 +155,7 @@ const Network = () => {
                     </h2>
                     <p>{community.description}</p>
                     <p>Location: {community.location}</p>
-                    <p>Contact: {community.contactNumbers.join(", ")}</p>
+                    <p>Contact: {Array.isArray(community.contactNumbers) ? community.contactNumbers.join(", ") : "N/A"}</p>
                   </li>
                 ))
               ) : (
