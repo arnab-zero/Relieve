@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import CommunityCreationForm from "./forms/CommunityCreationForm";
+import { AuthContext } from "./Authentication/AuthProvider";
 
 const Network = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [communities, setCommunities] = useState([]); // State to store communities
   const [events, setEvents] = useState([]); // State to store events
   const [query, setQuery] = useState("");
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
 
   // Toggle popup visibility
   const togglePopup = () => {

@@ -6,11 +6,11 @@ const DonationCalls = () => {
     useOutletContext() || { incidents: [], query: "", fundCalls: [] };
 
   return (
-    <div>
+    <div className="mt-6">
       {fundCalls.map((fundCall) => (
         <DonationSeekingCard
           key={fundCall.fundCallId}
-          DonationCalls={DonationCalls}
+          fundCall={fundCall}
         />
       ))}
     </div>
