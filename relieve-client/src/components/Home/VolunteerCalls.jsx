@@ -9,7 +9,7 @@ const VolunteerCalls = () => {
   };
 
   return (
-    <div>
+    <div className="mt-6">
       {volunteerCalls.map((volunteerCall) => (
         <VolunteerSeekingCard
           key={volunteerCall.volunteerCallId}
