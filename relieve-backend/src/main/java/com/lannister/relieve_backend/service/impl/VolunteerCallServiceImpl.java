@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class VolunteerCallServiceImpl implements VolunteerCallService {
 
-    private final VolunteerCallRepository volunteerCallRepository;
+    private VolunteerCallRepository volunteerCallRepository;
 
     @Override
     public VolunteerCallDto createVolunteerCall(VolunteerCallDto volunteerCallDto) {

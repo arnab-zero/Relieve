@@ -19,6 +19,6 @@ public class VolunteerCallDto {
     private String title;
     private String description;
     private String location;
-    private Time deadline;
-    private Time creationTime;
+    private LocalDateTime deadline;
+    private LocalDateTime creationTime;
 }

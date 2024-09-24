@@ -36,8 +36,8 @@ public class VolunteerCall {
     private String location;
 
     @Column(name = "deadline")
-    private Time deadline;
+    private LocalDateTime deadline;
 
     @Column(name = "creation_time", nullable = false, updatable = false)
-    private Time creationTime;
+    private LocalDateTime creationTime;
 }
