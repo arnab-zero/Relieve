@@ -27,7 +27,7 @@ const Navbar = () => {
         })
         .catch(error => console.error(error));
     } else {
-      navigate('/signin');
+      navigate('/sign-in');
     }
   };
 
