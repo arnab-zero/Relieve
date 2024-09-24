@@ -1,11 +1,12 @@
 import { div } from "framer-motion/client";
 
-const Forecast = () => {
-    const data = [1, 2, 3, 4, 5];
+const Forecast = ({title, data}) => {
+
+    console.log(data.icon);
   return (
     <div>
         <div className="flex items-center justify-start mt-6">
-            <p className="font-medium uppercase">3 hour step forecast</p>
+            <p className="font-medium uppercase">{title}</p>
         </div>
         <hr className="my-1" />
 
@@ -16,13 +17,8 @@ const Forecast = () => {
                     key={index}
                     className="flex flex-col items-center justify-center"
                     >
-                        <p className="font-light text-sm">Wed</p>
-                        <img 
-                        src="http://openweathermap.org/img/wn/01d@2x.png" 
-                        alt="weather icon" 
-                        className="w-12 my-1"
-                        />
-                        <p className="font-medium">12°</p>
+                        <p className="font-light text-sm">{data.title}</p>
+                        <p className="font-medium">{`${data.temp.toFixed()}°`}</p>
                     </div>
                 ))
             }

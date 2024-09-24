@@ -30,11 +30,11 @@ const MapComponent = () => {
       }
     }
 
-    return null; // Return null if no valid coordinates found
+    return null;
   };
 
   return (
-    <MapContainer center={position} zoom={7.5} style={{ height: "60vh", width: "60%" }}>
+    <MapContainer center={position} zoom={8} style={{ height: "60vh", width: "80%" }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

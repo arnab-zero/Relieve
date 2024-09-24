@@ -1,26 +1,40 @@
-import { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect, useRef, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { GrAnnounce } from "react-icons/gr";
-import IncidentReportingForm from "../pages/forms/IncidentReportingForm"; // Import the form component
+import IncidentReportingForm from "../pages/forms/IncidentReportingForm";
+import { AuthContext } from "../pages/Authentication/AuthProvider";
 
 const Navbar = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const popupRef = useRef(null); // Reference to detect outside clicks
+  const popupRef = useRef(null);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleFormSubmit = () => {
-    setIsPopupVisible(false); // Hide popup after form submission
+    setIsPopupVisible(false);
   };
 
   const handleReportClick = () => {
-    setIsPopupVisible(true); // Show popup when "Report Incident" is clicked
+    setIsPopupVisible(true);
   };
 
-  // Detect clicks outside the popup
+  const handleAuthClick = () => {
+    if (user) {
+      logOut()
+        .then(() => {
+          navigate('/');
+        })
+        .catch(error => console.error(error));
+    } else {
+      navigate('/signin');
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setIsPopupVisible(false); // Close the popup if clicked outside
+        setIsPopupVisible(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -31,14 +45,12 @@ const Navbar = () => {
 
   const links = (
     <>
-    <li>
+      <li>
         <NavLink
           to="/"
-          className={({ isActive, isPending }) =>
+          className={({ isActive }) =>
             isActive
               ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
-              : isPending
-              ? "pending"
               : ""
           }
         >
@@ -48,11 +60,9 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/network"
-          className={({ isActive, isPending }) =>
+          className={({ isActive }) =>
             isActive
               ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
-              : isPending
-              ? "pending"
               : ""
           }
         >
@@ -62,11 +72,9 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/map"
-          className={({ isActive, isPending }) =>
+          className={({ isActive }) =>
             isActive
               ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
-              : isPending
-              ? "pending"
               : ""
           }
         >
@@ -76,11 +84,9 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/shelter"
-          className={({ isActive, isPending }) =>
+          className={({ isActive }) =>
             isActive
               ? "text-white btn bg-inherit border-blue-secondary shadow-none hover:bg-blue-secondary hover:text-gray-700 font-semibold text-lg"
-              : isPending
-              ? "pending"
               : ""
           }
         >
@@ -92,7 +98,6 @@ const Navbar = () => {
 
   return (
     <div className="relative">
-      {/* Navbar content */}
       <div className="navbar bg-blue-primary font-manrope md:px-6">
         <div className="navbar-start">
           <div className="dropdown">
@@ -123,7 +128,6 @@ const Navbar = () => {
             <span className="flex items-center gap-1">
               <img src="/logo.svg" alt="" width={"30"} />
               <h2 className="text-lg text-white md:text-3xl font-black">
-                {" "}
                 Relieve
               </h2>
             </span>
@@ -136,35 +140,34 @@ const Navbar = () => {
         </div>
         <div className="navbar-end gap-1 md:gap-4">
           <button
-            onClick={handleReportClick} // Trigger popup on click
+            onClick={handleReportClick}
             className="btn btn-outline text-base-200 text-lg"
           >
             <GrAnnounce /> Report Incident
           </button>
-          <NavLink
-            to={"/profile"}
-            className={"text-base-200 font-semibold text-4xl"}
+          <button
+            onClick={handleAuthClick}
+            className="btn btn-outline text-base-200 text-lg"
           >
-            <CgProfile />
-          </NavLink>
+            {user ? 'Log Out' : 'Sign In'}
+          </button>
+          {user && (
+            <NavLink
+              to={"/profile"}
+              className={"text-base-200 font-semibold text-4xl"}
+            >
+              <span className="text-sm ml-2">{user.userName}</span>
+            </NavLink>
+          )}
         </div>
       </div>
 
-      {/* Popup Modal for IncidentReportingForm */}
       {isPopupVisible && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
           <div
-            ref={popupRef} // Reference for detecting outside clicks
+            ref={popupRef}
             className="bg-white rounded-lg shadow-lg p-6 relative w-11/12 max-w-lg max-h-[80vh] overflow-y-auto scrollbar-hide"
           >
-            {/* Close button */}
-            {/* <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
-              onClick={() => setIsPopupVisible(false)}
-            >
-              ✕
-            </button> */}
-            {/* Incident Reporting Form */}
             <IncidentReportingForm onSubmit={handleFormSubmit} />
           </div>
         </div>

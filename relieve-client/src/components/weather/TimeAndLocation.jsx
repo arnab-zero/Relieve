@@ -1,15 +1,15 @@
 
-const TimeAndLocation = () => {
+const TimeAndLocation = ({weather: {formattedLocalTime, name, country}}) => {
   return (
     <div className="">
-        <div className="flex items-center justify-center my-6">
-            <p className="text-xl font-extralight">
-                Tuesday, 24 Sep 2024 | Localtime: 07:21 AM
+        {/* <div className="flex items-center justify-center my-6">
+            <p className="text-lg font-extralight">
+                {formattedLocalTime}
             </p>
-        </div>
+        </div> */}
 
-        <div className="flex items-center justify-center my-3">
-            <p className="text-3xl font-medium">Dhaka, BD</p>
+        <div className="flex items-center justify-center my-2">
+            <p className="text-3xl font-medium">{`${name}, ${country}`}</p>
         </div>
     </div>
   )
