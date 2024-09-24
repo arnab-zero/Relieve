@@ -44,7 +44,7 @@ const SignIn = () => {
                             <button className="btn btn-primary">Sign In</button>
                         </div>
                         <p className="text-center mt-4">
-                            Don't have an account? <Link to="/signup" className="text-blue-600 hover:underline">Sign Up</Link>
+                            Don't have an account? <Link to="/sign-up" className="text-blue-600 hover:underline">Sign Up</Link>
                         </p>
                     </form>
                 </div>

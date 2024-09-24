@@ -80,7 +80,7 @@ const SignUp = () => {
                             <button className="btn btn-primary">Sign Up</button>
                         </div>
                         <p className="text-center mt-4">
-                            Already have an account? <Link to="/signin" className="text-blue-600 hover:underline">Sign In</Link>
+                            Already have an account? <Link to="/sign-in" className="text-blue-600 hover:underline">Sign In</Link>
                         </p>
                     </form>
                 </div>
