@@ -13,25 +13,30 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "fund_call")
-public class FundCall {
-
+@Table(name = "volunteer_requests")
+public class VolunteerRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long fundCallId;
+    private Long requestId;
+
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "event_id")
     private Long eventId;
-    @Column(name = "title")
-    private String title;
+
+    @Column(name = "event_name")
+    private String eventName;
+
+    @Column(name = "vc_Id")
+    private Long vcId;
+
+    @Column(name = "comment")
+    private String comment;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "target_amount")
-    private Double targetAmount;
-    @Column(name = "received_amount")
-    private Double receivedAmount;
-    @Column(name = "deadline")
-    private LocalDateTime deadline;
+
+    @Column(name = "is_approved")
+    private boolean isApproved;
 }

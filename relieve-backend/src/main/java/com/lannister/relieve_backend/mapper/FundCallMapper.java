@@ -7,6 +7,7 @@ public class FundCallMapper {
     public static FundCallDto mapToFundCallDto(FundCall fundCall) {
         FundCallDto fundCallDto = new FundCallDto();
 
+        fundCallDto.setFundCallId(fundCall.getFundCallId());
         fundCallDto.setEventId(fundCall.getEventId());
         fundCallDto.setTitle(fundCall.getTitle());
         fundCallDto.setCreatedAt(fundCall.getCreatedAt());
@@ -21,6 +22,7 @@ public class FundCallMapper {
     public static FundCall mapToFundCall(FundCallDto fundCallDto){
         FundCall fundCall = new FundCall();
 
+        fundCall.setFundCallId(fundCallDto.getFundCallId());
         fundCall.setEventId(fundCallDto.getEventId());
         fundCall.setTitle(fundCallDto.getTitle());
         fundCall.setCreatedAt(fundCallDto.getCreatedAt());

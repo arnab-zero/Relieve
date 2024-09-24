@@ -14,6 +14,7 @@ public class VolunteerCallMapper {
         volunteerCallDto.setLocation(volunteerCall.getLocation());
         volunteerCallDto.setDeadline(volunteerCall.getDeadline());
         volunteerCallDto.setCreationTime(volunteerCall.getCreationTime());
+        volunteerCallDto.setEventName(volunteerCall.getEventName());
 
         return volunteerCallDto;
     }
@@ -27,6 +28,8 @@ public class VolunteerCallMapper {
         volunteerCall.setLocation(volunteerCallDto.getLocation());
         volunteerCall.setDeadline(volunteerCallDto.getDeadline());
         volunteerCall.setCreationTime(volunteerCallDto.getCreationTime());
+        volunteerCall.setEventName(volunteerCallDto.getEventName());
+
 
         return volunteerCall;
     }

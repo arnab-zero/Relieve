@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/food")
 public class FoodController {
 
-    private final FoodService foodService;
+    private FoodService foodService;
 
     // Create new Food item
     @PostMapping

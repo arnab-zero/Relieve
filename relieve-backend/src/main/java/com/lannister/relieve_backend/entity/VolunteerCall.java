@@ -40,4 +40,7 @@ public class VolunteerCall {
 
     @Column(name = "creation_time", nullable = false, updatable = false)
     private LocalDateTime creationTime;
+
+    @Column(name = "event_name")
+    private String eventName;
 }

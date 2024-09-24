@@ -45,10 +45,14 @@ public class VolunteerCallServiceImpl implements VolunteerCallService {
         VolunteerCall volunteerCall = volunteerCallRepository.findById(vcId)
                 .orElseThrow(() -> new ResourceNotFoundException("Volunteer call not found with id: " + vcId));
 
+        volunteerCall.setVcId(volunteerCallDto.getVcId());
+        volunteerCall.setEventId(volunteerCallDto.getEventId());
         volunteerCall.setTitle(volunteerCallDto.getTitle());
         volunteerCall.setDescription(volunteerCallDto.getDescription());
         volunteerCall.setLocation(volunteerCallDto.getLocation());
         volunteerCall.setDeadline(volunteerCallDto.getDeadline());
+        volunteerCall.setCreationTime(volunteerCallDto.getCreationTime());
+        volunteerCall.setEventName(volunteerCallDto.getEventName());
 
         VolunteerCall updatedVolunteerCall = volunteerCallRepository.save(volunteerCall);
         return VolunteerCallMapper.mapToVolunteerCallDto(updatedVolunteerCall);
