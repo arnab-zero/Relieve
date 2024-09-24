@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { zillaUpazillaData } from "./ZillaUpazillaData.js";
+import { AuthContext } from "../Authentication/AuthProvider.jsx";
 
-export default function CreateEventForm({communityId}) {
+export default function CreateEventForm({ communityId }) {
   const [formData, setFormData] = useState({
     eventName: "",
     communityId: null,
     coordinators: "",
     contactNo: "",
     startDate: "",
-    startTime: "",
     endDate: "",
-    endTime: "",
     zilla: "",
     upazilla: "",
     location: "",
@@ -28,6 +27,8 @@ export default function CreateEventForm({communityId}) {
     }));
   };
 
+  const { user } = useContext(AuthContext);
+
   const validateForm = () => {
     const newErrors = {};
     // Validation checks
@@ -39,9 +40,7 @@ export default function CreateEventForm({communityId}) {
     else if (!/^\d+$/.test(formData.contactNo))
       newErrors.contactNo = "Contact number must contain only digits.";
     if (!formData.startDate) newErrors.startDate = "Start Date is required.";
-    if (!formData.startTime) newErrors.startTime = "Start Time is required.";
     if (!formData.endDate) newErrors.endDate = "End Date is required.";
-    if (!formData.endTime) newErrors.endTime = "End Time is required.";
     if (!formData.zilla) newErrors.zilla = "Zilla is required.";
     if (!formData.upazilla) newErrors.upazilla = "Upazilla is required.";
     if (!formData.location) newErrors.location = "Location is required.";
@@ -59,11 +58,11 @@ export default function CreateEventForm({communityId}) {
         communityId: communityId,
         description: formData.details,
         contacts: [parseInt(formData.contactNo)], // Assuming it's one contact, adjust if there are more
-        dateFrom: new Date(`${formData.startDate}T${formData.startTime}`),
-        dateTo: new Date(`${formData.endDate}T${formData.endTime}`),
+        dateFrom: new Date(formData.startDate),
+        dateTo: new Date(formData.endDate),
         location: `${formData.location}, ${formData.upazilla}, ${formData.zilla}`,
         volunteers: [], // Add volunteer ids if applicable
-        eventAdmins: [], // Add event admin ids if applicable
+        eventAdmins: [user.userId],
         volunteerCalls: [],
         donationCalls: [],
         reports: [],
@@ -81,6 +80,7 @@ export default function CreateEventForm({communityId}) {
         if (response.ok) {
           const savedEvent = await response.json();
           console.log("Event created:", savedEvent);
+          alert('Event created Successfully!')
         } else {
           console.error("Failed to create event", response.statusText);
         }
@@ -100,17 +100,15 @@ export default function CreateEventForm({communityId}) {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Event Name */}
         <div className="space-y-2">
-          <label htmlFor="eventName" className="block text-sm font-medium">
-            Event Name
-          </label>
           <input
             type="text"
             id="eventName"
+            placeholder="Event Name"
             name="eventName"
             value={formData.eventName}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.eventName ? "border-red-500" : "border-gray-300"
+            className={`input input-bordered border-2 text-md font-medium w-full ${
+              errors.eventName ? "border-red-500" : "border-blue-primary"
             } rounded-md`}
           />
           {errors.eventName && (
@@ -120,17 +118,15 @@ export default function CreateEventForm({communityId}) {
 
         {/* Coordinators */}
         <div className="space-y-2">
-          <label htmlFor="coordinators" className="block text-sm font-medium">
-            Coordinators
-          </label>
           <input
             type="text"
             id="coordinators"
+            placeholder="Coordinators"
             name="coordinators"
             value={formData.coordinators}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.coordinators ? "border-red-500" : "border-gray-300"
+            className={`input input-bordered border-2 text-md font-medium w-full ${
+              errors.coordinators ? "border-red-500" : "border-blue-primary"
             } rounded-md`}
           />
           {errors.coordinators && (
@@ -140,17 +136,15 @@ export default function CreateEventForm({communityId}) {
 
         {/* Contact No */}
         <div className="space-y-2">
-          <label htmlFor="contactNo" className="block text-sm font-medium">
-            Contact No
-          </label>
           <input
             type="text"
             id="contactNo"
+            placeholder="Contact No"
             name="contactNo"
             value={formData.contactNo}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.contactNo ? "border-red-500" : "border-gray-300"
+            className={`input input-bordered border-2 text-md font-medium w-full ${
+              errors.contactNo ? "border-red-500" : "border-blue-primary"
             } rounded-md`}
           />
           {errors.contactNo && (
@@ -158,84 +152,51 @@ export default function CreateEventForm({communityId}) {
           )}
         </div>
 
-        {/* Starting Date and Time */}
+        {/* Starting Date */}
         <div className="space-y-2">
-          <label htmlFor="startDate" className="block text-sm font-medium">
-            Starting at
-          </label>
           <input
             type="date"
             id="startDate"
+            placeholder="Start Date"
             name="startDate"
             value={formData.startDate}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.startDate ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
-          />
-          <input
-            type="time"
-            id="startTime"
-            name="startTime"
-            value={formData.startTime}
-            onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.startTime ? "border-red-500" : "border-gray-300"
+            className={`input input-bordered border-2 text-md font-medium w-full ${
+              errors.startDate ? "border-red-500" : "border-blue-primary"
             } rounded-md`}
           />
           {errors.startDate && (
             <p className="text-red-600 text-sm">{errors.startDate}</p>
           )}
-          {errors.startTime && (
-            <p className="text-red-600 text-sm">{errors.startTime}</p>
-          )}
         </div>
 
-        {/* Ending Date and Time */}
+        {/* Ending Date */}
         <div className="space-y-2">
-          <label htmlFor="endDate" className="block text-sm font-medium">
-            Ends at
-          </label>
           <input
             type="date"
             id="endDate"
+            placeholder="End Date"
             name="endDate"
             value={formData.endDate}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.endDate ? "border-red-500" : "border-gray-300"
-            } rounded-md`}
-          />
-          <input
-            type="time"
-            id="endTime"
-            name="endTime"
-            value={formData.endTime}
-            onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.endTime ? "border-red-500" : "border-gray-300"
+            className={`input input-bordered border-2 text-md font-medium w-full ${
+              errors.endDate ? "border-red-500" : "border-blue-primary"
             } rounded-md`}
           />
           {errors.endDate && (
             <p className="text-red-600 text-sm">{errors.endDate}</p>
           )}
-          {errors.endTime && (
-            <p className="text-red-600 text-sm">{errors.endTime}</p>
-          )}
         </div>
 
         {/* Zilla */}
         <div className="space-y-2">
-          <label htmlFor="zilla" className="block text-sm font-medium">
-            Zilla
-          </label>
           <select
             id="zilla"
             name="zilla"
             value={formData.zilla}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.zilla ? "border-red-500" : "border-gray-300"
+            className={`input input-bordered border-2 text-md font-medium w-full ${
+              errors.zilla ? "border-red-500" : "border-blue-primary"
             } rounded-md`}
           >
             <option value="">Select Zilla</option>
@@ -252,15 +213,12 @@ export default function CreateEventForm({communityId}) {
 
         {/* Upazilla */}
         <div className="space-y-2">
-          <label htmlFor="upazilla" className="block text-sm font-medium">
-            Upazilla
-          </label>
           <select
             id="upazilla"
             name="upazilla"
             value={formData.upazilla}
             onChange={handleChange}
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md"
+            className="input input-bordered border-2 text-md font-medium w-full rounded-md"
             disabled={!formData.zilla} // Disable until Zilla is selected
           >
             <option value="">Select Upazilla</option>
@@ -277,17 +235,15 @@ export default function CreateEventForm({communityId}) {
 
         {/* Location */}
         <div className="space-y-2">
-          <label htmlFor="location" className="block text-sm font-medium">
-            Location
-          </label>
           <input
             type="text"
             id="location"
+            placeholder="Location"
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.location ? "border-red-500" : "border-gray-300"
+            className={`input input-bordered border-2 text-md font-medium w-full ${
+              errors.location ? "border-red-500" : "border-blue-primary"
             } rounded-md`}
           />
           {errors.location && (
@@ -297,29 +253,30 @@ export default function CreateEventForm({communityId}) {
 
         {/* Details */}
         <div className="space-y-2">
-          <label htmlFor="details" className="block text-sm font-medium">
-            Details
-          </label>
           <textarea
             id="details"
             name="details"
+            placeholder="Details"
             value={formData.details}
             onChange={handleChange}
-            className={`mt-1 block w-full py-2 px-3 border ${
-              errors.details ? "border-red-500" : "border-gray-300"
+            className={`textarea textarea-bordered border-2 text-md font-medium w-full ${
+              errors.details ? "border-red-500" : "border-blue-primary"
             } rounded-md`}
-          />
+          ></textarea>
           {errors.details && (
             <p className="text-red-600 text-sm">{errors.details}</p>
           )}
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-        >
-          Create Event
-        </button>
+        {/* Submit Button */}
+        <div className="text-center">
+          <button
+            type="submit"
+            className="btn btn-primary w-full text-lg font-semibold bg-blue-primary hover:bg-blue-secondary"
+          >
+            Create Event
+          </button>
+        </div>
       </form>
     </div>
   );

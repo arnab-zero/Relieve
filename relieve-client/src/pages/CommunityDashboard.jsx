@@ -10,7 +10,6 @@ function CommunityDashboard() {
   const [isEventPopupVisible, setIsEventPopupVisible] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); // isAdmin state
-  const [userId, setUserId] = useState(null);
   const popupRef = useRef(null);
   const location = useLocation();
   const { community, events } = location.state;
