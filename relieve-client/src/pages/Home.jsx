@@ -33,7 +33,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => {
         setFundCalls(data);
-        console.log("fund: ", fundCalls);
+        // console.log("fund: ", fundCalls);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);

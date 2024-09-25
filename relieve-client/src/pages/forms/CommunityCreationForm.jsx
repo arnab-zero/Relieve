@@ -15,10 +15,9 @@ export default function CommunityCreationForm() {
     description: "",
   });
 
-  const { user, logOut } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const userId = user.userId;
 
-  // console.log(userId);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -26,19 +25,19 @@ export default function CommunityCreationForm() {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-      ...(name === "zilla" && { upazilla: "" }),
+      ...(name === "zilla" && { upazilla: "" }), // Reset upazilla when zilla changes
     }));
   };
 
   const validateForm = () => {
     const newErrors = {};
-    // Validation checks
+
     if (!formData.organizationName)
       newErrors.organizationName = "Organization Name is required.";
     if (!formData.coordinatorsName)
       newErrors.coordinatorsName = "Coordinators Name is required.";
     if (!formData.organizationImage)
-      newErrors.coordinatorsNid = "Organization name is required.";
+      newErrors.organizationImage = "Organization Image is required.";
     if (!formData.coordinatorsNid)
       newErrors.coordinatorsNid = "Coordinators NID is required.";
     if (!formData.contactNumbers)
@@ -57,62 +56,65 @@ export default function CommunityCreationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      const organizationDto = {
-        orgName: formData.organizationName,
-        description: formData.description,
-        contactNumbers: [parseInt(formData.contactNumbers)], // Assuming a single contact number
-        location: formData.location,
-        orgImage: formData.organizationImage,
-        nid: [formData.coordinatorsNid],
-        ongoingEvents: [],
-        pastEvents: [],
-        upcomingEvents: [],
-        volunteers: [],
-      };
+    if (!validateForm()) return;
 
-      try {
-        const response = await fetch("http://localhost:8080/organizations", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(organizationDto),
-        });
+    const organizationDto = {
+      orgName: formData.organizationName,
+      description: formData.description,
+      contactNumbers: [parseInt(formData.contactNumbers)],
+      location: formData.location,
+      orgImage: formData.organizationImage,
+      nid: [formData.coordinatorsNid],
+      ongoingEvents: [],
+      pastEvents: [],
+      upcomingEvents: [],
+      volunteers: [userId],
+    };
 
-        if (response.ok) {
-          const savedOrganization = await response.json();
-          // console.log(savedOrganization);
-          const communityId = savedOrganization.orgId; // Assuming organization ID is returned as `id`
-          // console.log(communityId);
-          await updateUserWithCommunity(userId, communityId); // Update user with the new community ID
-        } else {
-          console.error("Failed to create organization", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error creating organization:", error);
+    try {
+      const response = await fetch("http://localhost:8080/organizations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(organizationDto),
+      });
+
+      if (response.ok) {
+        const savedOrganization = await response.json();
+        const communityId = savedOrganization.orgId;
+        await updateUserWithCommunity(userId, communityId);
+      } else {
+        console.error("Failed to create organization", response.statusText);
       }
+    } catch (error) {
+      console.error("Error creating organization:", error);
     }
   };
 
   const updateUserWithCommunity = async (userId, communityId) => {
     try {
-      // Fetch the user data
-      const userResponse = await fetch(`http://localhost:8080/api/users/${userId}`);
+      const userResponse = await fetch(
+        `http://localhost:8080/api/users/${userId}`
+      );
       if (!userResponse.ok) throw new Error("User not found");
 
       const userData = await userResponse.json();
-      // console.log(userData);
-
       const updatedCommunityIds = [...userData.communityIds, communityId];
 
-      const updateResponse = await fetch(`http://localhost:8080/api/users/${userId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...userData, communityIds: updatedCommunityIds }),
-      });
+      const updateResponse = await fetch(
+        `http://localhost:8080/api/users/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...userData,
+            communityIds: updatedCommunityIds,
+          }),
+        }
+      );
 
       if (updateResponse.ok) {
         console.log("User updated with new community ID");
@@ -143,8 +145,9 @@ export default function CommunityCreationForm() {
             name="organizationName"
             value={formData.organizationName}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.organizationName ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.organizationName ? "border-red-500" : "border-blue-primary"
+            } rounded-md`}
           />
           {errors.organizationName && (
             <p className="text-red-600 text-sm">{errors.organizationName}</p>
@@ -160,8 +163,9 @@ export default function CommunityCreationForm() {
             name="coordinatorsName"
             value={formData.coordinatorsName}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.coordinatorsName ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.coordinatorsName ? "border-red-500" : "border-blue-primary"
+            } rounded-md`}
           />
           {errors.coordinatorsName && (
             <p className="text-red-600 text-sm">{errors.coordinatorsName}</p>
@@ -177,8 +181,9 @@ export default function CommunityCreationForm() {
             name="coordinatorsNid"
             value={formData.coordinatorsNid}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.coordinatorsNid ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.coordinatorsNid ? "border-red-500" : "border-blue-primary"
+            } rounded-md`}
           />
           {errors.coordinatorsNid && (
             <p className="text-red-600 text-sm">{errors.coordinatorsNid}</p>
@@ -193,8 +198,11 @@ export default function CommunityCreationForm() {
             name="organizationImage"
             value={formData.organizationImage}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.organizationImage ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.organizationImage
+                ? "border-red-500"
+                : "border-blue-primary"
+            } rounded-md`}
           />
           {errors.organizationImage && (
             <p className="text-red-600 text-sm">{errors.organizationImage}</p>
@@ -209,10 +217,13 @@ export default function CommunityCreationForm() {
             placeholder="Select District"
             value={formData.zilla}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.zilla ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.zilla ? "border-red-500" : "border-blue-primary"
+            } rounded-md`}
           >
-            <option className={"text-gray-400"} value="">Select Zilla</option>
+            <option className={"text-gray-400"} value="">
+              Select Zilla
+            </option>
             {Object.keys(zillaUpazillaData).map((zilla) => (
               <option className={"text-gray-400"} key={zilla} value={zilla}>
                 {zilla}
@@ -231,8 +242,9 @@ export default function CommunityCreationForm() {
             name="upazilla"
             value={formData.upazilla}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.upazilla ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.upazilla ? "border-red-500" : "border-blue-primary"
+            } rounded-md`}
             disabled={!formData.zilla}
           >
             <option value="">Select Upazilla</option>
@@ -256,8 +268,9 @@ export default function CommunityCreationForm() {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.location ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.location ? "border-red-500" : "border-blue-primary"
+            } rounded-md`}
           />
           {errors.location && (
             <p className="text-red-600 text-sm">{errors.location}</p>
@@ -273,8 +286,9 @@ export default function CommunityCreationForm() {
             placeholder="Contact Numbers"
             value={formData.contactNumbers}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.contactNumbers ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.contactNumbers ? "border-red-500" : "border-blue-primary"
+            } rounded-md`}
           />
           {errors.contactNumbers && (
             <p className="text-red-600 text-sm">{errors.contactNumbers}</p>
@@ -291,8 +305,9 @@ export default function CommunityCreationForm() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className={`input input-bordered border-2 text-md font-medium  w-full ${errors.description ? "border-red-500" : "border-blue-primary"
-              } rounded-md`}
+            className={`input input-bordered border-2 text-md font-medium  w-full ${
+              errors.description ? "border-red-500" : "border-blue-primary"
+            } rounded-md`}
           />
           {errors.description && (
             <p className="text-red-600 text-sm">{errors.description}</p>

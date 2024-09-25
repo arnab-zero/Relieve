@@ -50,7 +50,7 @@ const IncidentCard = ({ incident, setIncidents }) => {
   };
 
   const statusColors = {
-    pending: "yellow",
+    pending: "red",
     processing: "blue",
     resolved: "green",
     verified: "green",

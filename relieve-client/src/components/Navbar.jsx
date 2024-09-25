@@ -145,6 +145,7 @@ const Navbar = () => {
           >
             <GrAnnounce /> Report Incident
           </button>
+          <div>
           <button
             onClick={handleAuthClick}
             className="btn btn-outline text-base-200 text-lg"
@@ -159,6 +160,7 @@ const Navbar = () => {
               <span className="text-sm ml-2">{user.userName}</span>
             </NavLink>
           )}
+          </div>
         </div>
       </div>
 

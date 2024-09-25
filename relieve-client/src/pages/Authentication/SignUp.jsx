@@ -17,36 +17,33 @@ const SignUp = () => {
     const contactNumber = form.contactNumber.value;
 
     try {
-      const result = await createUser(email, password, name, contactNumber);
-      const user = result.user;
+        const result = await createUser(email, password, name, contactNumber);
+        const user = result.user;
+        
+        const userData = {
+            userName: name,
+            contactNumber: contactNumber,
+            email: email,
+            dateOfBirth: "2010-01-01",
+            location: "Dhaka, Bangladesh",
+            profession: "",
+            userImage: "",
+            communityIds: [],
+            eventIds: [],
+            incidentIds: []
+        };
 
-      const userData = {
-        userName: name,
-        contactNumber: contactNumber,
-        email: email,
-        dateOfBirth: "2010-01-01",
-        location: "Dhaka, Bangladesh",
-        profession: "",
-        userImage: "",
-        communityIds: [],
-        eventIds: [],
-        incidentIds: [],
-      };
-
-      const response = await axios.post(
-        "http:localhost:8080/api/users",
-        userData
-      );
-
-      if (response.status === 201) {
-        navigate("/");
-      } else {
-        setError("Failed to create user profile");
-      }
+        const response = await axios.post('http://localhost:8080/api/users', userData);
+        
+        if (response.status === 201) {
+            navigate('/');
+        } else {
+            setError('Failed to create user profile');
+        }
     } catch (error) {
-      setError(error.message);
+        setError(error.message);
     }
-  };
+}
 
   return (
     //  <div className="hero min-h-screen bg-base-200">
@@ -101,7 +98,7 @@ const SignUp = () => {
               <img src="/logo.svg" alt="" width={"180"} />
             </div>
           </div>
-          <form className="pr-20 pl-10 py-14">
+          <form className="pr-20 pl-10 py-14" onSubmit={handleSignUp}>
             <h1 className="text-3xl font-bold text-center mb-8">Sign Up</h1>
             {error && <p className="text-red-500 text-center">{error}</p>}{" "}
             <div className="form-control">
@@ -145,7 +142,9 @@ const SignUp = () => {
               />{" "}
             </div>{" "}
             <div className="form-control mt-6">
-              <button className="btn bg-[#336699] text-white hover:bg-[#86bbd8]">Sign Up</button>{" "}
+              <button className="btn bg-[#336699] text-white hover:bg-[#86bbd8]">
+                Sign Up
+              </button>{" "}
             </div>{" "}
             <p className="text-center mt-4">
               Already have an account?{" "}
