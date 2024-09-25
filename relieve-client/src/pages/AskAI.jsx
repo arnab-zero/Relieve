@@ -42,7 +42,7 @@ const AskAI = () => {
     ];
 
     return (
-        <div className="ask-ai-container">
+        <div className="">
             <h2 className="text-xl font-bold">Ask AI about Disaster Management</h2>
             <form onSubmit={handleSubmit} className="flex flex-col mt-4">
                 <textarea 

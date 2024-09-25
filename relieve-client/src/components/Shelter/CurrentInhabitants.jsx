@@ -6,14 +6,14 @@ const PendingInhabitants = ({ shelterId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null); // Reference for the modal
 
-  // Fetching pending inhabitants
+
   useEffect(() => {
     fetch(`http://localhost:8080/api/shelter-inhabitants?shelterId=${shelterId}`)
       .then((res) => res.json())
       .then((data) => setPendingInhabitants(data));
   }, [shelterId, pendingInhabitants]);
 
-  // Handle closing the modal when clicking outside of it
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
