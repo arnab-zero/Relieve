@@ -94,7 +94,7 @@ const VolunteerSeekingCard = ({ volunteerCall }) => {
             <NavLink to={`/event-dashboard/${eventId}`}>{eventName}</NavLink>
           </span>
           <span className="text-xs bg-[#1f8d0c] text-white px-2 py-1 rounded-full ml-2">
-            Verified/Unverified
+            Verified
           </span>
         </h1>
 

@@ -39,7 +39,7 @@ const HomePageNav = () => {
           Donation Calls
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink
           to="/alerts"
           className={({ isActive }) =>
@@ -50,7 +50,7 @@ const HomePageNav = () => {
         >
           Alerts
         </NavLink>
-      </li>
+      </li> */}
     </>
   );
 

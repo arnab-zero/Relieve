@@ -137,11 +137,11 @@ function CommunityDashboard() {
           )}
 
           {/* Add Member Button */}
-          {isAdmin && ( // Show only if the user is an admin
+          {/* {isAdmin && ( // Show only if the user is an admin
             <button className="flex items-center bg-blue-500 text-white py-2 px-4 rounded">
               <i className="mr-2">➕</i> Add Member
             </button>
-          )}
+          )} */}
         </div>
         }
       </div>

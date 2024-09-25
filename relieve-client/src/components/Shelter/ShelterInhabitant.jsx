@@ -5,18 +5,19 @@ import CurrentInhabitants from "./CurrentInhabitants";
 import AddInhabitantForm from "../../pages/forms/AddInhabitantForm";
 
 const ShelterInhabitant = ({ shelterId, setIsAdmin }) => {
-  const [activeInhabitantTab, setActiveInhabitantTab] = useState("current-inhabitants");
+  // console.log('inhibi',shelterId);
+  // const [activeInhabitantTab, setActiveInhabitantTab] = useState("current-inhabitants");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
 
-  const handleInhabitantRequests = () => {
-    setActiveInhabitantTab("inhabitant-requests");
-  };
+  // const handleInhabitantRequests = () => {
+  //   setActiveInhabitantTab("inhabitant-requests");
+  // };
 
-  const handleCurrentInhabitant = () => {
-    setActiveInhabitantTab("current-inhabitants");
-  };
+  // const handleCurrentInhabitant = () => {
+  //   setActiveInhabitantTab("current-inhabitants");
+  // };
 
   const handleAddMember = () => {
     setIsModalOpen(true);
@@ -43,7 +44,7 @@ const ShelterInhabitant = ({ shelterId, setIsAdmin }) => {
         >
           Inhabitant Requests
         </button> */}
-        <button
+        {/* <button
           className={`text-xl font-semibold text-gray-500 ${activeInhabitantTab === "current-inhabitants"
               ? "border-2 border-b-gray-500 border-t-0 border-l-0 border-r-0"
               : ""
@@ -51,14 +52,10 @@ const ShelterInhabitant = ({ shelterId, setIsAdmin }) => {
           onClick={handleCurrentInhabitant}
         >
           Current Inhabitants
-        </button>
+          </button>*/}
       </div>
       <div className="">
-        {activeInhabitantTab === "inhabitant-requests" ? (
-          <PendingInhabitants />
-        ) : (
-          <CurrentInhabitants />
-        )}
+          <CurrentInhabitants shelterId={shelterId} />
       </div>
 
       {isModalOpen && (

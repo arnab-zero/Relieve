@@ -1,17 +1,29 @@
 import { useEffect, useState, useRef } from "react";
 
-const PendingInhabitants = ({ shelterId }) => {
-  const [pendingInhabitants, setPendingInhabitants] = useState([]);
+const CurrentInhabitants = ({ shelterId }) => {
+  const [currentInhabitants, setCurrentInhabitants] = useState([]);
   const [selectedInhabitant, setSelectedInhabitant] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef(null); // Reference for the modal
+  const modalRef = useRef(null);
 
-  // Fetching pending inhabitants
+  // Fetching current inhabitants
   useEffect(() => {
-    fetch(`http://localhost:8080/api/shelter-inhabitants?shelterId=${shelterId}`)
-      .then((res) => res.json())
-      .then((data) => setPendingInhabitants(data));
-  }, [shelterId, pendingInhabitants]);
+    const fetchInhabitants = async () => {
+      try {
+        const res = await fetch(`http://localhost:8080/api/shelter-inhabitants?shelterId=${shelterId}`);
+        if (res.ok) {
+          const data = await res.json();
+          setCurrentInhabitants(data);
+        } else {
+          console.error('Failed to fetch inhabitants');
+        }
+      } catch (error) {
+        console.error('Error fetching inhabitants:', error);
+      }
+    };
+
+    fetchInhabitants();
+  }, [shelterId]);
 
   // Handle closing the modal when clicking outside of it
   useEffect(() => {
@@ -20,11 +32,13 @@ const PendingInhabitants = ({ shelterId }) => {
         setIsModalOpen(false);
       }
     };
+
     if (isModalOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
     }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -37,21 +51,22 @@ const PendingInhabitants = ({ shelterId }) => {
   };
 
   // Handle remove inhabitant (delete request)
-  const handleDecline = async () => {
+  const handleRemoveInhabitant = async () => {
     try {
       const response = await fetch(
         `http://localhost:8080/api/shelter-inhabitants/${selectedInhabitant.siId}?shelterId=${shelterId}`,
         { method: "DELETE" }
       );
+
       if (response.ok) {
-        setPendingInhabitants((prev) =>
+        setCurrentInhabitants((prev) =>
           prev.filter((inhabitant) => inhabitant.siId !== selectedInhabitant.siId)
         );
         setIsModalOpen(false);
         alert("Inhabitant removed successfully");
       } else {
         console.error("Failed to remove inhabitant.");
-        alert('Failed to remove Inhabitant');
+        alert("Failed to remove inhabitant");
       }
     } catch (error) {
       console.error("Error removing inhabitant:", error);
@@ -60,7 +75,7 @@ const PendingInhabitants = ({ shelterId }) => {
 
   return (
     <div>
-      {/* <h3 className="text-2xl font-semibold my-5">Inhabitant Request</h3> */}
+      <h3 className="text-2xl font-semibold my-5">Current Inhabitants</h3>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
@@ -75,25 +90,17 @@ const PendingInhabitants = ({ shelterId }) => {
             </tr>
           </thead>
           <tbody>
-            {pendingInhabitants.map((pendingInhabitant, index) => (
+            {currentInhabitants.map((inhabitant, index) => (
               <tr key={index}>
-                <td></td>
-                <td className={"text-lg font-semibold text-gray-500"}>
-                  {pendingInhabitant.name}
-                </td>
-                <td className={"text-lg font-semibold text-gray-500"}>
-                  {pendingInhabitant.contact}
-                </td>
-                <td className={"text-lg font-semibold text-gray-500"}>
-                  {pendingInhabitant.totalMember}
-                </td>
-                <td className={"text-lg font-semibold text-gray-500"}>
-                  {pendingInhabitant.religion}
-                </td>
+                <td>{index + 1}</td>
+                <td className="text-lg font-semibold text-gray-500">{inhabitant.name}</td>
+                <td className="text-lg font-semibold text-gray-500">{inhabitant.contact}</td>
+                <td className="text-lg font-semibold text-gray-500">{inhabitant.totalMember}</td>
+                <td className="text-lg font-semibold text-gray-500">{inhabitant.religion}</td>
                 <td>
                   <button
                     className="btn bg-blue-primary text-white hover:text-black"
-                    onClick={() => handleViewDetails(pendingInhabitant)}
+                    onClick={() => handleViewDetails(inhabitant)}
                   >
                     View Details
                   </button>
@@ -109,7 +116,7 @@ const PendingInhabitants = ({ shelterId }) => {
           <div ref={modalRef} className="bg-white p-10 space-y-2 rounded-lg shadow-lg w-2/5">
             <h3 className="text-2xl font-semibold mb-4">Inhabitant Details</h3>
             <p className="text-lg font-semibold text-gray-600">
-              <strong>Name: </strong> {selectedInhabitant.name}
+              <strong>Name:</strong> {selectedInhabitant.name}
             </p>
             <p className="text-lg font-semibold text-gray-600">
               <strong>Contact:</strong> {selectedInhabitant.contact}
@@ -133,11 +140,10 @@ const PendingInhabitants = ({ shelterId }) => {
               <strong>Remarks:</strong> {selectedInhabitant.remarks}
             </p>
 
-            {/* Approve and Remove Inhabitant buttons */}
             <div className="flex justify-between mt-6">
               <button
                 className="btn bg-red-500 text-white hover:bg-red-600"
-                onClick={handleDecline}
+                onClick={handleRemoveInhabitant}
               >
                 Remove Inhabitant
               </button>
@@ -149,4 +155,4 @@ const PendingInhabitants = ({ shelterId }) => {
   );
 };
 
-export default PendingInhabitants;
+export default CurrentInhabitants;

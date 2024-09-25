@@ -12,6 +12,8 @@ import VolunteerCallForm from "../pages/forms/VolunteerCallForm";
 import { AuthContext } from "./Authentication/AuthProvider";
 import { toast } from "react-toastify"; // For success alerts
 import 'react-toastify/dist/ReactToastify.css'; // Required for toast
+import VolunteerSeekingCard from "../components/VolunteerSeekingCard";
+import DonationSeekingCard from "../components/DonationSeekingCard";
 
 export default function EventDashboard() {
   const { eventId } = useParams();
@@ -23,6 +25,8 @@ export default function EventDashboard() {
   const [showVolunteerCallForm, setShowVolunteerCallForm] = useState(false);
   const [showVolunteerRequestModal, setShowVolunteerRequestModal] = useState(false);
   const [volunteerRequests, setVolunteerRequests] = useState([]);
+  const [volunteerCalls, setVolunteerCalls] = useState([]);
+  const [fundCalls, setFundCalls] = useState([]);
   const [users, setUsers] = useState([]);
 
   const { user } = useContext(AuthContext);
@@ -42,10 +46,40 @@ export default function EventDashboard() {
 
     fetchEventData();
 
+    const fetchVolunteerCallsData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/volunteer-calls?eventId=${eventId}`);
+        const data = await response.json();
+        setVolunteerCalls(data);
+      } catch (error) {
+        console.error("Error fetching volunteer calls data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVolunteerCallsData();
+
+    const fetchFundCallsData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/fund-call?eventId=${eventId}`);
+        const data = await response.json();
+        setFundCalls(data);
+      } catch (error) {
+        console.error("Error fetching fund calls data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFundCallsData();
+
     if (user && event) {
       setIsAdmin(event.eventAdmins.includes(user.userId));
       setIsVolunteer(user.eventIds.includes(event.eventId));
     }
+
+
 
   }, [eventId, user, event]);
 
@@ -155,8 +189,8 @@ export default function EventDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto p-4">
-        <div className="grid grid-cols-11 gap-4">
+      <div className="p-6">
+        <div className="grid grid-cols-12 gap-4">
           {/* Left Aside */}
           <aside className="col-span-2 space-y-4">
             {isAdmin && (
@@ -186,8 +220,8 @@ export default function EventDashboard() {
           </aside>
 
           {/* Main Content */}
-          <main className="col-span-6 bg-white rounded-lg shadow-lg p-6">
-            <h1 className="text-4xl font-bold text-indigo-600 mb-2">
+          <main className="col-span-4 bg-white rounded-lg shadow-lg p-6">
+            <h1 className="text-4xl font-bold text-blue-primary mb-2">
               {eventName}
             </h1>
             <div className="text-sm text-gray-500 mb-2">
@@ -202,11 +236,20 @@ export default function EventDashboard() {
 
           {/* Right Aside */}
           <aside className="col-span-3 bg-white rounded-lg shadow-lg p-4">
-            <h2 className="text-2xl font-semibold mb-4">We Are</h2>
+            <h2 className="text-2xl font-semibold text-blue-primary mb-4">Volunteer Calls</h2>
             <div className="space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
               {/* Add members dynamically */}
-              {users.map((user) => (
-                <MemberItem key={user.userId} name={user.userName} />
+              {volunteerCalls.map((volunteerCall) => (
+                <VolunteerSeekingCard volunteerCall={volunteerCall} />
+              ))}
+            </div>
+          </aside>
+          <aside className="col-span-3 bg-white rounded-lg shadow-lg p-4">
+            <h2 className="text-2xl font-semibold text-blue-primary mt-6 mb-4">Fund Calls</h2>
+            <div className="space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
+              {/* Add members dynamically */}
+              {fundCalls.map((fundCall) => (
+                <DonationSeekingCard fundCall={fundCall} />
               ))}
             </div>
           </aside>

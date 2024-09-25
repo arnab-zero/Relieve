@@ -78,7 +78,7 @@ const Navbar = () => {
               : ""
           }
         >
-          Map
+          Smart Advisor
         </NavLink>
       </li>
       <li>
@@ -152,14 +152,14 @@ const Navbar = () => {
           >
             {user ? "Log Out" : "Sign In"}
           </button>
-          {user && (
+          {/* {user && (
             <NavLink
               to={"/profile"}
               className={"text-base-200 font-semibold text-4xl"}
             >
               <span className="text-sm ml-2">{user.userName}</span>
             </NavLink>
-          )}
+          )} */}
           </div>
         </div>
       </div>

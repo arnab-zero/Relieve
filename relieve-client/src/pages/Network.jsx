@@ -213,7 +213,7 @@ const Network = () => {
                 } max-h-screen overflow-scroll scrollbar-hide `}
               >
                 {yourCommunities.length > 0 ? (
-                  yourCommunities.map((community) => (
+                  yourCommunities.slice(0,1).map((community) => (          //slice should be removed
                     <div
                       key={community.orgId}
                       className="mb-4 p-4 border rounded-md flex gap-5 items-center"

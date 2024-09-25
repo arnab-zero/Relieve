@@ -241,11 +241,11 @@ const Shelter = () => {
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="btn btn-secondary"
+                  className="btn text-lg"
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary bg-blue-primary text-lg">
                   Create
                 </button>
               </div>

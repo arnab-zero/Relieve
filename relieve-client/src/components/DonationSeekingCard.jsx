@@ -99,7 +99,7 @@ const DonationSeekingCard = ({ fundCall }) => {
         <div className="text-3xl font-semibold mb-2 items-center">
           <span>{title} </span>
           <span className="text-xs bg-[#1f8d0c] text-white px-2 py-1 rounded-full">
-            Verified/Unverified
+            Verified
           </span>
         </div>
         <h3 className="text-lg text-gray-700 mb-2">{eventName}</h3>

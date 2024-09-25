@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
 const genAI = new GoogleGenerativeAI("AIzaSyA4yQdMZoyFNQT7QS5d0ERQNHBBEGBeVkg");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -41,44 +40,61 @@ const AskAI = () => {
         "How to manage mental health during a disaster?",
     ];
 
+    const renderResponse = (response) => {
+        return response.split('\n').map((line, index) => {
+            if (line.startsWith('## ')) {
+                return <h2 key={index} className="text-2xl font-bold text-blue-primary mt-4">{line.slice(3)}</h2>;
+            }
+            if (line.startsWith('**')) {
+                return <p key={index} className="font-semibold mt-2">{line.replace(/\*\*/g, '')}</p>;
+            }
+            if (line.startsWith('* ')) {
+                return <li key={index} className="list-disc list-inside ml-6">{line.slice(2)}</li>;
+            }
+            return <p key={index} className="mt-1 text-gray-800">{line}</p>;
+        });
+    };
+
     return (
-        <div className="ask-ai-container">
-            <h2 className="text-xl font-bold">Ask AI about Disaster Management</h2>
-            <form onSubmit={handleSubmit} className="flex flex-col mt-4">
+        <div className="ask-ai-container p-4">
+            <h2 className="text-4xl font-manrope text-blue-primary text-center my-10 font-black">Ask AI about Disaster Management</h2>
+            <form onSubmit={handleSubmit} className="flex flex-col mt-10">
                 <textarea 
                     value={query} 
                     onChange={handleInputChange} 
                     placeholder="Type your query here..." 
-                    className="border rounded p-2"
+                    className="border-2 bg-gradient-to-r from-blue-50 to-cyan-50 text-xl text-gray-600 font-semibold border-blue-primary rounded-lg p-2"
                     rows={4}
                 />
                 <button 
                     type="submit" 
-                    className="mt-2 bg-blue-500 text-white rounded p-2 hover:bg-blue-600"
+                    className="mt-2 bg-blue-primary text-white text-xl font-semibold rounded p-2 hover:bg-blue-dark"
                     disabled={loading}
                 >
                     {loading ? "Loading..." : "Ask AI"}
                 </button>
             </form>
-            <div className="preset-queries mt-4">
-                <h3 className="font-semibold">Quick Queries</h3>
+            <div className="preset-queries mt-6">
+                <h3 className="text-2xl text-blue-primary border-b border-blue-dark p-2 mb-6 rounded-sm font-semibold">Quick Queries</h3>
                 <div className="flex flex-wrap gap-2">
                     {presetQueries.map((presetQuery, index) => (
                         <button 
                             key={index} 
                             onClick={() => handlePresetQuery(presetQuery)} 
-                            className="bg-gray-200 rounded px-2 py-1 hover:bg-gray-300"
+                            className="bg-gradient-to-r from-blue-50 to-cyan-50 shadow-lg text-xl rounded-sm p-4 hover:bg-gray-300"
                         >
                             {presetQuery}
                         </button>
                     ))}
                 </div>
             </div>
-            <div className="response-area mt-4">
+            <div className="response-area mt-6">
                 {response && (
-                    <div className="border rounded p-2 bg-gray-50">
-                        <h4 className="font-semibold">AI Response:</h4>
-                        <p>{response}</p>
+                    <div className="border rounded-md bg-gradient-to-r from-blue-50 to-cyan-50 p-6">
+                        <h4 className="text-2xl font-bold text-blue-primary font-manrope">AI Response:</h4>
+                        <div className="response-content mt-4 text-md">
+                            {renderResponse(response)}
+                        </div>
                     </div>
                 )}
             </div>
