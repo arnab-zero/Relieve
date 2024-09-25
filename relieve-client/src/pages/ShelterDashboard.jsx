@@ -1,18 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import ShelterInhabitant from "../components/Shelter/ShelterInhabitant";
 import ShelterFood from "../components/Shelter/ShelterFood";
+import AuthContext from "../pages/Authentication/AuthProvider"
 
 const ShelterDashboard = () => {
   const { shelterId } = useParams();
   const [shelter, setShelter] = useState({});
   const [active, setActive] = useState("inhabitant");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // const {user} = useContext(AuthContext)
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/shelters/${shelterId}`)
       .then((res) => res.json())
       .then((data) => setShelter(data));
+
+    //   if(user && shelter) {
+    //     if(shelter.eventId === user.userId) {
+    //         setIsAdmin(true);
+    //     }
+    // }
   }, [shelterId]);
 
   const {
@@ -97,7 +107,7 @@ const ShelterDashboard = () => {
       </div>
       <div className="">
         {
-          active === 'inhabitant' ? <ShelterInhabitant shelterId={shelterId}></ShelterInhabitant> : <ShelterFood shelterId={shelterId}></ShelterFood>
+          active === 'inhabitant' ? <ShelterInhabitant shelterId={shelterId} setIsAdmin={setIsAdmin}></ShelterInhabitant> : <ShelterFood shelterId={shelterId}></ShelterFood>
         }
       </div>
       <ToastContainer />

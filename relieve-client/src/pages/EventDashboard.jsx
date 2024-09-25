@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import {
   Users,
@@ -9,13 +9,18 @@ import {
 } from "lucide-react";
 import FundCallForm from "../pages/forms/FundCallForm";
 import VolunteerCallForm from "../pages/forms/VolunteerCallForm";
+import { AuthContext } from "./Authentication/AuthProvider";
 
 export default function EventDashboard() {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showFundCallForm, setShowFundCallForm] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isVolunteer, setIsVolunteer] = useState(false);
   const [showVolunteerCallForm, setShowVolunteerCallForm] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -32,7 +37,18 @@ export default function EventDashboard() {
     };
 
     fetchEventData();
-  }, [eventId]);
+
+    if (user && event) {
+      const isAdminCheck = event.eventAdmins.includes(user.userId);
+      setIsAdmin(isAdminCheck);
+    }
+
+    if (user && event) {
+      const isVolunteerCheck = user.eventIds.includes(event.eventId);
+      setIsVolunteer(isVolunteerCheck);
+    }
+
+  }, [eventId, user, event]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -58,17 +74,24 @@ export default function EventDashboard() {
         <div className="grid grid-cols-11 gap-4">
           {/* Left Aside */}
           <aside className="col-span-2 space-y-4">
-            <OptionBox
-              icon={<Users />}
-              text="Call for Volunteers"
-              onClick={() => setShowVolunteerCallForm(true)}
-            />
-            <OptionBox
-              icon={<DollarSign />}
-              text="Call for Donation"
-              onClick={() => setShowFundCallForm(true)}
-            />
-            <OptionBox icon={<MessageSquare />} text="Slack Chatroom" />
+            {
+              isAdmin && <>
+                <OptionBox
+                  icon={<Users />}
+                  text="Call for Volunteers"
+                  onClick={() => setShowVolunteerCallForm(true)}
+                />
+                <OptionBox
+                  icon={<DollarSign />}
+                  text="Call for Donation"
+                  onClick={() => setShowFundCallForm(true)}
+                />
+              </>
+            }
+            
+            {
+              (isAdmin || isVolunteer) && <OptionBox icon={<MessageSquare />} text="Slack Chatroom" />
+            }
             <OptionBox icon={<FileText />} text="View Expense Report" />
             <OptionBox icon={<Users2 />} text="Reach Our Ground Team" />
           </aside>

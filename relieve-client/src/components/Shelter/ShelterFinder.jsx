@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { zillaUpazillaData } from "../../pages/forms/ZillaUpazillaData";
+import Searchbar from "../Home/Searchbar";
 
 const ShelterFinder = () => {
   const [selectedZilla, setSelectedZilla] = useState("");
@@ -12,8 +13,8 @@ const ShelterFinder = () => {
   };
 
   return (
-    <div className="p-6 font-manrope gap-4 flex">
-      <select
+    <div className="p-6 font-manrope gap-4 flex items-center">
+      {/* <select
         id="zilla"
         value={selectedZilla}
         onChange={handleZillaChange}
@@ -43,11 +44,13 @@ const ShelterFinder = () => {
             {upazilla}
           </option>
         ))}
-      </select>
+      </select> */}
 
-      <button className="btn bg-blue-primary text-lg font-medium text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+      <Searchbar />
+
+      {/* <button className="btn bg-blue-primary text-md font-medium text-white py-1 px-2 rounded-md hover:bg-blue-700 transition-colors">
         Find Your Shelter
-      </button>
+      </button> */}
     </div>
   );
 };

@@ -22,7 +22,7 @@ function CommunityDashboard() {
       const isAdminCheck = user.communityIds.includes(community.orgId);
       setIsAdmin(isAdminCheck);
     }
-  }, []);
+  }, [user, community]);
 
   // console.log(isAdmin);
   

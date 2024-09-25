@@ -1,16 +1,100 @@
 import { FaPeopleLine, FaMapLocation } from "react-icons/fa6";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import ShelterFinder from "../components/Shelter/ShelterFinder";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ShelterCard from "../components/Shelter/ShelterCard";
 
 const Shelter = () => {
   const [shelters, setShelters] = useState([]);
+  const [displayShelters, setDisplayShelters] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [query, setQuery] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    imageUrl: "",
+    zilla: "",
+    upazilla: "",
+    location: "",
+    contactNumbers: "",
+    capacity: "",
+    currentPeople: "",
+  });
+
   useEffect(() => {
     fetch("http://localhost:8080/api/shelters")
       .then((res) => res.json())
-      .then((data) => setShelters(data));
+      .then((data) => {
+        setShelters(data);
+        setDisplayShelters(data); // Initially display all shelters
+      });
   }, []);
+
+  const handleCreateShelter = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setQuery(query);
+
+    if (!query.trim()) {
+      // If query is empty, reset to show all shelters
+      setDisplayShelters(shelters);
+      return;
+    }
+
+    const regex = new RegExp(query, "i");
+    const filteredShelters = shelters.filter(
+      (shelter) =>
+        regex.test(shelter.name) ||
+        regex.test(shelter.zilla) ||
+        regex.test(shelter.upazilla) ||
+        regex.test(shelter.location)
+    );
+    setDisplayShelters(filteredShelters);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newShelter = {
+      ...formData,
+      contactNumbers: formData.contactNumbers.split(",").map((num) => num.trim()),
+      eventId: userId,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/shelters", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newShelter),
+      });
+
+      if (response.ok) {
+        const createdShelter = await response.json();
+        setShelters([...shelters, createdShelter]);
+        setDisplayShelters([...shelters, createdShelter]); // Update displayShelters as well
+        alert("Shelter created successfully!");
+        handleCloseModal();
+      } else {
+        console.error("Error creating shelter", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error submitting shelter form:", error);
+    }
+  };
+
   return (
     <div className="font-manrope bg-base-100 min-h-screen">
       <div className="relative font-manrope">
@@ -60,16 +144,124 @@ const Shelter = () => {
           </div>
         </div>
       </div>
-      <span className="flex justify-center my-2">
-        <div className="flex-auto max-w-4xl">
-          <ShelterFinder />
+      <div className="mx-auto text-center mt-5 ">
+        <input
+          type="text"
+          placeholder="Type any location, contact or any info"
+          value={query}
+          onChange={handleSearch}
+          className="input input-bordered input-info border-blue-primary focus:border-blue-secondary focus:outline-blue-secondary w-full max-w-md"
+        />
+      </div>
+      <button
+        className="flex items-center btn-outline ml-28 mb-4 text-blue-primary border-2 bg-base-100 text-lg font-bold border-blue-primary py-2 px-4 rounded-lg"
+        onClick={handleCreateShelter}
+      >
+        <i className="mr-1 ">➕</i> Create Shelter
+      </button>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg p-6 w-1/2">
+            <h2 className="text-2xl font-bold mb-4">Create New Shelter</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Shelter Name"
+                value={formData.name}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="text"
+                name="imageUrl"
+                placeholder="Image URL"
+                value={formData.imageUrl}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="text"
+                name="zilla"
+                placeholder="Zilla"
+                value={formData.zilla}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="text"
+                name="upazilla"
+                placeholder="Upazilla"
+                value={formData.upazilla}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="text"
+                name="location"
+                placeholder="Location"
+                value={formData.location}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="text"
+                name="contactNumbers"
+                placeholder="Contact Numbers (comma separated)"
+                value={formData.contactNumbers}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="number"
+                name="capacity"
+                placeholder="Capacity"
+                value={formData.capacity}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+              <input
+                type="number"
+                name="currentPeople"
+                placeholder="Current People"
+                value={formData.currentPeople}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+              <div className="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  onClick={handleCloseModal}
+                  className="btn btn-secondary"
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Create
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </span>
-      {/* <h2 className="text-4xl text-blue-primary font-bold text-center my-10">Shelters</h2> */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto">
-        {shelters.map((shelter) => (
-          <ShelterCard key={shelter.shelterId} shelter={shelter}></ShelterCard>
-        ))}
+      )}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 container mx-auto mb-6">
+        {displayShelters.length > 0 ? (
+          displayShelters.map((shelter) => (
+            <ShelterCard key={shelter.shelterId} shelter={shelter} setUserId={setUserId} />
+          ))
+        ) : (
+          <p className="text-center">No shelters found matching your search.</p>
+        )}
       </div>
     </div>
   );

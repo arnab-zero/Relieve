@@ -6,7 +6,7 @@ const Searchbar = ({ setQuery }) => {
   return (
       
       <div className="font-manrope">
-          <span className="flex justify-center my-10">
+          <span className="flex justify-center my-8">
               <input
                   type="text"
                   placeholder="Type any location, contact or any info"
