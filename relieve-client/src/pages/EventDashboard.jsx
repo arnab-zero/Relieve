@@ -49,16 +49,22 @@ export default function EventDashboard() {
 
   }, [eventId, user, event]);
 
+  const handleVolunteerCallSubmit = () => {
+    setShowVolunteerCallForm(ture);
+  }
+
+  const handleFundCallSubmit = () => {
+    setShowFundCallForm(true);
+  }
+
   const handleVolunteerRequests = async () => {
     try {
-      // Fetch pending volunteer requests for this event
       const response = await fetch(
         `http://localhost:8080/volunteer-requests?eventId=${eventId}&isApproved=false`
       );
       const requestData = await response.json();
       setVolunteerRequests(requestData);
 
-      // Fetch all users data to match with volunteer requests
       const userResponse = await fetch("http://localhost:8080/api/users");
       const userData = await userResponse.json();
       setUsers(userData);
@@ -71,16 +77,14 @@ export default function EventDashboard() {
 
   const handleApprove = async (requestId, userId) => {
     try {
-      // Find the user to update
       const userToUpdate = users.find((u) => u.userId === userId);
       if (userToUpdate) {
-        // Add eventId to the user's eventIds array
+        // Add eventId to user's eventIds array
         const updatedUser = {
           ...userToUpdate,
           eventIds: [...userToUpdate.eventIds, eventId],
         };
 
-        // Update the user
         const response = await fetch(
           `http://localhost:8080/api/users/${userId}`,
           {
@@ -121,7 +125,6 @@ export default function EventDashboard() {
 
   const handleDecline = async (requestId) => {
     try {
-      // Delete the volunteer request
       const response = await fetch(
         `http://localhost:8080/volunteer-requests/${requestId}`,
         {
@@ -289,7 +292,7 @@ function VolunteerRequestModal({ volunteerRequests, users, onApprove, onDecline,
                   <td className="border px-4 py-2">{user ? user.userName : "Unknown"}</td>
                   <td className="border px-4 py-2">{user ? user.contactNumber : "Unknown"}</td>
                   <td className="border px-4 py-2">{request.comment}</td>
-                  <td className="border flex gap-1 px-4 py-2">
+                  <td className="border px-4 py-2">
                     <button
                       className="bg-green-500 text-white px-3 py-1 rounded mr-2"
                       onClick={() => onApprove(request.requestId, user.userId)}

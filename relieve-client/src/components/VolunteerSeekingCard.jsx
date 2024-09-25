@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../pages/Authentication/AuthProvider";
-import axios from "axios"; // Import axios for HTTP requests
+import axios from "axios";
 
 const VolunteerSeekingCard = ({ volunteerCall }) => {
   const { title, eventName, eventId, description, creationTime, location, vcId } =
