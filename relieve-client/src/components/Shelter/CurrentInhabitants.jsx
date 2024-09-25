@@ -11,7 +11,7 @@ const PendingInhabitants = ({ shelterId }) => {
     fetch(`http://localhost:8080/api/shelter-inhabitants?shelterId=${shelterId}`)
       .then((res) => res.json())
       .then((data) => setPendingInhabitants(data));
-  }, [shelterId]);
+  }, [shelterId, pendingInhabitants]);
 
   // Handle closing the modal when clicking outside of it
   useEffect(() => {
@@ -60,7 +60,7 @@ const PendingInhabitants = ({ shelterId }) => {
 
   return (
     <div>
-      <h3 className="text-2xl font-semibold my-5">Inhabitant Requests</h3>
+      {/* <h3 className="text-2xl font-semibold my-5">Inhabitant Request</h3> */}
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

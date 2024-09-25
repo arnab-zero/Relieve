@@ -62,7 +62,7 @@ export default function CreateEventForm({ communityId }) {
         dateTo: new Date(formData.endDate),
         location: `${formData.location}, ${formData.upazilla}, ${formData.zilla}`,
         volunteers: [], // Add volunteer ids if applicable
-        eventAdmins: [user.userId],
+        eventAdmins: [ user.userId],
         volunteerCalls: [],
         donationCalls: [],
         reports: [],

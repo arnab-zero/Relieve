@@ -4,8 +4,8 @@ import PendingInhabitants from "./PendingInhabitants";
 import CurrentInhabitants from "./CurrentInhabitants";
 import AddInhabitantForm from "../../pages/forms/AddInhabitantForm";
 
-const ShelterInhabitant = ({ shelterId }) => {
-  const [activeInhabitantTab, setActiveInhabitantTab] = useState("inhabitant-requests");
+const ShelterInhabitant = ({ shelterId, setIsAdmin }) => {
+  const [activeInhabitantTab, setActiveInhabitantTab] = useState("current-inhabitants");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
@@ -34,7 +34,7 @@ const ShelterInhabitant = ({ shelterId }) => {
         <i className="mr-2">➕</i> Add Member
       </button>
       <div className="flex justify-center gap-10">
-        <button
+        {/* <button
           className={`text-xl font-semibold text-gray-500 ${activeInhabitantTab === "inhabitant-requests"
               ? "border-2 border-b-gray-500 border-t-0 border-l-0 border-r-0"
               : ""
@@ -42,7 +42,7 @@ const ShelterInhabitant = ({ shelterId }) => {
           onClick={handleInhabitantRequests}
         >
           Inhabitant Requests
-        </button>
+        </button> */}
         <button
           className={`text-xl font-semibold text-gray-500 ${activeInhabitantTab === "current-inhabitants"
               ? "border-2 border-b-gray-500 border-t-0 border-l-0 border-r-0"
