@@ -17,31 +17,41 @@ const SignUp = () => {
     const contactNumber = form.contactNumber.value;
 
     try {
-        const result = await createUser(email, password, name, contactNumber);
-        const user = result.user;
-        
-        const userData = {
-            userName: name,
-            contactNumber: contactNumber,
-            email: email,
-            dateOfBirth: "2010-01-01",
-            location: "Dhaka, Bangladesh",
-            profession: "",
-            userImage: "",
-            communityIds: [],
-            eventIds: [],
-            incidentIds: []
-        };
+      const result = await createUser(email, password);
+      const user = result.user;
 
-        const response = await axios.post('http://localhost:8080/api/users', userData);
-        
-        if (response.status === 201) {
-            navigate('/');
-        } else {
-            setError('Failed to create user profile');
-        }
+      if (!user) {
+        throw new Error("Failed to create user");
+      }
+
+      const userData = {
+        userName: name,
+        contactNumber: contactNumber,
+        email: email,
+        dateOfBirth: "2010-01-01",
+        location: "Dhaka, Bangladesh",
+        profession: "",
+        userImage: "",
+        communityIds: [],
+        eventIds: [],
+        incidentIds: [],
+      };
+
+      // Corrected the URL
+      const response = await axios.post(
+        "http://localhost:8080/api/users",
+        userData
+      );
+
+      if (response.status === 201) {
+        // User profile successfully created
+        navigate("/");
+      } else {
+        setError("Failed to create user profile");
+      }
     } catch (error) {
-        setError(error.message);
+      console.error("SignUp Error: ", error);
+      setError(error.message || "An error occurred");
     }
 }
 
@@ -57,7 +67,7 @@ const SignUp = () => {
               <img src="/logo.svg" alt="" width={"180"} />
             </div>
           </div>
-          <form className="pr-20 pl-10 py-14" onSubmit={handleSignUp}>
+          <form onSubmit={handleSignUp} className="pr-20 pl-10 py-14">
             <h1 className="text-3xl font-bold text-center mb-8">Sign Up</h1>
             {error && <p className="text-red-500 text-center">{error}</p>}{" "}
             <div className="form-control">
