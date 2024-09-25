@@ -46,47 +46,6 @@ const SignUp = () => {
 }
 
   return (
-    //  <div className="hero min-h-screen bg-base-200">
-    //      <div className="hero-content flex-col lg:flex-row-reverse">
-    //          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-    //              <form onSubmit={handleSignUp} className="card-body">
-    //                  <h1 className="text-3xl font-bold text-center">Sign Up</h1>
-    //                  {error && <p className="text-red-500 text-center">{error}</p>}
-    //                  <div className="form-control">
-    //                      <label className="label">
-    //                          <span className="label-text">Name</span>
-    //                      </label>
-    //                      <input type="text" name="name" placeholder="Full Name" className="input input-bordered mb-4" required />
-    //                  </div>
-    //                  <div className="form-control">
-    //                      <label className="label">
-    //                          <span className="label-text">Email</span>
-    //                      </label>
-    //                      <input type="email" name="email" placeholder="Email" className="input input-bordered mb-4" required />
-    //                  </div>
-    //                  <div className="form-control">
-    //                      <label className="label">
-    //                          <span className="label-text">Password</span>
-    //                      </label>
-    //                      <input type="password" name="password" placeholder="Password" className="input input-bordered mb-4" required />
-    //                  </div>
-    //                  <div className="form-control">
-    //                      <label className="label">
-    //                          <span className="label-text">Contact Number</span>
-    //                      </label>
-    //                      <input type="tel" name="contactNumber" placeholder="Contact Number" className="input input-bordered mb-4" required />
-    //                  </div>
-    //                  <div className="form-control mt-6">
-    //                      <button className="btn btn-primary">Sign Up</button>
-    //                  </div>
-    //                  <p className="text-center mt-4">
-    //                      Already have an account? <Link to="/sign-in" className="text-blue-600 hover:underline">Sign In</Link>
-    //                  </p>
-    //              </form>
-    //          </div>
-    //      </div>
-    //  </div>
-
     <div className="hero flex justify-center min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="flex gap-12 flex-shrink-0 w-full shadow-2xl bg-base-100 rounded-r-lg">

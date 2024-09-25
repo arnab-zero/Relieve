@@ -10,6 +10,8 @@ import {
 import FundCallForm from "../pages/forms/FundCallForm";
 import VolunteerCallForm from "../pages/forms/VolunteerCallForm";
 import { AuthContext } from "./Authentication/AuthProvider";
+import { toast } from "react-toastify"; // For success alerts
+import 'react-toastify/dist/ReactToastify.css'; // Required for toast
 
 export default function EventDashboard() {
   const { eventId } = useParams();
@@ -19,6 +21,9 @@ export default function EventDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isVolunteer, setIsVolunteer] = useState(false);
   const [showVolunteerCallForm, setShowVolunteerCallForm] = useState(false);
+  const [showVolunteerRequestModal, setShowVolunteerRequestModal] = useState(false);
+  const [volunteerRequests, setVolunteerRequests] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const { user } = useContext(AuthContext);
 
@@ -28,7 +33,6 @@ export default function EventDashboard() {
         const response = await fetch(`http://localhost:8080/events/${eventId}`);
         const data = await response.json();
         setEvent(data);
-        console.log(data);
       } catch (error) {
         console.error("Error fetching event data:", error);
       } finally {
@@ -39,16 +43,102 @@ export default function EventDashboard() {
     fetchEventData();
 
     if (user && event) {
-      const isAdminCheck = event.eventAdmins.includes(user.userId);
-      setIsAdmin(isAdminCheck);
-    }
-
-    if (user && event) {
-      const isVolunteerCheck = user.eventIds.includes(event.eventId);
-      setIsVolunteer(isVolunteerCheck);
+      setIsAdmin(event.eventAdmins.includes(user.userId));
+      setIsVolunteer(user.eventIds.includes(event.eventId));
     }
 
   }, [eventId, user, event]);
+
+  const handleVolunteerRequests = async () => {
+    try {
+      // Fetch pending volunteer requests for this event
+      const response = await fetch(
+        `http://localhost:8080/volunteer-requests?eventId=${eventId}&isApproved=false`
+      );
+      const requestData = await response.json();
+      setVolunteerRequests(requestData);
+
+      // Fetch all users data to match with volunteer requests
+      const userResponse = await fetch("http://localhost:8080/api/users");
+      const userData = await userResponse.json();
+      setUsers(userData);
+
+      setShowVolunteerRequestModal(true); // Show modal
+    } catch (error) {
+      console.error("Error fetching volunteer requests:", error);
+    }
+  };
+
+  const handleApprove = async (requestId, userId) => {
+    try {
+      // Find the user to update
+      const userToUpdate = users.find((u) => u.userId === userId);
+      if (userToUpdate) {
+        // Add eventId to the user's eventIds array
+        const updatedUser = {
+          ...userToUpdate,
+          eventIds: [...userToUpdate.eventIds, eventId],
+        };
+
+        // Update the user
+        const response = await fetch(
+          `http://localhost:8080/api/users/${userId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedUser),
+          }
+        );
+
+        if (response.ok) {
+          // Update the volunteer request to set isApproved to true
+          const updateVolunteerRequest = await fetch(
+            `http://localhost:8080/volunteer-requests/${requestId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ approved: true }),
+            }
+          );
+
+          if (updateVolunteerRequest.ok) {
+            toast.success("User approved successfully!");
+            // Refresh the volunteer requests list
+            setVolunteerRequests(
+              volunteerRequests.filter((request) => request.requestId !== requestId)
+            );
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error approving volunteer:", error);
+    }
+  };
+
+  const handleDecline = async (requestId) => {
+    try {
+      // Delete the volunteer request
+      const response = await fetch(
+        `http://localhost:8080/volunteer-requests/${requestId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        toast.success("Request declined successfully!");
+        setVolunteerRequests(
+          volunteerRequests.filter((request) => request.requestId !== requestId)
+        );
+      }
+    } catch (error) {
+      console.error("Error declining volunteer request:", error);
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -60,22 +150,14 @@ export default function EventDashboard() {
 
   const { eventName, description, communityId, dateFrom } = event;
 
-  const handleFundCallSubmit = () => {
-    console.log("Fund call submitted successfully");
-  };
-
-  const handleVolunteerCallSubmit = () => {
-    console.log("Volunteer call submitted successfully");
-  };
-
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-11 gap-4">
           {/* Left Aside */}
           <aside className="col-span-2 space-y-4">
-            {
-              isAdmin && <>
+            {isAdmin && (
+              <>
                 <OptionBox
                   icon={<Users />}
                   text="Call for Volunteers"
@@ -86,12 +168,16 @@ export default function EventDashboard() {
                   text="Call for Donation"
                   onClick={() => setShowFundCallForm(true)}
                 />
+                <OptionBox
+                  icon={<Users />}
+                  text="Volunteer Requests"
+                  onClick={handleVolunteerRequests}
+                />
               </>
-            }
-            
-            {
-              (isAdmin || isVolunteer) && <OptionBox icon={<MessageSquare />} text="Slack Chatroom" />
-            }
+            )}
+            {(isAdmin || isVolunteer) && (
+              <OptionBox icon={<MessageSquare />} text="Slack Chatroom" />
+            )}
             <OptionBox icon={<FileText />} text="View Expense Report" />
             <OptionBox icon={<Users2 />} text="Reach Our Ground Team" />
           </aside>
@@ -115,16 +201,10 @@ export default function EventDashboard() {
           <aside className="col-span-3 bg-white rounded-lg shadow-lg p-4">
             <h2 className="text-2xl font-semibold mb-4">We Are</h2>
             <div className="space-y-4 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
-              <MemberItem name="John Doe" isCoordinator />
-              <MemberItem name="Jane Smith" isCoordinator />
-              <MemberItem name="Mike Johnson" />
-              <MemberItem name="Emily Brown" />
-              <MemberItem name="Chris Lee" />
-              <MemberItem name="Sarah Wilson" />
-              <MemberItem name="Alex Taylor" />
-              <MemberItem name="Olivia Martin" />
-              <MemberItem name="Daniel White" />
-              <MemberItem name="Sophia Garcia" />
+              {/* Add members dynamically */}
+              {users.map((user) => (
+                <MemberItem key={user.userId} name={user.userName} />
+              ))}
             </div>
           </aside>
         </div>
@@ -141,8 +221,20 @@ export default function EventDashboard() {
       {showVolunteerCallForm && (
         <VolunteerCallForm
           eventId={eventId}
+          eventName={event.eventName}
           onClose={() => setShowVolunteerCallForm(false)}
           onSubmit={handleVolunteerCallSubmit}
+        />
+      )}
+
+      {/* Volunteer Request Modal */}
+      {showVolunteerRequestModal && (
+        <VolunteerRequestModal
+          volunteerRequests={volunteerRequests}
+          users={users}
+          onApprove={handleApprove}
+          onDecline={handleDecline}
+          onClose={() => setShowVolunteerRequestModal(false)}
         />
       )}
     </div>
@@ -161,7 +253,7 @@ function OptionBox({ icon, text, onClick }) {
   );
 }
 
-function MemberItem({ name, isCoordinator = false }) {
+function MemberItem({ name }) {
   return (
     <div className="flex items-center space-x-3">
       <div className="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center">
@@ -169,11 +261,60 @@ function MemberItem({ name, isCoordinator = false }) {
       </div>
       <div className="flex-grow">
         <p className="text-sm font-medium text-gray-700">{name}</p>
-        {isCoordinator && (
-          <span className="text-xs text-indigo-600 font-semibold">
-            Co-ordinator
-          </span>
-        )}
+      </div>
+    </div>
+  );
+}
+
+function VolunteerRequestModal({ volunteerRequests, users, onApprove, onDecline, onClose }) {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
+        <h2 className="text-2xl font-bold mb-6">Volunteer Requests</h2>
+
+        <table className="min-w-full bg-white border">
+          <thead>
+            <tr>
+              <th className="border px-4 py-2">User Name</th>
+              <th className="border px-4 py-2">Contact Number</th>
+              <th className="border px-4 py-2">Comment</th>
+              <th className="border px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {volunteerRequests.map((request) => {
+              const user = users.find((u) => u.userId === request.userId);
+              return (
+                <tr key={request.requestId}>
+                  <td className="border px-4 py-2">{user ? user.userName : "Unknown"}</td>
+                  <td className="border px-4 py-2">{user ? user.contactNumber : "Unknown"}</td>
+                  <td className="border px-4 py-2">{request.comment}</td>
+                  <td className="border flex gap-1 px-4 py-2">
+                    <button
+                      className="bg-green-500 text-white px-3 py-1 rounded mr-2"
+                      onClick={() => onApprove(request.requestId, user.userId)}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      className="bg-red-500 text-white px-3 py-1 rounded"
+                      onClick={() => onDecline(request.requestId)}
+                    >
+                      Decline
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+
+        <button
+          className="mt-6 bg-gray-500 text-white px-4 py-2 rounded"
+          onClick={onClose}
+        >
+          Close
+        </button>
       </div>
     </div>
   );

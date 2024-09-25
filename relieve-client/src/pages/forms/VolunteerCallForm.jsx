@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function VolunteerCallForm({ eventId, onClose, onSubmit }) {
+export default function VolunteerCallForm({ eventId, eventName, onClose, onSubmit }) {
   const [formData, setFormData] = useState({
     title: "",
     location: "",
@@ -46,6 +46,7 @@ export default function VolunteerCallForm({ eventId, onClose, onSubmit }) {
     const volunteerCallData = {
       ...formData,
       eventId,
+      eventName,
       deadline: deadlineDate,
       creationTime: creationTime, // Sending full ISO string
     };

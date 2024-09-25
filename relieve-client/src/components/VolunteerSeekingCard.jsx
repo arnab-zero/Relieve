@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../pages/Authentication/AuthProvider";
+import axios from "axios"; // Import axios for HTTP requests
 
 const VolunteerSeekingCard = ({ volunteerCall }) => {
-  const { title, eventName, eventId, description, creationTime, location } =
+  const { title, eventName, eventId, description, creationTime, location, vcId } =
     volunteerCall;
 
   const [showTextarea, setShowTextarea] = useState(false);
   const [comment, setComment] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [userId, setUserId] = useState(null); 
+  const {user} = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user) {
+      setUserId(user.userId);
+    }
+  }, [user, volunteerCall]);
 
   function convertToBDTime(isoString) {
     const date = new Date(isoString);
@@ -32,15 +42,40 @@ const VolunteerSeekingCard = ({ volunteerCall }) => {
     setShowTextarea(true);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (comment.trim() === "") {
       setErrorMessage("Comment cannot be empty!");
     } else {
-      // Handle form submission logic here
-      console.log("Submitted comment: ", comment);
-      setShowTextarea(false);
-      setComment("");
-      setErrorMessage("");
+      try {
+        // Define the data for the POST request
+        const requestData = {
+          userId: userId, // userId from the state
+          eventId: eventId,
+          eventName: eventName,
+          vcId: vcId,
+          comment: comment,
+          createdAt: new Date().toISOString(), // Current timestamp
+          isApproved: false, // Set isApproved to false as requested
+        };
+
+        // Send a POST request to the backend
+        const response = await axios.post(
+          "http://localhost:8080/volunteer-requests",
+          requestData
+        );
+
+        if (response.status === 200 || response.status === 201) {
+          alert("Application successful!");
+          setShowTextarea(false);
+          setComment("");
+          setErrorMessage("");
+        } else {
+          setErrorMessage("Failed to submit application. Please try again.");
+        }
+      } catch (error) {
+        setErrorMessage("An error occurred. Please try again later.");
+        console.error("Error submitting volunteer request:", error);
+      }
     }
   };
 
